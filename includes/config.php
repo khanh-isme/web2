@@ -1,0 +1,1 @@
+<!-- dùng để quản lý data cho toàn bộ trang web -->

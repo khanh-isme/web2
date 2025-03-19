@@ -1,0 +1,471 @@
+section{
+    padding: 5% 10% ;
+}
+.main-home{
+    width: 100%;    
+    height: 900px;/*100vh*/
+    background-image: url(../images/banner1.png);
+    background-position: center;
+    background-size: cover;
+    
+                        display: grid;
+    grid-template-columns: repeat(1,1fr);
+    align-items: center;
+}
+.main-text{
+                        position:absolute;
+                        top: 70%;
+                        left: 10%;
+}
+
+.main-text h2{
+    color: #fff;
+    font-size: 30px;
+    text-transform:capitalize ;
+    font-weight: 500;
+}
+.main-text h1{
+    color: #fff;
+    font-size: 65px;
+    text-transform: capitalize;
+    font-weight: 600;
+    margin: 6px 0 10px;
+}
+.main-text p{
+    color: #fff;
+    font-size:20px ;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+.main-btn{
+    display: inline-block;
+    color: #111;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #fff;
+    text-transform: capitalize;
+
+    border: 2px solid #111;
+    border-radius: 50px;
+    padding: 12px 25px;
+    transition:all .42s ease ;
+}
+.main-btn :hover{
+    background-color: #111;
+    color: #fff;
+}
+.main-btn i{
+    vertical-align: middle;/**/
+}
+
+
+.down-arrow{
+    position:absolute;
+    top: 85%;
+    right:11%;
+}
+.down i{
+    font-size: 30px;
+    color:#2c2c2c;
+    border:2px solid #2c2c2c;
+    border-radius: 50%;
+    padding: 12px 12px;
+}
+.down i:hover{
+    background-color: #2c2c2c;
+    color:#fff;
+    transition: all .42s ease;
+}
+
+
+
+
+
+
+
+/*----------------------------------------------phần New Arrivals Just Landed*/
+
+
+/*-----Phần bao bọc sản phẩm */
+.product-section-a{
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+
+.product-section-a h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+/*-------------- Container của sản phẩm */
+.product-container-a {
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    white-space: nowrap;
+}
+
+
+/* Thiết kế từng sản phẩm */
+.product-a {
+    flex-shrink: 0;
+    
+    background-color: #fff;
+    text-align: left;
+    padding: 10px;
+ 
+    
+}
+
+.product-a img {
+    width: 464px;
+    height: auto;
+    
+}
+
+.product-a h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin: 10px 0 5px;
+}
+
+.product-a p {
+    color: #777;
+}
+
+.price {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Hiệu ứng hover */
+.product-a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+
+/* Nút điều khiển cuộn */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 0px;
+    z-index: 10;
+}
+
+.scroll-btn.left {
+    left: 10px;
+}
+
+.scroll-btn.right {
+    right: 10px;
+}
+
+.scroll-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------trending product section css*/
+/* Container của sản phẩm */
+.center-text h2{
+    color: #111;
+    font-size: 28px;
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 30px;
+}     
+.center-text span{
+    color: #EE1c47;
+}
+.product-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px,auto));/**/
+    gap: 2rem ;
+}   
+.product{
+    position: relative;
+    transition: all .42s;
+}
+.product img{
+    width: 100%;
+    height: auto;
+    transition: all .42s;
+}
+.product img:hover{
+    transform: scale(0.9);   
+}
+.product-text h5{
+    position: absolute;/* dùng để xác định vị trí phần  tử theo tọa độ của cái chứa nó  */
+    top :13px;
+    left: 13px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    background-color: #27b737;
+    padding: 3px 10px;
+    border-radius: 2px;
+}
+.heart-icon{
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+}
+.heart-icon:hover{
+    color: #EE1c47;
+}
+.ratting i{
+    color: #333c56;
+    font-size: 18px;
+}
+.price h4{
+    color: #111;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 400;
+}
+.price p{
+    color: #151515;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+
+
+
+
+/* -----------------------------------------------------------client review*/
+.client-review{
+    background-color: #f3f4f6;
+    padding: 20px;
+}
+.review{
+    text-align: center;
+}
+.review h3{
+    color: #111;
+    font-size: 25px;
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: 700;
+}
+.review img{
+    width: 600px;
+    height: auto;
+    border-radius: 10px;
+}
+.review p{
+    color: #707070;;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+
+
+
+
+/*--------------------------------------------------------------the lasted css*/
+.the-lasted-head h2{
+    font-size: 1.2em;
+    color: #333;
+    margin: 20px 50px;
+}
+.the-lasted-section{
+    display: flex;
+    gap: 5px;
+    margin:0px 30px;  
+}
+.the-lasted{
+    position: relative;
+        flex-shrink: 0;
+        background-color: #fff;
+    padding: 10px;        
+    
+}
+.the-lasted img{
+    width: 461px;
+    height: 582px;
+}
+.the-lasted-text{
+    position: absolute;/* dùng để xác định vị trí phần  tử theo tọa độ của cái chứa nó  */
+    bottom:  50px;
+    left: 30px; 
+}
+.the-lasted-text h4{
+    color:#fff;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 5px 10px;
+
+}
+.the-lasted-text h1{
+    color:#fff;
+    font-size: 25px;
+    text-transform: capitalize;
+    font-weight: 500;
+    margin: 5px 10px;
+
+}
+.the-lasted-btn{
+    display: inline-block;
+    color: #fcfbfb;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+
+    border: 2px solid #f4efef;
+    border-radius: 50px;
+    padding: 12px 25px;
+    transition:all .42s ease ;
+}
+.the-lasted-btn:hover{
+    background-color: #f8f4f4;
+    color: #060606;
+}
+.the-lasted-btn i{
+    vertical-align: middle;/**/
+}
+
+
+
+
+
+
+
+/*--------------------------------------------------------css sport*/
+.product-section-sport{
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+
+.product-section-sport-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.product-section-sport-text h1{
+    font-weight: 900;
+    font-size: 50px;
+}
+.product-section-sport-text p{
+    color: #434343;
+    padding-bottom: 10px;
+}
+
+.product-container-sport{
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+    scroll-behavior: smooth;
+    margin: 0px 20px;
+    white-space: nowrap;
+}
+.product-sport img{
+    width: 500px;
+    height: 300px;
+}
+.product-sport{
+   
+                    position: relative;
+                    flex-shrink: 0;
+                    background-color: #fff;
+                    padding: 10px;        
+        
+    
+    
+}
+.sport-text{
+    
+                    position: absolute;/* dùng để xác định vị trí phần  tử theo tọa độ của cái chứa nó  */
+                    bottom:  50px;
+                    left: 30px; 
+    
+    
+    color: #fff;
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: capitalize;
+
+    border: 2px solid #fff;
+    padding: 12px 25px;
+    transition:all .42s ease ;
+    border-radius: 50px;
+}
+.sport-text:hover{
+    background-color: #fff;
+    color: #111;
+}
+
+
+
+/*-------------------------------------------------------update section css*/
+.up-center-text h2{
+    text-align: center;
+    color: #111;
+    font-size: 25px;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.cart img{
+    width: 380px;
+    height: auto;
+    border-radius: 5px;   
+}
+.update-cart{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, auto));
+    gap: 1rem;
+}
+.cart h5{
+    color: #636872;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+.cart h4{
+    color: #111;
+    font-size: 18px;
+    font-weight:600;
+}
+.cart p{
+    color: #707070;
+    font-size: 15px;
+    max-width: 380px;
+    line-height: 25px;
+    margin-bottom: 12px;
+}
+.cart h6{
+    color: #151515;
+    font-size: 14px;
+    font-weight:500 ;
+}
