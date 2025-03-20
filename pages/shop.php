@@ -1,175 +1,170 @@
-
 <?php
 include '../includes/header.php';
 ?>
 
-<html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../assets/css/header.css">
+    <title>Shop</title>
+    <script src="../assets/js/shop.js" defer></script>
     <link rel="stylesheet" href="../assets/css/shop.css">
-    <script src="../assets/js/header.js"></script>
-</head>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 </head>
 <body>
-    
     <div class="container">
         <aside class="sidebar">
             <h2>Filters</h2>
-            <div class="filter-group">
-            </div>
             <div class="filter-group">
                 <label><input type="checkbox"> Boys</label><br>
                 <label><input type="checkbox"> Girls</label>
             </div>
             
-            <div class="filter-header"  onclick="toggleSize()">Gender </div>
+            <div class="filter-header" onclick="toggleSize()">Gender</div>
             <div class="filter-options" id="gender-options">
-                <a href="shopF.html"> Men </a>
-
-                <a href="shopF.html"> Women </a>
-                
+                <a href="shopF.html">Men</a>
+                <a href="shopF.html">Women</a>
                 <a href="shopF.html">Unisex</a>
             </div>
 
-            <div class="filter-header-color"  onclick="toggleSize1()">Category </div>
+            <div class="filter-header-color" onclick="toggleSize1()">Category</div>
             <div class="filter-options" id="color-options">
-                <a href="shopF.html"> Sport </a>
-
-                <a href="shopF.html"> Fastion </a>
-                
-            
+                <a href="shopF.html">Sport</a>
+                <a href="shopF.html">Fashion</a>
             </div>
 
-            <div class="filter-header-collection"  onclick="toggleSize2()">Collection </div>
+            <div class="filter-header-collection" onclick="toggleSize2()">Collection</div>
             <div class="filter-options" id="collection-options">
-                <a href="shopF.html"> winter </a>
-
-                <a href="shopF.html"> summer </a>
-                
-                <a href="shopF.html"> spring</a>
+                <a href="shopF.html">Winter</a>
+                <a href="shopF.html">Summer</a>
+                <a href="shopF.html">Spring</a>
             </div>
-            
         </aside>
 
+        <!-- Danh sách sản phẩm -->
         <main class="product-list">
             <div class="header">
-                <h1> Shoes vipro </h1>
+                <h1>Shoes Vipro</h1>
             </div>
 
-            <div class="products">
-                <div class="product">
-                    <a href="product.html">
-
-                        <img src="../images/11.png" alt="Shoe 1">
-                        <p class="tag">Hàng mới</p>
-                        <h3>Nike Pegasus Trail 5</h3>
-                        <p>Giày cho mấy nhóc già đầu đi</p>
-                        <p>1 Mẫu màu</p>
-                        <p class="price">1000$</p>
-                    </a>
-                </div>
-
-                <!-- Repeat product divs for other products -->
-                <div class="product">
-                    <a href="product.html">
-
-                        <img src="../images/12.png" alt="Shoe 2">
-                        <p class="tag">Bán chạy</p>
-                        <h3>For My Pride 41</h3>
-                        <p>Giày giành cho MCK</p>
-                        <p>1 Mẫu màu</p>
-                        <p class="price">2000$</p>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-
-                        <img src="../images/7.png" alt="Shoe 2">
-                        <p class="tag">Bán chạy</p>
-                        <h3>For My Pride 41</h3>
-                        <p>Giày giành cho MCK</p>
-                        <p>1 Mẫu màu</p>
-                        <p class="price">2,679$</p>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-
-                    
-                        <img src="../images/10.png" alt="Shoe 4">
-                        <p class="tag">Bán chạy</p>
-                        <h3>Nike air mag hàng faki</h3>
-                        <p>Mang vào auto đẹp gái</p>
-                        <p>2 Mẫu màu</p>
-                        <p class="price">4,000,000$</p>
-                    </a>   
-                </div>
-                <div class="product">
-                    <a href="product.html">
-
-                        <img src="../images/14.png" alt="Shoe 5">
-                        <p class="tag">Cháy hàng</p>
-                        <h3>Giày 30/4/1975</h3>
-                        <p>Mang vào dinh độc lập sẽ được tặng huy chương</p>
-                        <p>0 Mẫu màu</p>
-                        <p class="price">7,00$</p>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-
-                        <img src="../images/13.png" alt="Shoe 6">
-                        <p class="tag">Bán chạy</p>
-                        <h3>Nigeria</h3>
-                        <p>Mang hiệu ứng quyền công dân</p>
-                        <p>1 Mẫu màu</p>
-                        <p class="price">999$</p>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-
-                        <img src="../images/8.jpg" alt="Shoe 7">
-                        <p class="tag">Ế hàng</p>
-                        <h3>Giày Gengu</h3>
-                        <p>Mang vào thì thua T1</p>
-                        <p>1 Mẫu màu</p>
-                        <p class="price">1$</p>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-
-                        <img src="../images/11.png" alt="Shoe 8">
-                        <p class="tag">Bán đắt</p>
-                        <h3>Giày SGP oai phong</h3>
-                        <p>Mang vào sẽ có 9 lần vô địch quốc nội</p>
-                        <p>2 Mẫu màu</p>
-                        <p class="price">999$</p>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-
-                        <img src="../images/222.webp" alt="Shoe 8">
-                        <p class="tag">Bán đắt</p>
-                        <h3>Giày SGP oai phong</h3>
-                        <p>Mang vào sẽ có 9 lần vô địch quốc nội</p>
-                        <p>2 Mẫu màu</p>
-                        <p class="price">999$</p>
-                    </a>
-                </div>
-
-            </div>
+            <div class="products" id="product-for-shop"></div>
         </main>
+
+        <script>
+            const products = [
+                {
+                    name: "Nike Pegasus Trail 5T-Shirt 14A",
+                    tag: "Hàng mới",
+                    image: "/web2/assets/images/14.png",
+                    price: 1000,
+                    title: "Giày cho mấy nhóc già đầu đi",
+                    color: "1 Mẫu màu"    
+                },
+                {
+                    name: "Nike Pegasus Trail 5",
+                    tag: "Hàng mới",
+                    image: "/web2/assets/images/14.png",
+                    price: 1000,
+                    title: "Giày cho mấy nhóc già đầu đi",
+                    color: "1 Mẫu màu"    
+                },
+                {
+                    name: "Nike Pegasus Trail 5",
+                    tag: "Hàng mới",
+                    image: "/web2/assets/images/14.png",
+                    price: 1000,
+                    title: "Giày cho mấy nhóc già đầu đi",
+                    color: "1 Mẫu màu"    
+                },
+                {
+                    name: "Nike Pegasus Trail 5",
+                    tag: "Hàng mới",
+                    image: "/web2/assets/images/14.png",
+                    price: 1000,
+                    title: "Giày cho mấy nhóc già đầu đi",
+                    color: "1 Mẫu màu"    
+                },
+                {
+                    name: "Nike Pegasus Trail 5",
+                    tag: "Hàng mới",
+                    image: "/web2/assets/images/14.png",
+                    price: 1000,
+                    title: "Giày cho mấy nhóc già đầu đi",
+                    color: "1 Mẫu màu"    
+                },
+                {
+                    name: "Nike Pegasus Trail 5",
+                    tag: "Hàng mới",
+                    image: "/web2/assets/images/14.png",
+                    price: 1000,
+                    title: "Giày cho mấy nhóc già đầu đi",
+                    color: "1 Mẫu màu"    
+                }
+            ];
+
+            const productsPerPage = 3; // Số sản phẩm trên mỗi trang
+            let currentPage = 1;
+
+            function displayProducts(page) {
+                const productContainer = document.getElementById('product-for-shop');
+                productContainer.innerHTML = ""; // Xóa nội dung cũ
+
+                const startIndex = (page - 1) * productsPerPage;
+                const endIndex = startIndex + productsPerPage;
+                const paginatedProducts = products.slice(startIndex, endIndex);
+
+                paginatedProducts.forEach(product => {
+                    const productHTML = `
+                        <div class="product">
+                            <a href="product.html">
+                                <img src="${product.image}" alt="Shoe">
+                                <p class="tag">${product.tag}</p>
+                                <h3>${product.name}</h3>
+                                <p>${product.title}</p>
+                                <p>${product.color}</p>
+                                <p class="price">${product.price}$</p>
+                            </a>
+                        </div>
+                    `;
+                    productContainer.innerHTML += productHTML;
+                });
+
+                updatePaginationButtons();
+            }
+
+            function updatePaginationButtons() {
+                document.getElementById('prevBtn').disabled = currentPage === 1;
+                document.getElementById('nextBtn').disabled = currentPage === Math.ceil(products.length / productsPerPage);
+            }
+
+            function changePage(step) {
+                currentPage += step;
+                displayProducts(currentPage);
+            }
+
+            // Thêm nút phân trang vào HTML
+            document.addEventListener("DOMContentLoaded", function () {
+                const paginationControls = `
+                    <div class="pagination">
+                        <button id="prevBtn" onclick="changePage(-1)">Previous</button>
+                        <span> Page <span id="currentPage">1</span> </span>
+                        <button id="nextBtn" onclick="changePage(1)">Next</button>
+                    </div>
+                `;
+                document.querySelector('.product-list').insertAdjacentHTML('beforeend', paginationControls);
+                displayProducts(currentPage);
+            });
+
+        </script>
     </div>
 
 
+    
+
 </body>
 </html>
-</html>
+
+<?php
+include '../includes/footer.php';       
+?>

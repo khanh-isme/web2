@@ -15,19 +15,11 @@ if (!defined('HEADER_INCLUDED')) {
 <script src="/web2/assets/js/header.js" defer></script>
 
 
-    <!-- Load CSS của trang hiện tại -->
-    <?php
-    $currentPage = basename($_SERVER['PHP_SELF'], ".php");
-    echo '<link rel="stylesheet" href="/web2/assets/css/' . $currentPage . '.css">';
-    ?>
-
-
-
 <header>
-    <a href="/web2/pages/home.php" class="logo"><img src="/web2/assets/images/Adidas-Logo.png" alt="Logo"></a>
+    <a href="/web2/index.php" class="logo"><img src="/web2/assets/images/Adidas-Logo.png" alt="Logo"></a>
 
     <ul class="nav-menu">
-        <li><a href="/web2/pages/home.php">Home</a></li>
+        <li><a href="/web2/index.php">Home</a></li>
         <li><a href="/web2/pages/shop.php">Shop</a></li>
         <li><a href="/web2/pages/about.php">about</a></li>
         <li><a href="#">Sale</a></li>

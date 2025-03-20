@@ -188,13 +188,33 @@ body {
     font-weight: bold;
 }
 
-.shop-product-pagination{
-    margin: 25px;
-}
-.shop-product-pagination-item{
-    background-color: #000;
-    border-radius: 5px;
-}
 
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.pagination button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.pagination button:hover {
+  background-color: #0056b3;
+}
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.pagination span {
+  font-size: 18px;
+  font-weight: bold;
+}
 
