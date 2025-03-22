@@ -11,10 +11,10 @@ if (!defined('FOOTER_INCLUDED')) {
             <h3>Về Chúng Tôi</h3>
             <p>Chúng tôi cung cấp những đôi giày thể thao chính hãng với chất lượng cao, giúp bạn tự tin trên từng bước đi.</p>
             <div class="social-icons">
-                <a href="#"><i class='bx bxl-facebook'></i></a>
-                <a href="#"><i class='bx bxl-instagram'></i></a>
-                <a href="#"><i class='bx bxl-twitter'></i></a>
-                <a href="#"><i class='bx bxl-youtube'></i></a>
+                <a href="https://www.facebook.com/luong.caocat"><i class='bx bxl-facebook'></i></a>
+                <a href="https://www.facebook.com/huy.binh.754918"><i class='bx bxl-instagram'></i></a>
+                <a href="https://www.facebook.com/vankhanh.nicknew"><i class='bx bxl-twitter'></i></a>
+                <a href="https://www.youtube.com/@radboyvn"><i class='bx bxl-youtube'></i></a>
             </div>
         </div>
 
