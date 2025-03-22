@@ -75,12 +75,12 @@ function toggleSize() {
     }
 ];
 
-const productsPerPage = 3; // Số sản phẩm trên mỗi trang
+const productsPerPage = 4; // Số sản phẩm trên mỗi trang
 let currentPage = 1;
 
 function displayProducts(page) {
     const productContainer = document.getElementById('product-for-shop');
-    productContainer.innerHTML = ""; // Xóa nội dung cũ
+    productContainer.innerHTML = ""; 
 
     const startIndex = (page - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
@@ -116,7 +116,7 @@ function changePage(step) {
 }
 
 // Thêm nút phân trang vào HTML
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () { // lắng nghe sự kiện khi được load
     const paginationControls = `
         <div class="pagination">
             <button id="prevBtn" onclick="changePage(-1)">Previous</button>

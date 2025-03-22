@@ -2,6 +2,12 @@
 include './includes/header.php';
 ?>
 
+
+<?php
+include './includes/config.php';
+$products = getProductList($connection);
+$categories = getCategoryList($connection);
+?>
 <html>
        
    <head>
@@ -47,37 +53,33 @@ include './includes/header.php';
         </div>
     
         <script>
-            
-            const products = [
-                { image: "/web2/assets/images/11.png", name: "Nike C1TY 'Brownstone'", category: "Shoes", price: "2,929$" },
-                { image: "/web2/assets/images/10.png", name: "Nike Air Force 1 Shadow", category: "Women's Shoes", price: "3,829$" },
-                { image: "/web2/assets/images/7.png", name: "Nike Zoom Vomero Roam", category: "Men's Winterized Shoes", price: "5,279$" },
-                { image: "/web2/assets/images/8.jpg", name: "Nike Zoom Vomero Roam", category: "Men's Winterized Shoes", price: "5,279$" },
-                { image: "/web2/assets/images/12.png", name: "Nike Zoom Vomero Roam", category: "Men's Winterized Shoes", price: "5,279$" },
-                { image: "/web2/assets/images/13.png", name: "Nike Zoom Vomero Roam", category: "Men's Winterized Shoes", price: "5,279$" }
-            ];
-    
-            
+            const products = <?php echo json_encode($products); ?>;
+            console.log(products);
+            const categories = <?php echo json_encode($categories); ?>;
+            console.log(categories);
             const productContainer = document.getElementById("product-list");
-    
+            const product_copy = products.slice(0, 5);
             
-            products.forEach(product => {
+            product_copy.forEach(product => {
+                const category = categories.find(category => category.id === product.category_id);
+                const categoryName = category ? category.name : "Unknown"; 
+
                 const productHTML = `
                     <div class="product-a">
                         <a href="product.html">
                             <img src="${product.image}" alt="${product.name}">
                             <h3>${product.name}</h3>
-                            <p>${product.category}</p>
+                            <p>${categoryName}</p>
                             <p class="price">${product.price}</p>
                         </a>
                     </div>
                 `;
                 productContainer.innerHTML += productHTML;
             });
+
+
         </script>
     
-
-
 
 
 
@@ -93,20 +95,12 @@ include './includes/header.php';
         </section>
 
         <script>
-            const products1 = [
-                { image: "/web2/assets/images/7.png", name: "Half Running Set", price: "99$ - 100$" },
-                { image: "/web2/assets/images/10.png", name: "Half Running Set", price: "99$ - 100$" },
-                { image: "/web2/assets/images/11.png", name: "Half Running Set", price: "99$ - 100$" },
-                { image: "/web2/assets/images/12.png", name: "Half Running Set", price: "99$ - 100$" },
-                { image: "/web2/assets/images/13.png", name: "Half Running Set", price: "99$ - 100$" },
-                { image: "/web2/assets/images/14.png", name: "Half Running Set", price: "99$ - 100$" },
-                { image: "/web2/assets/images/15.png", name: "Half Running Set", price: "99$ - 100$" },
-                { image: "/web2/assets/images/8.jpg", name: "Half Running Set", price: "99$ - 100$" }
-            ];
-
+            
+            const product_sale = products.slice(5, 10);
+            console.log(product_sale);
             const productContainer1 = document.getElementById("product-list-1");
 
-            products1.forEach(product => {
+            product_sale.forEach(product => {
                 const productHTML = `
                     <div class="product">
                         <a href="product.html">
