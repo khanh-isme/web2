@@ -1,7 +1,7 @@
 <!-- dùng để quản lý data cho toàn bộ trang web -->
 
 <?php
-
+//hell no
 class Products {
     private $id;
     private $name;
