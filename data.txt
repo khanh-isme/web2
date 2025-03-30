@@ -16,7 +16,7 @@ CREATE TABLE collection (
     name VARCHAR(100) NOT NULL,
     description TEXT
 );
-c
+
 
 -- Bảng kích thước sản phẩm (product_size)
 CREATE TABLE product_size (
@@ -234,10 +234,6 @@ INSERT INTO product_size (product_id, size, stock) VALUES
 
 
 
-
-
-
-
 -- Bảng người dùng (users)
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -246,9 +242,65 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     phone VARCHAR(20),
     address TEXT,
-    role ENUM('customer', 'admin') DEFAULT 'customer',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    product_size_id INT NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_size_id) REFERENCES product_size(id) ON DELETE CASCADE
+);
+
+INSERT INTO users (name, email, password, phone, address) VALUES
+('Nguyễn Văn A', 'nguyenvana@example.com', '123456', '0987654321', 'Hà Nội'),
+('Trần Thị B', 'tranthib@example.com', 'abcdef', '0977123456', 'TP HCM'),
+('Lê Văn C', 'levanc@example.com', 'pass123', '0912345678', 'Đà Nẵng'),
+('Hoàng Thị D', 'hoangthid@example.com', 'securepass', '0933221144', 'Cần Thơ'),
+('Phạm Văn E', 'phamvane@example.com', 'e123456', '0966554433', 'Hải Phòng'),
+('Vũ Thị F', 'vuthif@example.com', 'fpassword', '0922113344', 'Huế'),
+('Bùi Văn G', 'buivang@example.com', 'gpass', '0944556677', 'Nha Trang'),
+('Đặng Thị H', 'dangthih@example.com', 'hpassword', '0988223344', 'Vũng Tàu'),
+('Ngô Văn I', 'ngovani@example.com', 'ipass123', '0911998877', 'Quảng Ninh'),
+('Dương Thị J', 'duongthij@example.com', 'jpassword', '0955332244', 'Bắc Ninh'),
+('Trịnh Văn K', 'trinhvank@example.com', 'ksecure', '0999223344', 'Thanh Hóa'),
+('Đoàn Thị L', 'doanthil@example.com', 'lpass', '0944559922', 'Nam Định'),
+('Mai Văn M', 'maivanm@example.com', 'mpassword', '0900557788', 'Hòa Bình'),
+('Châu Thị N', 'chauthin@example.com', 'npass', '0933225566', 'Bình Dương'),
+('Lương Văn O', 'luongvano@example.com', 'opassword', '0977448822', 'Lạng Sơn'),
+('Phan Thị P', 'phanthip@example.com', 'ppass123', '0966991155', 'Quảng Bình'),
+('Cao Văn Q', 'caovanq@example.com', 'qpassword', '0922334455', 'Cà Mau'),
+('Tạ Thị R', 'tatheir@example.com', 'rpass', '0999887766', 'Kon Tum'),
+('Trương Văn S', 'truongvans@example.com', 'spassword', '0900223344', 'Bắc Giang'),
+('Lý Thị T', 'lythit@example.com', 'tpass123', '0944778899', 'Đắk Lắk');
+
+
+INSERT INTO cart (user_id, product_id, product_size_id, quantity) VALUES
+(1, 1, 1, 2),  -- User 1 mua sản phẩm 1, size 40
+(2, 1, 2, 1),  -- User 2 mua sản phẩm 1, size 41
+(3, 2, 3, 3),  -- User 3 mua sản phẩm 2, size 42
+(4, 2, 4, 1),  -- User 4 mua sản phẩm 2, size 43
+(5, 3, 5, 2),  -- User 5 mua sản phẩm 3, size 40
+(6, 3, 6, 4),  -- User 6 mua sản phẩm 3, size 41
+(7, 4, 7, 2),  -- User 7 mua sản phẩm 4, size 39
+(8, 4, 8, 1),  -- User 8 mua sản phẩm 4, size 40
+(9, 5, 9, 3),  -- User 9 mua sản phẩm 5, size 41
+(10, 5, 10, 1), -- User 10 mua sản phẩm 5, size 42
+(11, 6, 11, 2), -- User 11 mua sản phẩm 6, size 38
+(12, 6, 12, 5), -- User 12 mua sản phẩm 6, size 39
+(13, 6, 13, 1), -- User 13 mua sản phẩm 6, size 40
+(14, 6, 14, 3), -- User 14 mua sản phẩm 6, size 41
+(15, 6, 15, 2), -- User 15 mua sản phẩm 6, size 42
+(16, 7, 16, 4), -- User 16 mua sản phẩm 7, size 36
+(17, 7, 17, 1), -- User 17 mua sản phẩm 7, size 37
+(18, 7, 18, 2), -- User 18 mua sản phẩm 7, size 38
+(19, 7, 19, 3), -- User 19 mua sản phẩm 7, size 39
+(20, 7, 20, 1); -- User 20 mua sản phẩm 7, size 40
+
 
 -- Bảng đơn hàng (orders)
 CREATE TABLE orders (
@@ -256,7 +308,6 @@ CREATE TABLE orders (
     user_id INT,
     total_price DECIMAL(10,2) NOT NULL,
     status ENUM('pending', 'processing', 'shipped', 'delivered', 'canceled') DEFAULT 'pending',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
