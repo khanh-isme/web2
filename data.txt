@@ -1,7 +1,17 @@
 -- Tạo database
-CREATE DATABASE shoe_store CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE shoe_store;
+CREATE DATABASE shoe CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE shoe;
 
+
+
+-- Bảng kích thước sản phẩm (product_size)
+CREATE TABLE product_size (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    size VARCHAR(50) NOT NULL,
+    stock INT DEFAULT 0, -- Số lượng sản phẩm cho từng size
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
 
 -- Bảng danh mục sản phẩm (categories)
 CREATE TABLE categories (
@@ -15,16 +25,6 @@ CREATE TABLE collection (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT
-);
-
-
--- Bảng kích thước sản phẩm (product_size)
-CREATE TABLE product_size (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    product_id INT NOT NULL,
-    size VARCHAR(50) NOT NULL,
-    stock INT DEFAULT 0, -- Số lượng sản phẩm cho từng size
-    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
 -- Chèn dữ liệu mẫu cho bảng categories
@@ -45,60 +45,60 @@ INSERT INTO collection (name, description) VALUES
 
 -- Chèn dữ liệu mẫu cho bảng products
 INSERT INTO products (name, category_id, price, description, image, collection_id, gender) VALUES
-('Nike Air Force 1', 1, 1200000, 'Giày thể thao cổ điển', 'nike_af1.jpg', 1, 'unisex'),
-('Adidas Ultraboost', 5, 2800000, 'Giày chạy bộ cao cấp', 'adidas_ultraboost.jpg', 4, 'unisex'),
-('Timberland Classic', 2, 3500000, 'Giày boot chống nước', 'timberland.jpg', 2, 'nam'),
-('Vans Old Skool', 1, 1500000, 'Giày trượt ván cổ điển', 'vans_old_skool.jpg', 5, 'unisex'),
-('Puma RS-X', 1, 2200000, 'Phong cách retro', 'puma_rsx.jpg', 3, 'unisex'),
-('Gucci Loafer', 4, 5500000, 'Giày lười thời trang cao cấp', 'gucci_loafer.jpg', 3, 'nu'),
-('Converse Chuck Taylor', 1, 1300000, 'Mẫu giày cao cổ huyền thoại', 'converse_chuck.jpg', 5, 'unisex'),
-('Adidas Yeezy Boost', 5, 5000000, 'Giày sneakers phiên bản giới hạn', 'yeezy_boost.jpg', 3, 'unisex'),
-('Nike ZoomX', 5, 3200000, 'Giày chạy bộ siêu nhẹ', 'nike_zoomx.jpg', 4, 'nam'),
-('Crocs Classic', 3, 900000, 'Dép thoải mái và nhẹ nhàng', 'crocs.jpg', 1, 'unisex');
+('Nike Air Force 1', 1, 1200000, 'Giày thể thao cổ điển', '/web2/assets/images/14.png', 1, 'unisex'),
+('Adidas Ultraboost', 5, 2800000, 'Giày chạy bộ cao cấp', '/web2/assets/images/14.png', 4, 'unisex'),
+('Timberland Classic', 2, 3500000, 'Giày boot chống nước', '/web2/assets/images/14.png', 2, 'nam'),
+('Vans Old Skool', 1, 1500000, 'Giày trượt ván cổ điển', '/web2/assets/images/14.png', 5, 'unisex'),
+('Puma RS-X', 1, 2200000, 'Phong cách retro', '/web2/assets/images/14.png', 3, 'unisex'),
+('Gucci Loafer', 4, 5500000, 'Giày lười thời trang cao cấp', '/web2/assets/images/14.png', 3, 'nu'),
+('Converse Chuck Taylor', 1, 1300000, 'Mẫu giày cao cổ huyền thoại', '/web2/assets/images/14.png', 5, 'unisex'),
+('Adidas Yeezy Boost', 5, 5000000, 'Giày sneakers phiên bản giới hạn', '/web2/assets/images/14.png', 3, 'unisex'),
+('Nike ZoomX', 5, 3200000, 'Giày chạy bộ siêu nhẹ', '/web2/assets/images/14.png', 4, 'nam'),
+('Crocs Classic', 3, 900000, 'Dép thoải mái và nhẹ nhàng', '/web2/assets/images/14.png', 1, 'unisex');
 
 -- Chèn dữ liệu vào bảng products
 INSERT INTO products (name, category_id, price, description, image, collection_id, gender) VALUES
-('Air Max 2025', 1, 120.00, 'Giày thể thao cao cấp', 'airmax2025.jpg', 1, 'unisex'),
-('Winter Boot Pro', 2, 150.00, 'Giày boot ấm áp mùa đông', 'winterboot.jpg', 2, 'nu'),
-('Casual Sandal', 3, 50.00, 'Dép sandals thoáng mát', 'casualsandal.jpg', 3, 'unisex'),
-('Leather Loafers', 4, 100.00, 'Giày lười da sang trọng', 'leatherloafers.jpg', 5, 'nam'),
-('Running Pro 3000', 5, 130.00, 'Giày chạy bộ chuyên nghiệp', 'runningpro3000.jpg', 4, 'unisex'),
+('Air Max 2025', 1, 120.00, 'Giày thể thao cao cấp', '/web2/assets/images/14.png', 1, 'unisex'),
+('Winter Boot Pro', 2, 150.00, 'Giày boot ấm áp mùa đông', '/web2/assets/images/14.png', 2, 'nu'),
+('Casual Sandal', 3, 50.00, 'Dép sandals thoáng mát', '/web2/assets/images/14.png', 3, 'unisex'),
+('Leather Loafers', 4, 100.00, 'Giày lười da sang trọng', '/web2/assets/images/14.png', 5, 'nam'),
+('Running Pro 3000', 5, 130.00, 'Giày chạy bộ chuyên nghiệp', '/web2/assets/images/14.png', 4, 'unisex'),
 
-('Sporty Runner', 1, 110.00, 'Giày chạy bộ nhẹ', 'sportyrunner.jpg', 4, 'unisex'),
-('Winter Guard Boot', 2, 160.00, 'Boot chống nước mùa đông', 'winterguard.jpg', 2, 'nu'),
-('Summer Sandal', 3, 45.00, 'Dép mùa hè phong cách', 'summersandal.jpg', 3, 'unisex'),
-('Elegant Loafers', 4, 105.00, 'Giày lười thanh lịch', 'elegantloafers.jpg', 5, 'nam'),
-('Speed Track', 5, 140.00, 'Giày thể thao tốc độ', 'speedtrack.jpg', 4, 'unisex'),
+('Sporty Runner', 1, 110.00, 'Giày chạy bộ nhẹ', 's/web2/assets/images/14.png', 4, 'unisex'),
+('Winter Guard Boot', 2, 160.00, 'Boot chống nước mùa đông', '/web2/assets/images/14.png', 2, 'nu'),
+('Summer Sandal', 3, 45.00, 'Dép mùa hè phong cách', '/web2/assets/images/14.png', 3, 'unisex'),
+('Elegant Loafers', 4, 105.00, 'Giày lười thanh lịch', '/web2/assets/images/14.png', 5, 'nam'),
+('Speed Track', 5, 140.00, 'Giày thể thao tốc độ', '/web2/assets/images/14.png', 4, 'unisex'),
 
-('Flex Sneakers', 1, 115.00, 'Giày thể thao linh hoạt', 'flexsneakers.jpg', 1, 'unisex'),
-('Mountain Boot', 2, 170.00, 'Giày boot leo núi', 'mountainboot.jpg', 2, 'nam'),
-('Beach Sandal', 3, 55.00, 'Dép đi biển thời trang', 'beachsandal.jpg', 3, 'unisex'),
-('Classic Loafers', 4, 95.00, 'Giày lười cổ điển', 'classicloafers.jpg', 5, 'nam'),
-('Endurance Runner', 5, 135.00, 'Giày chạy bộ bền bỉ', 'endurancerunner.jpg', 4, 'unisex'),
+('Flex Sneakers', 1, 115.00, 'Giày thể thao linh hoạt', '/web2/assets/images/14.png', 1, 'unisex'),
+('Mountain Boot', 2, 170.00, 'Giày boot leo núi', '/web2/assets/images/14.png', 2, 'nam'),
+('Beach Sandal', 3, 55.00, 'Dép đi biển thời trang', '/web2/assets/images/14.png', 3, 'unisex'),
+('Classic Loafers', 4, 95.00, 'Giày lười cổ điển', '/web2/assets/images/14.png', 5, 'nam'),
+('Endurance Runner', 5, 135.00, 'Giày chạy bộ bền bỉ', '/web2/assets/images/14.png', 4, 'unisex'),
 
-('Elite Sneakers', 1, 125.00, 'Giày thể thao đẳng cấp', 'elitesneakers.jpg', 1, 'unisex'),
-('Arctic Boot', 2, 180.00, 'Giày boot chống lạnh', 'arcticboot.jpg', 2, 'nu'),
-('Urban Sandal', 3, 60.00, 'Dép thành phố hiện đại', 'urbansandal.jpg', 3, 'unisex'),
-('Formal Loafers', 4, 110.00, 'Giày lười công sở', 'formalloafers.jpg', 5, 'nam'),
-('Marathon Pro', 5, 145.00, 'Giày chạy marathon', 'marathonpro.jpg', 4, 'unisex'),
+('Elite Sneakers', 1, 125.00, 'Giày thể thao đẳng cấp', '/web2/assets/images/14.png', 1, 'unisex'),
+('Arctic Boot', 2, 180.00, 'Giày boot chống lạnh', '/web2/assets/images/14.png', 2, 'nu'),
+('Urban Sandal', 3, 60.00, 'Dép thành phố hiện đại', '/web2/assets/images/14.png', 3, 'unisex'),
+('Formal Loafers', 4, 110.00, 'Giày lười công sở', '/web2/assets/images/14.png', 5, 'nam'),
+('Marathon Pro', 5, 145.00, 'Giày chạy marathon', '/web2/assets/images/14.png', 4, 'unisex'),
 
-('Hyper Sneakers', 1, 130.00, 'Giày sneaker phong cách', 'hypersneakers.jpg', 1, 'unisex'),
-('Explorer Boot', 2, 175.00, 'Boot khám phá địa hình', 'explorerboot.jpg', 2, 'nam'),
-('Comfy Sandal', 3, 65.00, 'Dép thoải mái mọi lúc', 'comfysandal.jpg', 3, 'unisex'),
-('Casual Loafers', 4, 115.00, 'Giày lười hàng ngày', 'casualloafers.jpg', 5, 'nam'),
-('Speed Runner X', 5, 150.00, 'Giày chạy bộ nhanh', 'speedrunnerx.jpg', 4, 'unisex'),
+('Hyper Sneakers', 1, 130.00, 'Giày sneaker phong cách', '/web2/assets/images/14.png', 1, 'unisex'),
+('Explorer Boot', 2, 175.00, 'Boot khám phá địa hình', 'e/web2/assets/images/14.png', 2, 'nam'),
+('Comfy Sandal', 3, 65.00, 'Dép thoải mái mọi lúc', '/web2/assets/images/14.png', 3, 'unisex'),
+('Casual Loafers', 4, 115.00, 'Giày lười hàng ngày', '/web2/assets/images/14.png', 5, 'nam'),
+('Speed Runner X', 5, 150.00, 'Giày chạy bộ nhanh', 's/web2/assets/images/14.png', 4, 'unisex'),
 
-('Active Sneakers', 1, 135.00, 'Giày sneaker thể thao', 'activesneakers.jpg', 1, 'unisex'),
-('Trek Boot', 2, 185.00, 'Boot trekking bền bỉ', 'trekboot.jpg', 2, 'nam'),
-('Summer Breeze Sandal', 3, 70.00, 'Dép mùa hè thoáng mát', 'summerbreeze.jpg', 3, 'unisex'),
-('Stylish Loafers', 4, 120.00, 'Giày lười thời trang', 'stylishloafers.jpg', 5, 'nam'),
-('Pro Runner Elite', 5, 155.00, 'Giày chạy bộ chuyên nghiệp', 'prorunnerelite.jpg', 4, 'unisex'),
+('Active Sneakers', 1, 135.00, 'Giày sneaker thể thao', '/web2/assets/images/14.png', 1, 'unisex'),
+('Trek Boot', 2, 185.00, 'Boot trekking bền bỉ', 't/web2/assets/images/14.png', 2, 'nam'),
+('Summer Breeze Sandal', 3, 70.00, 'Dép mùa hè thoáng mát', '/web2/assets/images/14.png', 3, 'unisex'),
+('Stylish Loafers', 4, 120.00, 'Giày lười thời trang', '/web2/assets/images/14.png', 5, 'nam'),
+('Pro Runner Elite', 5, 155.00, 'Giày chạy bộ chuyên nghiệp', '/web2/assets/images/14.png', 4, 'unisex'),
 
-('Dynamic Sneakers', 1, 140.00, 'Giày thể thao năng động', 'dynamicsneakers.jpg', 1, 'unisex'),
-('Alpine Boot', 2, 190.00, 'Boot leo núi chuyên dụng', 'alpineboot.jpg', 2, 'nam'),
-('Outdoor Sandal', 3, 75.00, 'Dép ngoài trời bền bỉ', 'outdoorsandal.jpg', 3, 'unisex'),
-('Luxury Loafers', 4, 125.00, 'Giày lười cao cấp', 'luxuryloafers.jpg', 5, 'nam'),
-('Ultrafast Runner', 5, 160.00, 'Giày chạy bộ tốc độ cao', 'ultrafastrunner.jpg', 4, 'unisex');
+('Dynamic Sneakers', 1, 140.00, 'Giày thể thao năng động', '/web2/assets/images/14.png', 1, 'unisex'),
+('Alpine Boot', 2, 190.00, 'Boot leo núi chuyên dụng', '/web2/assets/images/14.png', 2, 'nam'),
+('Outdoor Sandal', 3, 75.00, 'Dép ngoài trời bền bỉ', '/web2/assets/images/14.png', 3, 'unisex'),
+('Luxury Loafers', 4, 125.00, 'Giày lười cao cấp', '/web2/assets/images/14.png', 5, 'nam'),
+('Ultrafast Runner', 5, 160.00, 'Giày chạy bộ tốc độ cao', '/web2/assets/images/14.png', 4, 'unisex');
 
 
 INSERT INTO products (name, category_id, price, description, image, collection_id, gender)
@@ -302,6 +302,8 @@ INSERT INTO cart (user_id, product_id, product_size_id, quantity) VALUES
 (20, 7, 20, 1); -- User 20 mua sản phẩm 7, size 40
 
 
+
+// tamj thoi chưa sử dụng 
 -- Bảng đơn hàng (orders)
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
