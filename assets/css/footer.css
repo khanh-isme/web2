@@ -1,11 +1,12 @@
-/* CSS cho footer */
 footer {
     background-color: #222;
     color: white;
     padding: 40px 0;
     font-family: 'Roboto', sans-serif;
+    margin-top: 100px ; /* Đảm bảo footer luôn đẩy xuống cuối */
 }
 
+/* Căn chỉnh layout cho footer */
 .footer-container {
     display: flex;
     justify-content: space-between;

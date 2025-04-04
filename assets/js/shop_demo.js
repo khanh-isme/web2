@@ -1,21 +1,16 @@
-
-
 (function () {
-    
-    window.initShopScript = function() {
+    function initShopScript() {
         console.log("✅ Shop script initialized");
 
          // Kiểm tra xem script đã chạy chưa
-         //đánh dấu khi shopScriptInitialized thực sự chạy xong
-         if (!window.shopScriptInitialized) {
-            window.shopScriptInitialized = true;
-            console.log("✅ Shop script initialized");
-        
-            resetFilters();
-            fetchProducts(1);
-        } else {
-            console.log("🚨 Script đã chạy trước đó, bỏ qua init.");
-        }
+    if (window.shopScriptInitialized) {
+        console.log("🚨 Script đã chạy trước đó, bỏ qua init.");
+        return;
+    }
+    window.shopScriptInitialized = true; // Đánh dấu script đã chạy
+
+    resetFilters();
+    fetchProducts(1);
         
 
         // Reset bộ lọc về mặc định
@@ -23,8 +18,9 @@
             window.selectedGender = '';
             window.selectedCategory = '';
             window.selectedCollection = '';
-        }
 
+
+        }
 
         // Các toggle bộ lọc
         function toggleFilter(headerClass, optionsId) {
@@ -44,11 +40,6 @@
         let currentPage = 1;
         let totalPages = 1;
         let isFetching = false;
-        
-
-        let productName = document.getElementById("productName").value;
-        console.log(productName); 
-
 
         async function fetchProducts(page) {
             if (isFetching || page < 1 || page > totalPages) return;
@@ -56,10 +47,6 @@
 
             try {
                 let url = `/web2/includes/get_products.php?page=${page}&limit=${productsPerPage}`;
-                if(productName != ''){
-                   console.log(productName); 
-                   url +=`&name=${encodeURIComponent(productName)}`;
-                } 
                 if (window.selectedGender) url += `&gender=${window.selectedGender}`;
                 if (window.selectedCategory) url += `&category=${encodeURIComponent(window.selectedCategory)}`;
                 if (window.selectedCollection) url += `&collection=${encodeURIComponent(window.selectedCollection)}`;
@@ -170,7 +157,6 @@
                 console.log("🔄 Shop page loaded - Reset filters.");
                 resetFilters();
                 fetchProducts(1);
-
             }
         });
         
@@ -179,12 +165,7 @@
         fetchProducts(currentPage);
     }
 
-    // Khởi chạy script ban đầu kiểm tra nó chưa chạy thì mới gọi
-    $(document).ready(function () {
-        if (!window.shopScriptInitialized) {
-            initShopScript();
-        }
-    });
-    
+    // Khởi chạy script ban đầu
+    $(document).ready(initShopScript);
 
 })();

@@ -2,78 +2,13 @@
 
 
 
-let cart = [];
-
-    function renderCart() {
-        const cartBody = document.getElementById("cartBody");
-        cartBody.innerHTML = "";
-
-        cart.forEach((item, index) => {
-            const row = `
-                <tr>
-                    <td><img src="${item.image}" alt="${item.name}" class="product-image"></td>
-                    <td>${item.name}</td>
-                    <td>$${item.price}</td>
-                    <td>
-                        <button class="btn-decrease" onclick="changeQuantity(${index}, -1)">-</button>
-                        ${item.quantity}
-                        <button class="btn-increase" onclick="changeQuantity(${index}, 1)">+</button>
-                    </td>
-                    <td>$${(item.price * item.quantity).toFixed(2)}</td>
-                    <td>
-                        <button class="btn btn-delete" onclick="removeFromCart(${index})">Remove</button>
-                    </td>
-                </tr>
-            `;
-            cartBody.insertAdjacentHTML("beforeend", row);
-        });
-
-        updateTotal();
-    }
-
-    function addToCart(name, price, image) {
-        const existingProduct = cart.find(item => item.name === name);
-        if (existingProduct) {
-            existingProduct.quantity += 1;
-        } else {
-            cart.push({ name, price, quantity: 1, image });
-        }
-        renderCart();
-    }
-
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        renderCart();
-    }
-
-    function changeQuantity(index, amount) {
-        if (cart[index].quantity + amount > 0) {
-            cart[index].quantity += amount;
-        } else {
-            cart.splice(index, 1);
-        }
-        renderCart();
-    }
-
-    function updateTotal() {
-        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        document.getElementById("totalPrice").innerText = `Total: $${total.toFixed(2)}`;
-    }
-
-    renderCart();
-
-
     //cart push up
     function toggleCartPopup() {
         const cartPopup = document.getElementById('cartPopup');
         cartPopup.style.display = cartPopup.style.display === 'none' || cartPopup.style.display === '' ? 'flex' : 'none';
     }
 
-    function removeItem() {
-        alert("Item removed (Demo Function)");
-        // You can add JavaScript logic here to remove the item from the cart
-    }
-
+  
     // Close cart popup when clicking outside of it
     window.onclick = function(event) {
         const cartPopup = document.getElementById('cartPopup');
@@ -89,17 +24,67 @@ let cart = [];
     function toggleSearch() {
         const searchContainer = document.getElementById("searchPopup");
         searchContainer.style.display = searchContainer.style.display === "none" || searchContainer.style.display === "" ? "block" : "none";
-      }
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchForm = document.getElementById("searchForm");
+    
+        searchForm.addEventListener("submit", function (event) {
+            event.preventDefault(); // Ngăn chặn reload trang
+    
+            const productName = document.getElementById("productName").value.trim();
+    
+    
+    
+            // Gửi AJAX đến shop.php
+            fetch(`/web2/pages/shop.php?name=${productName}`, {
+                method: "GET",
+                headers: { "X-Requested-With": "XMLHttpRequest" }
+            })
+            .then(response => response.text())
+            .then(html => {
+                const contentDiv = document.getElementById("content");
+                if (contentDiv) {
+                    contentDiv.innerHTML = html;
+                    
+                    console.log("✅ Đã cập nhật nội dung sản phẩm.");
+            
+                    const scriptSrc = "/web2/assets/js/shop.js";
+                    //kiểm tra nếu nó đã có DOM rồi thì không thêm nữa
+                    if (!document.querySelector(`script[src="${scriptSrc}"]`)) {
+                        const script = document.createElement("script");
+                        script.src = scriptSrc;
+                        script.onload = () => {
+                            console.log("✅ Shop.js đã tải lại.");
+                            if (typeof initShopScript === "function") {
+                                initShopScript();
+                            } else {
+                                console.error("❌ initShopScript không tồn tại sau khi tải lại script.");
+                            }
+                        };
+                        document.body.appendChild(script);
+                    } else {
+                        console.log("⚠️ Shop.js đã tồn tại, không tải lại.");
+                        if (typeof initShopScript === "function") {
+                            initShopScript();
+                        }
+                    }
+                }    
+            })
+            .catch(error => console.error("❌ Lỗi khi tải sản phẩm:", error));
+            
+        });
+    });
+    
+    
       
     
 
       
-// viết cái nút tăng giảm số lượng    
-// Hàm tăng số lượng
 
 
 
 
 
-  
   

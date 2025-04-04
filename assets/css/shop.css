@@ -28,6 +28,7 @@
     margin: 20px 0px;
   }
 
+  
   .filter-header::after {
     margin-right: 100px;
     content: "▲";
@@ -48,7 +49,9 @@
   .filter-options-element {
     margin-bottom: 10px;
     display: block;
+    cursor: pointer; 
     
+  
   }
 
   .filter-header-color {
@@ -96,16 +99,26 @@
 
 
 
-body {
-   
-    background-color: #f8f8f8;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
     padding-top: 100px;
+    flex :1;
     display: flex;
     max-width: 1200px;
     margin: auto;
+}
+.product-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 1000px; /* Đảm bảo phần nội dung có độ cao tối thiểu */
 }
 
 .sidebar {
@@ -144,14 +157,23 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    min-height: 300px; /* Giữ độ cao tối thiểu */
+    align-items: center;
+    justify-content: center;
 }
+
+
 
 .product {
     background-color: #ffffff;
     padding: 15px;
     border: none;
     text-align: left;
+
 }
+
+
+
 
 .product img {
     width: 100%;

@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/web2/includes/header.php'; ?>
+
 
 <!DOCTYPE html>
 <html lang="vi">
