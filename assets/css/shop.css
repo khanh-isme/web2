@@ -45,7 +45,7 @@
     display: none;
   }
 
-  .filter-options a{
+  .filter-options-element {
     margin-bottom: 10px;
     display: block;
     
