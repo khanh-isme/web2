@@ -1,0 +1,51 @@
+@keyframes showMessageDialog {
+    0% {
+        transform: translateX(100%);  /* Đưa phần tử ra ngoài màn hình (bên phải) */
+        opacity: 0;
+    }
+    10% {
+        transform: translateX(-30px);  /* Di chuyển vào vị trí ban đầu (trong màn hình) */
+        opacity: 1;
+    }
+    80% {
+        transform: translateX(-30px);  /* Giữ phần tử ở trong màn hình */
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);  /* Đưa phần tử ra ngoài màn hình (bên phải) */
+        opacity: 0;
+    }
+}
+
+#messageDialog {
+    display: inline-flex;
+    position: fixed;  /* Dùng position fixed để cố định phần tử ở một vị trí */
+    top: 30px;  /* Vị trí phần tử */
+    right: 0;   /* Giữ phần tử ở bên phải màn hình */
+    height: 75px;
+    min-width: 300px;
+    padding: 0 20px 0 20px; 
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 75px;  /* Căn giữa văn bản */
+    opacity: 0;  /* Ban đầu ẩn phần tử */
+}
+
+.icon
+{
+    vertical-align: middle;
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.red
+{
+    color: red;
+}
+
+.green
+{
+    color: green;
+}

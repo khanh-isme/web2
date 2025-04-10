@@ -1,0 +1,110 @@
+admin-login {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('../imgs/login-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+}
+
+#admin-login-container {
+    width: 450px;
+    padding: 40px;
+    border: 1px solid black;
+    background: rgba(54, 54, 54, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: background 0.5;
+    animation: fadeIn 1s ease-in forwards, moveDown 1s ease-in forwards;
+}
+
+@keyframes fadeIn
+{
+    from
+    {
+        opacity: 0;
+    }
+    to
+    {
+        opacity: 1;
+    }
+}
+
+@keyframes moveDown
+{
+    from
+    {
+        margin-top: -100px;
+    }
+    to 
+    {
+        margin-top: 0;
+    }
+}
+
+#admin-login-form
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#admin-login-form h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.admin-login-form-input-group {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.admin-login-form-input-group i {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.admin-login-form-input-group input {
+    background: white;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+#admin-login-button {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    background: #1f1f1f;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+#admin-login-button:hover
+{
+    box-shadow: 0 0 0 2px rgba(54, 54, 54, 0.7), 0 0 0 4px #1f1f1f;
+}
+
+#admin-login-button:disabled
+{
+    cursor: default;
+    opacity: 0.2;
+    box-shadow: none;
+}
