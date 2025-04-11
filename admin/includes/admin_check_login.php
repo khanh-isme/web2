@@ -9,12 +9,25 @@
         require_once('responseHTML.php');
         $perms = getPermissions($_SESSION['user']['username']);
 
-        $response = [
-            'status' => 'success',
-            'message' => '<p><i class="fa-regular fa-circle-check green icon"></i>Chào mừng trở lại, '.htmlspecialchars($user['fullname'], ENT_QUOTES, 'UTF-8').' huynh!</p>',
-            'html' => responseHTML($perms,$user),
-            'default' => !empty($perms)?$perms[0]:'',
-        ];
+        if($user['status']==='active')
+        {
+            $response = [
+                'status' => 'success',
+                'message' => '<p><i class="fa-regular fa-circle-check green icon"></i>Chào mừng trở lại, '.htmlspecialchars($user['fullname'], ENT_QUOTES, 'UTF-8').' huynh!</p>',
+                'html' => responseHTML($perms,$user),
+                'default' => !empty($perms)?$perms[0]:'',
+            ];
+        }
+        else
+        {
+            session_destroy();
+            $response = [
+                'status' => 'error',
+                'message' => '<p><i class="fa-regular fa-circle-xmark red icon"></i>Tài khoản '.htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8').' đã bị khóa!</p>',
+                'html' => file_get_contents("admin_login.php"),
+                'default' => '',
+            ];
+        }
     }
     else
     {

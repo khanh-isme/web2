@@ -5,9 +5,9 @@ fetch('includes/admin_check_login.php')
     try
     {
         data=JSON.parse(responseData);
+        showMessageDialog(data.message);
         if(data.status==="success")
         {
-            showMessageDialog(data.message);
             document.querySelector('#body').innerHTML=data.html;
             itemDefault=document.getElementsByClassName(data.default);
             Array.from(itemDefault).forEach(el => {

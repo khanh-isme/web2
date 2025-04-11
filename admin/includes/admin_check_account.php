@@ -10,24 +10,35 @@
         $user=getUser($username);
         if ($user!=null) 
         {
-            if (password_verify($password,$user['password'])) 
+            if ($user['status']==='active')
             {
-                require 'getPermission.php';
-                require 'responseHTML.php';
-                session_start();
-                $_SESSION['user']=$user;
-                $perms=getPermissions($user['username']);
-
-                $response = [
-                    'status' => 'success',
-                    'message' => '<p><i class="fa-regular fa-circle-check green icon"></i>Đăng nhập thành công!</p>',
-                    'html' => responseHTML($perms,$user),
-                    'default' => !empty($perms)?$perms[0]:'',
-                ];
-            } else {
+                if (password_verify($password,$user['password'])) 
+                {
+                    require 'getPermission.php';
+                    require 'responseHTML.php';
+                    session_start();
+                    $_SESSION['user']=$user;
+                    $perms=getPermissions($user['username']);
+    
+                    $response = [
+                        'status' => 'success',
+                        'message' => '<p><i class="fa-regular fa-circle-check green icon"></i>Đăng nhập thành công!</p>',
+                        'html' => responseHTML($perms,$user),
+                        'default' => !empty($perms)?$perms[0]:'',
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'error',
+                        'message' => '<p><i class="fa-regular fa-circle-xmark red icon"></i>Tên đăng nhập hoặc mật khẩu không đúng!</p>',
+                        'html' => '',
+                    ];
+                }
+            }
+            else
+            {
                 $response = [
                     'status' => 'error',
-                    'message' => '<p><i class="fa-regular fa-circle-xmark red icon"></i>Tên đăng nhập hoặc mật khẩu không đúng!</p>',
+                    'message' => '<p><i class="fa-regular fa-circle-xmark red icon"></i>Tài khoản đã bị khóa!</p>',
                     'html' => '',
                 ];
             }
