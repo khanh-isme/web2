@@ -94,11 +94,12 @@ if (!defined('HEADER_INCLUDED')) {
         <div class="form-group">
             <label for="collection">Collection</label>
             <select id="collection" name="collection">
-                <option value="">Summer Collection</option>
-                <option value="">Winter Collectionr</option>
-                <option value="">Limited Edition</option>
-                <option value="">Running Shoes</option>
-                <option value="">Casual Style</option>
+                <option value="">Select collection</option>
+                <option value="Summer Collection">Summer Collection</option>
+                <option value="Winter Collectionr">Winter Collectionr</option>
+                <option value="Limited Edition">Limited Edition</option>
+                <option value=">Running Shoes">Running Shoes</option>
+                <option value="Casual Style">Casual Style</option>
             </select>
         </div>
         <div class="form-group">

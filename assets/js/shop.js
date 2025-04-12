@@ -44,9 +44,14 @@
         let currentPage = 1;
         let totalPages = 1;
         let isFetching = false;
-        
 
         let productName = document.getElementById("productName").value;
+        window.selectedCategory = document.getElementById("category").value;
+        window.selectedCollection = document.getElementById("collection").value;
+        window.selectedGender =document.getElementById("gender").value;
+        let size = document.getElementById("size").value;
+        let minPrice = document.getElementById("minPrice").value;
+        let maxPrice = document.getElementById("maxPrice").value;
         console.log(productName); 
 
 
@@ -59,7 +64,10 @@
                 if(productName != ''){
                    console.log(productName); 
                    url +=`&name=${encodeURIComponent(productName)}`;
-                } 
+                }
+                if (size) url += `&size=${encodeURIComponent(size)}`;
+                if (minPrice) url += `&minPrice=${encodeURIComponent(minPrice)}`; 
+                if (maxPrice) url += `&maxPrice=${encodeURIComponent(maxPrice)}`;
                 if (window.selectedGender) url += `&gender=${window.selectedGender}`;
                 if (window.selectedCategory) url += `&category=${encodeURIComponent(window.selectedCategory)}`;
                 if (window.selectedCollection) url += `&collection=${encodeURIComponent(window.selectedCollection)}`;
@@ -153,10 +161,13 @@
         
             console.log("🛍 Sản phẩm ID:", productId);
         
-            // Chỉ tải nội dung sản phẩm vào #content, KHÔNG thay đổi URL
-            $("#content").load(`/web2/pages/product.php?id=${productId}`, function () {
-                console.log("✅ Đã tải nội dung sản phẩm thành công!");
-            });
+            // Gửi AJAX đến product.php
+            fetch(`/web2/pages/product.php?id=${productId}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('content').innerHTML = html;
+                })
+                .catch(error => console.error('Lỗi khi tải sản phẩm:', error));
         });
         
 

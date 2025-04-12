@@ -27,56 +27,72 @@
     }
 
 
+
+
+
     document.addEventListener("DOMContentLoaded", function () {
-        const searchForm = document.getElementById("searchForm");
-    
-        searchForm.addEventListener("submit", function (event) {
-            event.preventDefault(); // Ngăn chặn reload trang
-    
-            const productName = document.getElementById("productName").value.trim();
-    
-    
-    
-            // Gửi AJAX đến shop.php
-            fetch(`/web2/pages/shop.php?name=${productName}`, {
-                method: "GET",
-                headers: { "X-Requested-With": "XMLHttpRequest" }
-            })
-            .then(response => response.text())
-            .then(html => {
-                const contentDiv = document.getElementById("content");
-                if (contentDiv) {
-                    contentDiv.innerHTML = html;
-                    
-                    console.log("✅ Đã cập nhật nội dung sản phẩm.");
-            
-                    const scriptSrc = "/web2/assets/js/shop.js";
-                    //kiểm tra nếu nó đã có DOM rồi thì không thêm nữa
-                    if (!document.querySelector(`script[src="${scriptSrc}"]`)) {
-                        const script = document.createElement("script");
-                        script.src = scriptSrc;
-                        script.onload = () => {
-                            console.log("✅ Shop.js đã tải lại.");
-                            if (typeof initShopScript === "function") {
-                                initShopScript();
-                            } else {
-                                console.error("❌ initShopScript không tồn tại sau khi tải lại script.");
-                            }
-                        };
-                        document.body.appendChild(script);
-                    } else {
-                        console.log("⚠️ Shop.js đã tồn tại, không tải lại.");
+    const searchForm = document.getElementById("searchForm");
+
+    searchForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Ngăn chặn reload trang
+
+        const productName = document.getElementById("productName").value.trim();
+        const category = document.getElementById("category").value;
+        const collection = document.getElementById("collection").value;
+        const gender = document.getElementById("gender").value;
+        const size = document.getElementById("size").value.trim();
+        const minPrice = document.getElementById("minPrice").value;
+        const maxPrice = document.getElementById("maxPrice").value;
+
+        // Tạo query string
+        const queryParams = new URLSearchParams({
+            name: productName,
+            category : category,
+            collection: collection,
+            gender : gender,
+            size: size,
+            minPrice: minPrice,
+            maxPrice: maxPrice
+        });
+
+        // Gửi AJAX đến shop.php với đầy đủ dữ liệu
+        fetch(`/web2/pages/shop.php?${queryParams.toString()}`, {
+            method: "GET",
+            headers: { "X-Requested-With": "XMLHttpRequest" }
+        })
+        .then(response => response.text())
+        .then(html => {
+            const contentDiv = document.getElementById("content");
+            if (contentDiv) {
+                contentDiv.innerHTML = html;
+
+                console.log("✅ Đã cập nhật nội dung sản phẩm.");
+
+                const scriptSrc = "/web2/assets/js/shop.js";
+                if (!document.querySelector(`script[src="${scriptSrc}"]`)) {
+                    const script = document.createElement("script");
+                    script.src = scriptSrc;
+                    script.onload = () => {
+                        console.log("✅ Shop.js đã tải lại.");
                         if (typeof initShopScript === "function") {
                             initShopScript();
+                        } else {
+                            console.error("❌ initShopScript không tồn tại sau khi tải lại script.");
                         }
+                    };
+                    document.body.appendChild(script);
+                } else {
+                    console.log("⚠️ Shop.js đã tồn tại, không tải lại.");
+                    if (typeof initShopScript === "function") {
+                        initShopScript();
                     }
-                }    
-            })
-            .catch(error => console.error("❌ Lỗi khi tải sản phẩm:", error));
-            
-        });
+                }
+            }
+        })
+        .catch(error => console.error("❌ Lỗi khi tải sản phẩm:", error));
     });
-    
+});
+
     
       
     

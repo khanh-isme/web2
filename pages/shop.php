@@ -1,7 +1,19 @@
 <?php
-    
-$searchName = isset($_GET['name']) ? trim($_GET['name']) : '';
+if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+    // Lấy dữ liệu từ query string
+    $productName = isset($_GET['name']) ? trim($_GET['name']) : '';
+    $category = isset($_GET['category']) ? trim($_GET['category']) : '';
+    $collection = isset($_GET['collection']) ? trim($_GET['collection']) : '';
+    $gender = isset($_GET['gender']) ? trim($_GET['gender']) : '';
+    $size = isset($_GET['size']) ? trim($_GET['size']) : '';
+    $minPrice = isset($_GET['minPrice']) ? (float) $_GET['minPrice'] : 0;
+    $maxPrice = isset($_GET['maxPrice']) ? (float) $_GET['maxPrice'] : 0;
+}
+
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +29,14 @@ $searchName = isset($_GET['name']) ? trim($_GET['name']) : '';
 </head>
 
 <body>
-    <input type="hidden" id="productName" value="<?= htmlspecialchars($searchName) ?>">
+    <input type="hidden" id="productName" value="<?= htmlspecialchars($productName) ?>">
+    <input type="hidden" id="category" value="<?= htmlspecialchars($category) ?>">
+    <input type="hidden" id="collection" value="<?= htmlspecialchars($collection) ?>">
+    <input type="hidden" id="gender" value="<?= htmlspecialchars($gender) ?>">
+    <input type="hidden" id="size" value="<?= htmlspecialchars($size) ?>">
+    <input type="hidden" id="minPrice" value="<?= htmlspecialchars($minPrice) ?>">
+    <input type="hidden" id="maxPrice" value="<?= htmlspecialchars($maxPrice) ?>">
+
 
 
     <div class="container">
