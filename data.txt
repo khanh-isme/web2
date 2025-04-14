@@ -1,0 +1,339 @@
+-- Tạo database
+CREATE DATABASE shoe CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE shoe;
+
+
+
+-- Bảng kích thước sản phẩm (product_size)
+CREATE TABLE product_size (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    size VARCHAR(50) NOT NULL,
+    stock INT DEFAULT 0, -- Số lượng sản phẩm cho từng size
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+-- Bảng danh mục sản phẩm (categories)
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT
+);
+
+-- Bảng bộ sưu tập sản phẩm (collection)
+CREATE TABLE collection (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT
+);
+
+-- Chèn dữ liệu mẫu cho bảng categories
+INSERT INTO categories (name, description) VALUES
+('Sneakers', 'Giày thể thao'),
+('Boots', 'Giày boot thời trang'),
+('Sandals', 'Dép và sandals'),
+('Loafers', 'Giày lười'),
+('Athletic', 'Giày thể thao chuyên dụng');
+
+-- Chèn dữ liệu mẫu cho bảng collection
+INSERT INTO collection (name, description) VALUES
+('Summer Collection', 'Bộ sưu tập mùa hè 2025'),
+('Winter Collection', 'Bộ sưu tập mùa đông'),
+('Limited Edition', 'Phiên bản giới hạn'),
+('Running Shoes', 'Bộ sưu tập giày chạy bộ'),
+('Casual Style', 'Phong cách thường ngày');
+
+-- Chèn dữ liệu mẫu cho bảng products
+INSERT INTO products (name, category_id, price, description, image, collection_id, gender) VALUES
+('Nike Air Force 1', 1, 1200000, 'Giày thể thao cổ điển', '/web2/assets/images/14.png', 1, 'unisex'),
+('Adidas Ultraboost', 5, 2800000, 'Giày chạy bộ cao cấp', '/web2/assets/images/14.png', 4, 'unisex'),
+('Timberland Classic', 2, 3500000, 'Giày boot chống nước', '/web2/assets/images/14.png', 2, 'nam'),
+('Vans Old Skool', 1, 1500000, 'Giày trượt ván cổ điển', '/web2/assets/images/14.png', 5, 'unisex'),
+('Puma RS-X', 1, 2200000, 'Phong cách retro', '/web2/assets/images/14.png', 3, 'unisex'),
+('Gucci Loafer', 4, 5500000, 'Giày lười thời trang cao cấp', '/web2/assets/images/14.png', 3, 'nu'),
+('Converse Chuck Taylor', 1, 1300000, 'Mẫu giày cao cổ huyền thoại', '/web2/assets/images/14.png', 5, 'unisex'),
+('Adidas Yeezy Boost', 5, 5000000, 'Giày sneakers phiên bản giới hạn', '/web2/assets/images/14.png', 3, 'unisex'),
+('Nike ZoomX', 5, 3200000, 'Giày chạy bộ siêu nhẹ', '/web2/assets/images/14.png', 4, 'nam'),
+('Crocs Classic', 3, 900000, 'Dép thoải mái và nhẹ nhàng', '/web2/assets/images/14.png', 1, 'unisex');
+
+-- Chèn dữ liệu vào bảng products
+INSERT INTO products (name, category_id, price, description, image, collection_id, gender) VALUES
+('Air Max 2025', 1, 120.00, 'Giày thể thao cao cấp', '/web2/assets/images/14.png', 1, 'unisex'),
+('Winter Boot Pro', 2, 150.00, 'Giày boot ấm áp mùa đông', '/web2/assets/images/14.png', 2, 'nu'),
+('Casual Sandal', 3, 50.00, 'Dép sandals thoáng mát', '/web2/assets/images/14.png', 3, 'unisex'),
+('Leather Loafers', 4, 100.00, 'Giày lười da sang trọng', '/web2/assets/images/14.png', 5, 'nam'),
+('Running Pro 3000', 5, 130.00, 'Giày chạy bộ chuyên nghiệp', '/web2/assets/images/14.png', 4, 'unisex'),
+
+('Sporty Runner', 1, 110.00, 'Giày chạy bộ nhẹ', 's/web2/assets/images/14.png', 4, 'unisex'),
+('Winter Guard Boot', 2, 160.00, 'Boot chống nước mùa đông', '/web2/assets/images/14.png', 2, 'nu'),
+('Summer Sandal', 3, 45.00, 'Dép mùa hè phong cách', '/web2/assets/images/14.png', 3, 'unisex'),
+('Elegant Loafers', 4, 105.00, 'Giày lười thanh lịch', '/web2/assets/images/14.png', 5, 'nam'),
+('Speed Track', 5, 140.00, 'Giày thể thao tốc độ', '/web2/assets/images/14.png', 4, 'unisex'),
+
+('Flex Sneakers', 1, 115.00, 'Giày thể thao linh hoạt', '/web2/assets/images/14.png', 1, 'unisex'),
+('Mountain Boot', 2, 170.00, 'Giày boot leo núi', '/web2/assets/images/14.png', 2, 'nam'),
+('Beach Sandal', 3, 55.00, 'Dép đi biển thời trang', '/web2/assets/images/14.png', 3, 'unisex'),
+('Classic Loafers', 4, 95.00, 'Giày lười cổ điển', '/web2/assets/images/14.png', 5, 'nam'),
+('Endurance Runner', 5, 135.00, 'Giày chạy bộ bền bỉ', '/web2/assets/images/14.png', 4, 'unisex'),
+
+('Elite Sneakers', 1, 125.00, 'Giày thể thao đẳng cấp', '/web2/assets/images/14.png', 1, 'unisex'),
+('Arctic Boot', 2, 180.00, 'Giày boot chống lạnh', '/web2/assets/images/14.png', 2, 'nu'),
+('Urban Sandal', 3, 60.00, 'Dép thành phố hiện đại', '/web2/assets/images/14.png', 3, 'unisex'),
+('Formal Loafers', 4, 110.00, 'Giày lười công sở', '/web2/assets/images/14.png', 5, 'nam'),
+('Marathon Pro', 5, 145.00, 'Giày chạy marathon', '/web2/assets/images/14.png', 4, 'unisex'),
+
+('Hyper Sneakers', 1, 130.00, 'Giày sneaker phong cách', '/web2/assets/images/14.png', 1, 'unisex'),
+('Explorer Boot', 2, 175.00, 'Boot khám phá địa hình', 'e/web2/assets/images/14.png', 2, 'nam'),
+('Comfy Sandal', 3, 65.00, 'Dép thoải mái mọi lúc', '/web2/assets/images/14.png', 3, 'unisex'),
+('Casual Loafers', 4, 115.00, 'Giày lười hàng ngày', '/web2/assets/images/14.png', 5, 'nam'),
+('Speed Runner X', 5, 150.00, 'Giày chạy bộ nhanh', 's/web2/assets/images/14.png', 4, 'unisex'),
+
+('Active Sneakers', 1, 135.00, 'Giày sneaker thể thao', '/web2/assets/images/14.png', 1, 'unisex'),
+('Trek Boot', 2, 185.00, 'Boot trekking bền bỉ', 't/web2/assets/images/14.png', 2, 'nam'),
+('Summer Breeze Sandal', 3, 70.00, 'Dép mùa hè thoáng mát', '/web2/assets/images/14.png', 3, 'unisex'),
+('Stylish Loafers', 4, 120.00, 'Giày lười thời trang', '/web2/assets/images/14.png', 5, 'nam'),
+('Pro Runner Elite', 5, 155.00, 'Giày chạy bộ chuyên nghiệp', '/web2/assets/images/14.png', 4, 'unisex'),
+
+('Dynamic Sneakers', 1, 140.00, 'Giày thể thao năng động', '/web2/assets/images/14.png', 1, 'unisex'),
+('Alpine Boot', 2, 190.00, 'Boot leo núi chuyên dụng', '/web2/assets/images/14.png', 2, 'nam'),
+('Outdoor Sandal', 3, 75.00, 'Dép ngoài trời bền bỉ', '/web2/assets/images/14.png', 3, 'unisex'),
+('Luxury Loafers', 4, 125.00, 'Giày lười cao cấp', '/web2/assets/images/14.png', 5, 'nam'),
+('Ultrafast Runner', 5, 160.00, 'Giày chạy bộ tốc độ cao', '/web2/assets/images/14.png', 4, 'unisex');
+
+
+INSERT INTO products (name, category_id, price, description, image, collection_id, gender)
+VALUES
+('Giày Sneakers X1', 1, 59.99, 'Giày sneakers phong cách trẻ trung.', '/web2/assets/images/14.png', 1, 'unisex'),
+('Giày Sneakers X2', 1, 65.50, 'Thiết kế thể thao, năng động.', '/web2/assets/images/14.png', 2, 'unisex'),
+('Giày Sneakers X3', 1, 72.00, 'Màu sắc cá tính, phù hợp giới trẻ.', '/web2/assets/images/14.png', 3, 'unisex'),
+('Giày Boots B1', 2, 85.99, 'Giày boot thời trang, phù hợp mùa đông.', '/web2/assets/images/14.png', 2, 'nam'),
+('Giày Boots B2', 2, 90.75, 'Chất liệu da cao cấp, bền bỉ.', '/web2/assets/images/14.png', 1, 'nu'),
+('Giày Sandals S1', 3, 35.99, 'Dép sandals nhẹ, thoáng khí.', '/web2/assets/images/14.png', 4, 'unisex'),
+('Giày Sandals S2', 3, 40.50, 'Dép đế cao, phong cách hiện đại.', '/web2/assets/images/14.png', 5, 'nu'),
+('Giày Loafers L1', 4, 55.99, 'Giày lười tiện lợi, phù hợp công sở.', '/web2/assets/images/14.png', 3, 'nam'),
+('Giày Loafers L2', 4, 60.00, 'Chất liệu da sang trọng, dễ kết hợp trang phục.', '/web2/assets/images/14.png', 2, 'nu'),
+('Giày Thể Thao A1', 5, 78.99, 'Giày thể thao chuyên dụng.', '/web2/assets/images/14.png', 1, 'unisex'),
+
+('Giày Sneakers X4', 1, 62.99, 'Thiết kế mới, đế cao su bền.', '/web2/assets/images/14.png', 5, 'unisex'),
+('Giày Sneakers X5', 1, 68.50, 'Phong cách streetwear.', '/web2/assets/images/14.png', 2, 'unisex'),
+('Giày Boots B3', 2, 95.99, 'Boots da thật, chống nước.', '/web2/assets/images/14.png', 4, 'nam'),
+('Giày Boots B4', 2, 99.50, 'Boots cổ cao thời trang.', '/web2/assets/images/14.png', 3, 'nu'),
+('Giày Sandals S3', 3, 38.50, 'Sandal dây mềm mại.', '/web2/assets/images/14.png', 1, 'nu'),
+('Giày Sandals S4', 3, 42.99, 'Dép quai ngang, thoải mái.', '/web2/assets/images/14.png', 2, 'unisex'),
+('Giày Loafers L3', 4, 58.75, 'Loafers phong cách Hàn Quốc.', '/web2/assets/images/14.png', 5, 'nu'),
+('Giày Loafers L4', 4, 63.50, 'Giày lười nam lịch lãm.', '/web2/assets/images/14.png', 3, 'nam'),
+('Giày Thể Thao A2', 5, 79.99, 'Đế cao su chống trơn trượt.', '/web2/assets/images/14.png', 4, 'unisex'),
+('Giày Thể Thao A3', 5, 82.50, 'Giày nhẹ, bám sân tốt.', '/web2/assets/images/14.png', 5, 'unisex'),
+
+('Giày Sneakers X6', 1, 64.99, 'Sneakers đơn giản nhưng tinh tế.', '/web2/assets/images/14.png', 2, 'unisex'),
+('Giày Boots B5', 2, 92.00, 'Boots chống nước, chống trơn.', '/web2/assets/images/14.png', 1, 'nam'),
+('Giày Sandals S5', 3, 37.50, 'Sandal nữ đi biển.', '/web2/assets/images/14.png', 3, 'nu'),
+('Giày Loafers L5', 4, 61.99, 'Giày lười da bò thật.', '/web2/assets/images/14.png', 4, 'nam'),
+('Giày Thể Thao A4', 5, 85.00, 'Giày chạy bộ chuyên dụng.', '/web2/assets/images/14.png', 1, 'unisex');
+
+
+
+-- Chèn dữ liệu mẫu cho bảng product_size
+INSERT INTO product_size (product_id, size, stock) VALUES
+(1, '40', 10),
+(1, '41', 15),
+(2, '42', 20),
+(2, '43', 18),
+(3, '40', 12),
+(3, '41', 14),
+(4, '39', 10),
+(4, '40', 20),
+(5, '41', 12),
+(5, '42', 16);
+
+
+-- Chèn dữ liệu vào bảng product_size với product_id bắt đầu từ 6
+INSERT INTO product_size (product_id, size, stock) VALUES
+(6, '38', 10), (6, '39', 15), (6, '40', 20), (6, '41', 25), (6, '42', 30),
+(7, '36', 12), (7, '37', 18), (7, '38', 22), (7, '39', 28), (7, '40', 32),
+(8, '39', 14), (8, '40', 20), (8, '41', 24), (8, '42', 26), (8, '43', 30),
+(9, '38', 10), (9, '39', 15), (9, '40', 20), (9, '41', 25), (9, '42', 30),
+(10, '40', 18), (10, '41', 22), (10, '42', 28), (10, '43', 32), (10, '44', 35),
+
+(11, '38', 12), (11, '39', 18), (11, '40', 22), (11, '41', 28), (11, '42', 32),
+(12, '36', 10), (12, '37', 15), (12, '38', 20), (12, '39', 25), (12, '40', 30),
+(13, '39', 14), (13, '40', 20), (13, '41', 24), (13, '42', 26), (13, '43', 30),
+(14, '38', 12), (14, '39', 18), (14, '40', 22), (14, '41', 28), (14, '42', 32),
+(15, '40', 16), (15, '41', 22), (15, '42', 28), (15, '43', 32), (15, '44', 35),
+
+(16, '38', 10), (16, '39', 15), (16, '40', 20), (16, '41', 25), (16, '42', 30),
+(17, '36', 12), (17, '37', 18), (17, '38', 22), (17, '39', 28), (17, '40', 32),
+(18, '39', 14), (18, '40', 20), (18, '41', 24), (18, '42', 26), (18, '43', 30),
+(19, '38', 10), (19, '39', 15), (19, '40', 20), (19, '41', 25), (19, '42', 30),
+(20, '40', 18), (20, '41', 22), (20, '42', 28), (20, '43', 32), (20, '44', 35),
+
+(21, '38', 12), (21, '39', 18), (21, '40', 22), (21, '41', 28), (21, '42', 32),
+(22, '36', 10), (22, '37', 15), (22, '38', 20), (22, '39', 25), (22, '40', 30),
+(23, '39', 14), (23, '40', 20), (23, '41', 24), (23, '42', 26), (23, '43', 30),
+(24, '38', 12), (24, '39', 18), (24, '40', 22), (24, '41', 28), (24, '42', 32),
+(25, '40', 16), (25, '41', 22), (25, '42', 28), (25, '43', 32), (25, '44', 35),
+
+(26, '38', 10), (26, '39', 15), (26, '40', 20), (26, '41', 25), (26, '42', 30),
+(27, '36', 12), (27, '37', 18), (27, '38', 22), (27, '39', 28), (27, '40', 32),
+(28, '39', 14), (28, '40', 20), (28, '41', 24), (28, '42', 26), (28, '43', 30),
+(29, '38', 10), (29, '39', 15), (29, '40', 20), (29, '41', 25), (29, '42', 30),
+(30, '40', 18), (30, '41', 22), (30, '42', 28), (30, '43', 32), (30, '44', 35);
+
+-- Chèn dữ liệu vào bảng product_size với product_id bắt đầu từ 31
+INSERT INTO product_size (product_id, size, stock) VALUES
+(31, '38', 10), (31, '39', 15), (31, '40', 20), (31, '41', 25), (31, '42', 30),
+(32, '36', 12), (32, '37', 18), (32, '38', 22), (32, '39', 28), (32, '40', 32),
+(33, '39', 14), (33, '40', 20), (33, '41', 24), (33, '42', 26), (33, '43', 30),
+(34, '38', 10), (34, '39', 15), (34, '40', 20), (34, '41', 25), (34, '42', 30),
+(35, '40', 18), (35, '41', 22), (35, '42', 28), (35, '43', 32), (35, '44', 35),
+
+(36, '38', 12), (36, '39', 18), (36, '40', 22), (36, '41', 28), (36, '42', 32),
+(37, '36', 10), (37, '37', 15), (37, '38', 20), (37, '39', 25), (37, '40', 30),
+(38, '39', 14), (38, '40', 20), (38, '41', 24), (38, '42', 26), (38, '43', 30),
+(39, '38', 12), (39, '39', 18), (39, '40', 22), (39, '41', 28), (39, '42', 32),
+(40, '40', 16), (40, '41', 22), (40, '42', 28), (40, '43', 32), (40, '44', 35),
+
+(41, '38', 10), (41, '39', 15), (41, '40', 20), (41, '41', 25), (41, '42', 30),
+(42, '36', 12), (42, '37', 18), (42, '38', 22), (42, '39', 28), (42, '40', 32),
+(43, '39', 14), (43, '40', 20), (43, '41', 24), (43, '42', 26), (43, '43', 30),
+(44, '38', 10), (44, '39', 15), (44, '40', 20), (44, '41', 25), (44, '42', 30),
+(45, '40', 18), (45, '41', 22), (45, '42', 28), (45, '43', 32), (45, '44', 35),
+
+(46, '38', 12), (46, '39', 18), (46, '40', 22), (46, '41', 28), (46, '42', 32),
+(47, '36', 10), (47, '37', 15), (47, '38', 20), (47, '39', 25), (47, '40', 30),
+(48, '39', 14), (48, '40', 20), (48, '41', 24), (48, '42', 26), (48, '43', 30),
+(49, '38', 12), (49, '39', 18), (49, '40', 22), (49, '41', 28), (49, '42', 32),
+(50, '40', 16), (50, '41', 22), (50, '42', 28), (50, '43', 32), (50, '44', 35),
+
+(51, '38', 10), (51, '39', 15), (51, '40', 20), (51, '41', 25), (51, '42', 30),
+(52, '36', 12), (52, '37', 18), (52, '38', 22), (52, '39', 28), (52, '40', 32),
+(53, '39', 14), (53, '40', 20), (53, '41', 24), (53, '42', 26), (53, '43', 30),
+(54, '38', 10), (54, '39', 15), (54, '40', 20), (54, '41', 25), (54, '42', 30),
+(55, '40', 18), (55, '41', 22), (55, '42', 28), (55, '43', 32), (55, '44', 35);
+
+INSERT INTO product_size (product_id, size, stock) VALUES
+(56, '38', 12), (56, '39', 18), (56, '40', 22), (56, '41', 28), (56, '42', 32),
+(57, '36', 10), (57, '37', 15), (57, '38', 20), (57, '39', 25), (57, '40', 30),
+(58, '39', 14), (58, '40', 20), (58, '41', 24), (58, '42', 26), (58, '43', 30),
+(59, '38', 10), (59, '39', 15), (59, '40', 20), (59, '41', 25), (59, '42', 30),
+(60, '40', 18), (60, '41', 22), (60, '42', 28), (60, '43', 32), (60, '44', 35),
+
+(61, '38', 12), (61, '39', 18), (61, '40', 22), (61, '41', 28), (61, '42', 32),
+(62, '36', 10), (62, '37', 15), (62, '38', 20), (62, '39', 25), (62, '40', 30),
+(63, '39', 14), (63, '40', 20), (63, '41', 24), (63, '42', 26), (63, '43', 30),
+(64, '38', 12), (64, '39', 18), (64, '40', 22), (64, '41', 28), (64, '42', 32),
+(65, '40', 16), (65, '41', 22), (65, '42', 28), (65, '43', 32), (65, '44', 35),
+
+(66, '38', 10), (66, '39', 15), (66, '40', 20), (66, '41', 25), (66, '42', 30),
+(67, '36', 12), (67, '37', 18), (67, '38', 22), (67, '39', 28), (67, '40', 32),
+(68, '39', 14), (68, '40', 20), (68, '41', 24), (68, '42', 26), (68, '43', 30),
+(69, '38', 10), (69, '39', 15), (69, '40', 20), (69, '41', 25), (69, '42', 30),
+(70, '40', 18), (70, '41', 22), (70, '42', 28), (70, '43', 32), (70, '44', 35);
+
+
+
+
+
+-- Bảng người dùng (users)
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    address TEXT,
+);
+
+CREATE TABLE cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    product_size_id INT NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_size_id) REFERENCES product_size(id) ON DELETE CASCADE
+);
+
+INSERT INTO users (name, email, password, phone, address) VALUES
+('Nguyễn Văn A', 'nguyenvana@example.com', '123456', '0987654321', 'Hà Nội'),
+('Trần Thị B', 'tranthib@example.com', 'abcdef', '0977123456', 'TP HCM'),
+('Lê Văn C', 'levanc@example.com', 'pass123', '0912345678', 'Đà Nẵng'),
+('Hoàng Thị D', 'hoangthid@example.com', 'securepass', '0933221144', 'Cần Thơ'),
+('Phạm Văn E', 'phamvane@example.com', 'e123456', '0966554433', 'Hải Phòng'),
+('Vũ Thị F', 'vuthif@example.com', 'fpassword', '0922113344', 'Huế'),
+('Bùi Văn G', 'buivang@example.com', 'gpass', '0944556677', 'Nha Trang'),
+('Đặng Thị H', 'dangthih@example.com', 'hpassword', '0988223344', 'Vũng Tàu'),
+('Ngô Văn I', 'ngovani@example.com', 'ipass123', '0911998877', 'Quảng Ninh'),
+('Dương Thị J', 'duongthij@example.com', 'jpassword', '0955332244', 'Bắc Ninh'),
+('Trịnh Văn K', 'trinhvank@example.com', 'ksecure', '0999223344', 'Thanh Hóa'),
+('Đoàn Thị L', 'doanthil@example.com', 'lpass', '0944559922', 'Nam Định'),
+('Mai Văn M', 'maivanm@example.com', 'mpassword', '0900557788', 'Hòa Bình'),
+('Châu Thị N', 'chauthin@example.com', 'npass', '0933225566', 'Bình Dương'),
+('Lương Văn O', 'luongvano@example.com', 'opassword', '0977448822', 'Lạng Sơn'),
+('Phan Thị P', 'phanthip@example.com', 'ppass123', '0966991155', 'Quảng Bình'),
+('Cao Văn Q', 'caovanq@example.com', 'qpassword', '0922334455', 'Cà Mau'),
+('Tạ Thị R', 'tatheir@example.com', 'rpass', '0999887766', 'Kon Tum'),
+('Trương Văn S', 'truongvans@example.com', 'spassword', '0900223344', 'Bắc Giang'),
+('Lý Thị T', 'lythit@example.com', 'tpass123', '0944778899', 'Đắk Lắk');
+
+
+INSERT INTO cart (user_id, product_id, product_size_id, quantity) VALUES
+(1, 1, 1, 2),  -- User 1 mua sản phẩm 1, size 40
+(2, 1, 2, 1),  -- User 2 mua sản phẩm 1, size 41
+(3, 2, 3, 3),  -- User 3 mua sản phẩm 2, size 42
+(4, 2, 4, 1),  -- User 4 mua sản phẩm 2, size 43
+(5, 3, 5, 2),  -- User 5 mua sản phẩm 3, size 40
+(6, 3, 6, 4),  -- User 6 mua sản phẩm 3, size 41
+(7, 4, 7, 2),  -- User 7 mua sản phẩm 4, size 39
+(8, 4, 8, 1),  -- User 8 mua sản phẩm 4, size 40
+(9, 5, 9, 3),  -- User 9 mua sản phẩm 5, size 41
+(10, 5, 10, 1), -- User 10 mua sản phẩm 5, size 42
+(11, 6, 11, 2), -- User 11 mua sản phẩm 6, size 38
+(12, 6, 12, 5), -- User 12 mua sản phẩm 6, size 39
+(13, 6, 13, 1), -- User 13 mua sản phẩm 6, size 40
+(14, 6, 14, 3), -- User 14 mua sản phẩm 6, size 41
+(15, 6, 15, 2), -- User 15 mua sản phẩm 6, size 42
+(16, 7, 16, 4), -- User 16 mua sản phẩm 7, size 36
+(17, 7, 17, 1), -- User 17 mua sản phẩm 7, size 37
+(18, 7, 18, 2), -- User 18 mua sản phẩm 7, size 38
+(19, 7, 19, 3), -- User 19 mua sản phẩm 7, size 39
+(20, 7, 20, 1); -- User 20 mua sản phẩm 7, size 40
+
+
+
+// tamj thoi chưa sử dụng 
+-- Bảng đơn hàng (orders)
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    total_price DECIMAL(10,2) NOT NULL,
+    status ENUM('pending', 'processing', 'shipped', 'delivered', 'canceled') DEFAULT 'pending',
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Bảng chi tiết đơn hàng (order_items)
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+-- Bảng thanh toán (payments)
+CREATE TABLE payments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    payment_method ENUM('credit_card', 'paypal', 'bank_transfer', 'cod') NOT NULL,
+    status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
+    transaction_id VARCHAR(100) UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+);
+
+
+

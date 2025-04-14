@@ -15,15 +15,18 @@ if (!defined('HEADER_INCLUDED')) {
 <script src="/web2/assets/js/header.js" defer></script>
 
 
+
 <header>
     <a href="/web2/index.php" class="logo"><img src="/web2/assets/images/Adidas-Logo.png" alt="Logo"></a>
+    <nav>
 
-    <ul class="nav-menu">
-        <li><a href="/web2/index.php">Home</a></li>
-        <li><a href="/web2/pages/shop.php">Shop</a></li>
-        <li><a href="/web2/pages/about.php">about</a></li>
-        <li><a href="#">Sale</a></li>
-    </ul>
+        <ul class="nav-menu">
+            <li><a href=""class="nav-link" data-page="home.php">Home</a></li>
+            <li><a href=""class="nav-link" data-page="shop.php">Shop</a></li>
+            <li><a href="" class="nav-link" data-page="about.php">about</a></li>
+            <li><a href="#">Sale</a></li>
+        </ul>
+    </nav>
 
     <div class="nav-icon">
         <div class="search-icon"><i class='bx bx-search' onclick="toggleSearch()"></i></div>
@@ -81,17 +84,22 @@ if (!defined('HEADER_INCLUDED')) {
             <label for="category">Category</label>
             <select id="category" name="category">
                 <option value="">Select category</option>
-                <option value="sport">Sport</option>
-                <option value="fashion">Fashion</option>
+                <option value="Sneaker">Sneaker</option>
+                <option value="Boots">Boots</option>
+                <option value="Sandals">Sandals</option>
+                <option value="Loafers">Loafers</option>
+                <option value="Loafers">Loafers</option>
             </select>
         </div>
         <div class="form-group">
             <label for="collection">Collection</label>
             <select id="collection" name="collection">
                 <option value="">Select collection</option>
-                <option value="winter">Winter</option>
-                <option value="summer">Summer</option>
-                <option value="spring">Spring</option>
+                <option value="Summer Collection">Summer Collection</option>
+                <option value="Winter Collectionr">Winter Collectionr</option>
+                <option value="Limited Edition">Limited Edition</option>
+                <option value=">Running Shoes">Running Shoes</option>
+                <option value="Casual Style">Casual Style</option>
             </select>
         </div>
         <div class="form-group">
@@ -114,8 +122,10 @@ if (!defined('HEADER_INCLUDED')) {
                 <input type="number" id="maxPrice" name="maxPrice" placeholder="Max" min="0">
             </div>
         </div>
-        <a href="/web2/pages/shopS1.php">
-            <button type="button" class="search-button">Search</button>
-        </a>
+
+        
+        
+        <button type="submit" class="search-button">Search</button>
+    
     </form>
 </div>

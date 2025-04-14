@@ -5,7 +5,7 @@ if (!defined('FOOTER_INCLUDED')) {
 ?>
 <link rel="stylesheet" href="/web2/assets/css/footer.css">
 
-<footer>
+<footer class ='footer'>
     <div class="footer-container">
         <div class="footer-section about">
             <h3>Về Chúng Tôi</h3>

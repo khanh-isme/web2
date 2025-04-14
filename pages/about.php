@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/web2/includes/header.php'; ?>
+
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -56,18 +56,28 @@
         <div class="team-list">
             <div class="team-member">
                 <img src="/web2/assets/images/team1.jpg" alt="Người sáng lập">
-                <h3>Nguyễn Văn A</h3>
-                <p>Người sáng lập</p>
+                <h3>Dương Văn Khánh</h3>
+                <p>Lão tổ tông môn</p>
             </div>
             <div class="team-member">
                 <img src="/web2/assets/images/team2.jpg" alt="CEO">
-                <h3>Trần Thị B</h3>
-                <p>Giám đốc điều hành</p>
+                <h3>Cao Cát Lượng</h3>
+                <p>Tông chủ đương thời</p>
             </div>
             <div class="team-member">
                 <img src="/web2/assets/images/team3.jpg" alt="Quản lý kinh doanh">
-                <h3>Phạm Văn C</h3>
-                <p>Quản lý kinh doanh</p>
+                <h3>Dương Nguyễn Minh Khang</h3>
+                <p>Cung phụng đại trưởng lão</p>
+            </div>
+            <div class="team-member">
+                <img src="/web2/assets/images/team4.jpg" alt="Phó giám đốc">
+                <h3>Đinh Văn Thanh Sơn</h3>
+                <p>Trưởng lão chấp pháp đường</p>
+            </div>
+            <div class="team-member">
+                <img src="/web2/assets/images/team5.jpg" alt="Nhân viên thiết kế">
+                <h3>Từ Huy Bình</h3>
+                <p>Thái thượng đại trưởng lão</p>
             </div>
         </div>
     </div>
