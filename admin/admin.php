@@ -12,12 +12,11 @@
     </head>
 
     <body>
+    <a href="customer.php">Khach hang</a>
         <?php require_once 'includes/connect.php';?>
         <div id="messageDialog">
-            
         </div>
         <div id="body">
-            
         <div>
         <?php require "includes/admin_right_content.php";?>
     </body>
