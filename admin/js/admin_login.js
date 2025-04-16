@@ -47,6 +47,8 @@ function handleLogin()
                     });
                     activeMenuItem();
                     handleLogout();
+                    handleStatsMenu();
+                    handleChart();
                 }
                 else
                 {

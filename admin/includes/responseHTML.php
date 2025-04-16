@@ -16,7 +16,7 @@ function responseHTML($permissions,$user)
     if(isset($permissionsMap["STATS"]))
     {
         $html.="<li class='menu-item STATS' data-value='STATS'>
-                    <lb><i class='fa-solid fa-chart-column menu-icon'></i>Thống kê số liệu</lb>
+                    <lb><i class='fa-solid fa-chart-column menu-icon'></i>Thống kê doanh thu</lb>
                 </li>";
     }
     if(isset($permissionsMap["PRODUCTS"]))
@@ -65,7 +65,9 @@ function responseHTML($permissions,$user)
                 </div>
             </div>";
 
-    $html.=file_get_contents("admin_right_content.php");
+            ob_start();
+            require "admin_right_content.php";
+            $html .= ob_get_clean();
     return $html;
 }
 ?>

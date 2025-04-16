@@ -14,8 +14,6 @@
 {
     display: none;
     flex-direction: column;
-    padding: 10px;
-
 }
 
 .content-ctn.active
