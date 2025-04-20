@@ -15,6 +15,7 @@ fetch('includes/admin_check_login.php')
             });
             activeMenuItem();
             handleLogout();
+            cc();
         }
         else
         {

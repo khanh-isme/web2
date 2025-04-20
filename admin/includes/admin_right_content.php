@@ -3,175 +3,135 @@
     STATS
     </div>
     <div class="PRODUCTS content-ctn">
-    PRODUCTS
+        
     </div>
     <div class="ORDERS content-ctn">
     ORDERS
     </div>
     <div class="CUSTOMERS content-ctn">
-    <style>
-        <?php include('css/customer.css'); ?>
-    </style>
-
-<div class="account-management-container"> <header class="account-management-header">
-        <h1>Quản lý tài khoản</h1>
-    </header>
-
-    <div class="tab-container">
-        <div class="tab active" data-tab="profile">Thông tin tài khoản</div>
-        <div class="tab" data-tab="password">Đổi mật khẩu</div>
-        <div class="tab" data-tab="orders">Đơn hàng của tôi</div>
+    <div class="customer-content">
+    <div class="customer-header">
+        <h1>Customers</h1>
+        <p class="customer-help-text">View, add, edit customer information. <a href="#">Need help?</a></p>
+        <div class="customer-header-buttons">
+            <button class="customer-add-button" id="open-add-modal-button">ADD CUSTOMER</button>
+        </div>
     </div>
 
-    <div id="profile" class="tab-content active"> <h2>Thông tin tài khoản</h2>
-        <form method="post" action="#"> <div class="form-group">
-                <label for="name">Họ tên:</label>
-                <input type="text" id="name" name="name" value="" placeholder="Nhập họ tên của bạn" required>
+    <form method="GET" action="#">
+        <div class="customer-search-section">
+            <div class="customer-search-title">SEARCH CUSTOMERS</div>
+            <div class="customer-search-inputs">
+                <div class="customer-search-row">
+                    <div class="customer-filter-group">
+                        <input type="text" name="keyword" id="customer-keyword" placeholder="Enter name, email, phone..." class="customer-search-bar">
+                    </div>
+                    <button type="submit" class="customer-search-button">SEARCH</button>
+                </div>
             </div>
+        </div>
+    </form>
 
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="" placeholder="Nhập địa chỉ email" required>
-            </div>
+    <p class="customer-status-info">DISPLAYING CUSTOMER LIST</p>
 
-            <div class="form-group">
-                <label for="phone">Số điện thoại:</label>
-                <input type="tel" id="phone" name="phone" value="" placeholder="Nhập số điện thoại">
-            </div>
-
-            <div class="form-group">
-                <label for="address">Địa chỉ:</label>
-                <textarea id="address" name="address" rows="3" placeholder="Nhập địa chỉ của bạn"></textarea>
-            </div>
-
-            <button type="submit">Cập nhật thông tin</button> </form>
-    </div>
-
-    <div id="password" class="tab-content" > <h2>Đổi mật khẩu</h2>
-        <form method="post" action="#"> <div class="form-group">
-                <label for="current_password">Mật khẩu hiện tại:</label>
-                <input type="password" id="current_password" name="current_password" required>
-            </div>
-
-            <div class="form-group">
-                <label for="new_password">Mật khẩu mới:</label>
-                <input type="password" id="new_password" name="new_password" required>
-            </div>
-
-            <div class="form-group">
-                <label for="confirm_password">Xác nhận mật khẩu mới:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-
-            <button type="submit">Đổi mật khẩu</button> </form>
-    </div>
-
-    <div id="orders" class="tab-content"> <h2>Đơn hàng của tôi</h2>
-
-        <table>
+    <div class="table-scroll">
+        <table class="customer-table">
             <thead>
                 <tr>
-                    <th>Mã đơn hàng</th>
-                    <th>Ngày đặt</th>
-                    <th>Tổng tiền</th>
-                    <th>Trạng thái</th>
-                    <th>Thao tác</th>
+                    <th><input type="checkbox" id="select-all-customers"></th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td data-label="Mã đơn hàng">#12345</td>
-                    <td data-label="Ngày đặt">15/04/2025 10:30</td>
-                    <td data-label="Tổng tiền">1.250.000đ</td>
-                    <td data-label="Trạng thái">
-                        <span class="order-status status-delivered">
-                            Đã giao hàng
-                        </span>
-                    </td>
-                    <td data-label="Thao tác">
-                        <a href="#view-order-12345" class="btn btn-secondary">Xem chi tiết</a>
-                        </td>
+                    <td><input type="checkbox" class="customer-checkbox"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button class="customer-edit-button" data-id="1"> <i class="fas fa-edit"></i>
+                        </button>
+                         </td>
                 </tr>
-                 <tr>
-                    <td data-label="Mã đơn hàng">#67890</td>
-                    <td data-label="Ngày đặt">16/04/2025 08:15</td>
-                    <td data-label="Tổng tiền">780.000đ</td>
-                    <td data-label="Trạng thái">
-                        <span class="order-status status-processing">
-                           Đang xử lý
-                        </span>
-                    </td>
-                    <td data-label="Thao tác">
-                         <a href="#view-order-67890" class="btn btn-secondary">Xem chi tiết</a>
-                         <button class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');">Hủy đơn</button>
-                    </td>
-                </tr>
-                 <tr>
-                    <td data-label="Mã đơn hàng">#11223</td>
-                    <td data-label="Ngày đặt">10/04/2025 14:00</td>
-                    <td data-label="Tổng tiền">320.000đ</td>
-                    <td data-label="Trạng thái">
-                        <span class="order-status status-canceled">
-                           Đã hủy
-                        </span>
-                    </td>
-                    <td data-label="Thao tác">
-                         <a href="#view-order-11223" class="btn btn-secondary">Xem chi tiết</a>
-                    </td>
-                </tr>
-            </tbody>
+                
+                </tbody>
         </table>
-
-        </div> <div id="view-order-12345" class="order-details" >
-         <h3>Chi tiết đơn hàng #12345</h3>
-         <p><strong>Ngày đặt hàng:</strong> 15/04/2025 10:30</p>
-         <p><strong>Trạng thái:</strong>
-             <span class="order-status status-delivered">
-                 Đã giao hàng
-             </span>
-         </p>
-         <p><strong>Địa chỉ giao hàng:</strong> 123 Đường ABC, Phường X, Quận Y, TP. HCM</p>
-
-         <h4 style="margin-top: 20px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #ddd;">Sản phẩm trong đơn hàng:</h4>
-
-         <div class="order-item">
-             <div class="order-item-image">
-                 <img src="https://via.placeholder.com/80" alt="Sản phẩm A">
-             </div>
-             <div class="order-item-details">
-                 <h4>Tên Sản phẩm A rất dài để kiểm tra xuống dòng</h4>
-                 <p>Giá: 500.000đ</p>
-                 <p>Số lượng: 2</p>
-                 <p>Thành tiền: 1.000.000đ</p>
-             </div>
-         </div>
-
-         <div class="order-item">
-             <div class="order-item-image">
-                  <img src="https://via.placeholder.com/80" alt="Sản phẩm B">
-             </div>
-             <div class="order-item-details">
-                 <h4>Sản phẩm B</h4>
-                 <p>Giá: 250.000đ</p>
-                 <p>Số lượng: 1</p>
-                 <p>Thành tiền: 250.000đ</p>
-             </div>
-         </div>
-
-         <div class="order-total">
-             Tổng thanh toán: 1.250.000đ
-         </div>
-
-         <a href="#" class="back-link" onclick="/* Thêm JS để ẩn div này và quay lại tab orders */">
-             <i class="fas fa-arrow-left"></i> Quay lại danh sách đơn hàng
-         </a>
-     </div>
-
-
+    </div>
 </div>
-<script>
-    
-</script>
+
+<form id="customer-edit-form" action="#" method="POST">
+    <div id="customer-edit-modal" class="customer-modal"> <div class="customer-modal-content">
+            <div class="customer-modal-header">
+                <h1>Edit Customer Information</h1>
+                <span class="customer-close-button" data-modal-id="customer-edit-modal">&times;</span>
+            </div>
+            <div class="customer-modal-body">
+                <input type="hidden" name="id" id="customer-edit-id">
+                <div class="customer-form-group">
+                    <label for="customer-edit-name">Name</label>
+                    <input type="text" name="name" id="customer-edit-name" required>
+                </div>
+                <div class="customer-form-group">
+                    <label for="customer-edit-email">Email</label>
+                    <input type="email" name="email" id="customer-edit-email" required>
+                </div>
+                <div class="customer-form-group">
+                    <label for="customer-edit-phone">Phone</label>
+                    <input type="tel" name="phone" id="customer-edit-phone">
+                </div>
+                <div class="customer-form-group">
+                    <label for="customer-edit-address">Address</label>
+                    <textarea name="address" id="customer-edit-address"></textarea>
+                </div>
+            </div>
+            <div class="customer-modal-footer">
+                <button type="submit" class="customer-save-button">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form id="customer-add-form" action="#" method="POST">
+    <div id="customer-add-modal" class="customer-modal"> <div class="customer-modal-content">
+            <div class="customer-modal-header">
+                <h1>Add New Customer</h1>
+                 <span class="customer-close-button" data-modal-id="customer-add-modal">&times;</span>
+            </div>
+            <div class="customer-modal-body">
+                <div class="customer-form-group">
+                    <label for="customer-add-name">Name</label>
+                    <input type="text" name="name" id="customer-add-name" required>
+                </div>
+                <div class="customer-form-group">
+                    <label for="customer-add-email">Email</label>
+                    <input type="email" name="email" id="customer-add-email" required>
+                </div>
+                <div class="customer-form-group">
+                    <label for="customer-add-password">Password</label>
+                    <input type="password" name="password" id="customer-add-password" required>
+                </div>
+                <div class="customer-form-group">
+                    <label for="customer-add-phone">Phone</label>
+                    <input type="tel" name="phone" id="customer-add-phone">
+                </div>
+                <div class="customer-form-group">
+                    <label for="customer-add-address">Address</label>
+                    <textarea name="address" id="customer-add-address"></textarea>
+                </div>
+            </div>
+            <div class="customer-modal-footer">
+                <button type="submit" class="customer-save-button">Save Customer</button>
+            </div>
+        </div>
+    </div>
+</form>
     </div>
     <div class="EMPLOYEES content-ctn">
     EMPLOYEES

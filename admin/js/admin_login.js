@@ -47,6 +47,7 @@ function handleLogin()
                     });
                     activeMenuItem();
                     handleLogout();
+                    cc();
                 }
                 else
                 {
