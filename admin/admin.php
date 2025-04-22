@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/admin.css">
         <link rel="stylesheet" href="css/products.css">
         <link rel="stylesheet" href="css/customer_styles.css">
+        <link rel="stylesheet" href="css/stats.css">
         <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     </head>
@@ -19,14 +20,16 @@
             
         </div>
         <div id="body">
-            
-        <div>
-        <?php require "includes/admin_right_content.php";?>
+        
+        </div>
     </body>
     <script src="js/admin_messageDialog.js"></script>
     <script src="js/customer_scripts.js"></script>
     <script src="js/admin_login.js"></script>
     <script src="js/admin_logout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/stats_chart.js"></script>
+    <script src="js/stats_menu.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/left_menu.js"></script>
 </html>

@@ -1,0 +1,134 @@
+#stats-ctn
+{
+    display: flex;
+    width: 75%;
+    padding: 10px;
+}
+
+#chart-ctn
+{
+    position: relative;
+    width: 100%;
+    border: 1px solid black;
+}
+
+canvas
+{
+    width: 100%;
+}
+
+#chart-input-warning
+{
+    width:100%;
+    height: 30px;
+    font-size: 18px;
+    position: absolute;
+    top: 40%;
+    text-align: center;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    line-height: 30px;
+    color: gray;
+}
+
+#chart-input-warning.active
+{
+    display: flex;
+}
+
+#chart-input-warning i
+{
+    margin-right:5px; 
+    font-size: 30px;
+    color: gray;
+}
+
+.disabled
+{
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+#stats-menu-option-form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    right: 0px;
+    background: whitesmoke;
+    width: 20%;
+    border-left: 1px solid black;
+    height: 100vh;
+    padding-top: 20px;
+}
+
+.stats-option-ctn
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.stats-option-ctn.border
+{
+    border: 2px solid black;
+    width: 100%;
+    padding: 5px;
+}
+
+.stats-option-slt
+{
+    border-radius: 0;
+    width: 100%;
+    height: 40px;
+    border: 2px solid black;
+    font-size: 16px;
+    color: rgb(73, 73, 73);
+    outline: none;
+    margin: 3px 0px 5px 0px;
+}
+
+#stats-by-slt option {
+    font-size: 16px;
+    color: rgb(73, 73, 73);
+    background-color: #fff; /* nếu bạn muốn đổi màu nền */
+}
+
+#category-menu label
+{
+    margin: 3px 0 3px 0;
+}
+
+.category-cb
+{
+    -webkit-appearance: none;   
+    -moz-appearance: none;     
+    appearance: none;
+    border: 2px solid black;
+    background: none;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px 0 0;
+    vertical-align: middle;
+    position: relative;
+}
+
+.category-cb:focus
+{
+    outline: none;
+    color: gray;
+    background: none;
+    box-shadow: none;
+} 
+
+.category-cb:checked::after {
+    content: "\2713";
+    position: absolute;
+    top: -11px;
+    left: -1px;
+    font-size: 20px;
+    color: black;
+}

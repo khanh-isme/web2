@@ -48,6 +48,8 @@ function handleLogin()
                     activeMenuItem();
                     handleLogout();
                     cc();
+                    handleStatsMenu();
+                    handleChart();
                 }
                 else
                 {
