@@ -190,30 +190,26 @@ input[readonly], textarea[readonly], select[disabled] {
     text-overflow: ellipsis;
 }
 /* Adjust column widths as needed */
-.customer-table th:nth-child(1), /* Checkbox */
+.customer-table th:nth-child(1), /* ID */
 .customer-table td:nth-child(1) {
     width: 5%;
     text-align: center;
 }
-.customer-table th:nth-child(2), /* ID */
+.customer-table th:nth-child(2), /* Name */
 .customer-table td:nth-child(2) {
-    width: 8%;
+    width: 13%;
 }
-.customer-table th:nth-child(3), /* Name */
+.customer-table th:nth-child(3), /* Email */
 .customer-table td:nth-child(3) {
-    width: 20%;
+    width: 17%;
 }
-.customer-table th:nth-child(4), /* Email */
+.customer-table th:nth-child(4), /* Phone */
 .customer-table td:nth-child(4) {
-    width: 25%;
+    width: 10%;
 }
-.customer-table th:nth-child(5), /* Phone */
+.customer-table th:nth-child(5), /* Address */
 .customer-table td:nth-child(5) {
-    width: 15%;
-}
-.customer-table th:nth-child(6), /* Address */
-.customer-table td:nth-child(6) {
-     width: 22%;
+     width: 30%;
      white-space: normal; /* Allow address to wrap */
 }
 
