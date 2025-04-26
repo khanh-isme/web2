@@ -15,7 +15,8 @@ fetch('includes/admin_check_login.php')
             });
             activeMenuItem();
             handleLogout();
-            cc();
+            orderfunc();
+            customerfunc();
             handleStatsMenu();
             handleChart();
         }

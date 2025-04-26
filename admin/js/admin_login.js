@@ -47,7 +47,8 @@ function handleLogin()
                     });
                     activeMenuItem();
                     handleLogout();
-                    cc();
+                    orderfunc();
+                    customerfunc();
                     handleStatsMenu();
                     handleChart();
                 }

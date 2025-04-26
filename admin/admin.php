@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/right_content.css">
         <link rel="stylesheet" href="css/admin.css">
         <link rel="stylesheet" href="css/products.css">
+        <link rel="stylesheet" href="css/order_styles.css">
         <link rel="stylesheet" href="css/customer_styles.css">
         <link rel="stylesheet" href="css/stats.css">
         <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
@@ -25,6 +26,7 @@
     </body>
     <script src="js/admin_messageDialog.js"></script>
     <script src="js/customer_scripts.js"></script>
+    <script src="js/order_scripts.js"></script>
     <script src="js/admin_login.js"></script>
     <script src="js/admin_logout.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

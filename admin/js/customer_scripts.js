@@ -1,6 +1,6 @@
 // --- Tệp: customer_scripts.js (hoặc tên tương tự) ---
 
-function cc() {
+function customerfunc() {
     // --- Lấy các phần tử DOM ---
     let addCustomerForm = document.getElementById('customer-add-form');
     let addCustomerModal = document.getElementById('customer-add-modal');
@@ -76,6 +76,41 @@ function cc() {
             // Hiển thị thông báo không tìm thấy kết quả
             customerTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center;">No customers found.</td></tr>`; // Colspan=6
         }
+    }
+
+    function loadInitialCustomers() {
+        if (!customerTableBody) return; // Thoát nếu không tìm thấy table body
+
+        console.log('--- Loading Initial Customers ---');
+        if (statusInfo) statusInfo.textContent = 'Loading all customers...';
+        customerTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center;">Loading...</td></tr>`; // Hiển thị loading
+
+        // Gọi backend searchCustomers.php với POST rỗng để lấy tất cả
+        fetch('includes/searchCustomers.php', { //
+            method: 'POST'
+            // Không cần body hoặc dùng new FormData() rỗng
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(`HTTP error! ${response.status} - ${text}`) });
+            }
+            return response.json();
+        })
+        .then(result => {
+            if (result.status === 'success') {
+                updateCustomerTable(result.data); // Cập nhật bảng
+                if (statusInfo) statusInfo.textContent = 'DISPLAYING CUSTOMER LIST (All Active)';
+            } else {
+                console.error('Error loading initial customers:', result.message);
+                if (statusInfo) statusInfo.textContent = `Error: ${result.message}`;
+                 customerTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center;">Error: ${result.message}</td></tr>`;
+            }
+        })
+        .catch(error => {
+            console.error('Fetch error loading initial customers:', error);
+            if (statusInfo) statusInfo.textContent = `Error: ${error.message}`;
+            customerTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center;">Could not load customers. ${error.message}</td></tr>`;
+        });
     }
 
     // --- Xử lý sự kiện Submit Form Tìm Kiếm ---
@@ -370,6 +405,7 @@ function cc() {
             });
         });
     }
+    
 
     const editForm = document.getElementById('customer-edit-form'); // Lấy form sửa
     if (!editForm) {
@@ -461,6 +497,31 @@ function cc() {
                 submitButton.textContent = originalButtonText;
             });
         }); // <<< Kết thúc addEventListener của editForm
+    }
+    const customersContent = document.querySelector('.CUSTOMERS.content-ctn');
+    if (customersContent && customersContent.classList.contains('active')) {
+        loadInitialCustomers();
+    }
+
+    // Lắng nghe sự kiện click menu item 'CUSTOMERS' để load lại nếu cần
+    // (Cần đảm bảo class 'menu-item' và 'CUSTOMERS' đúng với HTML của bạn)
+    const customersMenuItem = document.querySelector('.menu-item.CUSTOMERS'); //
+    if (customersMenuItem) {
+        customersMenuItem.addEventListener('click', () => {
+            // Chờ một chút để đảm bảo tab content đã được active bởi script khác
+            setTimeout(() => {
+                // Chỉ load lại nếu tab content thực sự active và bảng đang trống hoặc có thông báo lỗi/loading
+                const isActive = customersContent && customersContent.classList.contains('active');
+                const isEmpty = !customerTableBody || !customerTableBody.querySelector('tr') || customerTableBody.textContent.includes('Error') || customerTableBody.textContent.includes('Loading');
+
+                if (isActive && isEmpty) {
+                     loadInitialCustomers();
+                } else if (isActive) {
+                     console.log("Customer tab activated, but table seems populated. Not reloading.");
+                     // Hoặc bạn có thể luôn load lại nếu muốn: loadInitialCustomers();
+                }
+            }, 50); // Delay nhỏ
+        });
     }
     // --- Các hàm khác (ví dụ: mở/đóng modal, xóa lỗi, thêm hàng vào bảng...) ---
     // function clearErrorMessages(form) { /* ... */ }
