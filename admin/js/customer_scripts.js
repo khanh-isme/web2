@@ -524,6 +524,18 @@ function customerfunc() {
         });
     }
     // --- Các hàm khác (ví dụ: mở/đóng modal, xóa lỗi, thêm hàng vào bảng...) ---
+    // Lấy tất cả các modal của customer
+    const customerModals = document.querySelectorAll('.CUSTOMERS .customer-modal'); // Chỉ lấy modal trong phần customer
+
+    customerModals.forEach(modal => {
+        modal.addEventListener('click', function(event) {
+            // Kiểm tra xem nơi click có phải là chính cái nền modal không
+            if (event.target === modal) {
+                console.log(`Clicked outside content on modal: ${modal.id}`);
+                closeModal(modal); // Gọi hàm closeModal đã có
+            }
+        });
+    });
     // function clearErrorMessages(form) { /* ... */ }
     // function displayValidationErrors(form, errors) { /* ... */ }
     // function addNewCustomerRowToTable(id, name, email, phone, address) { /* ... */ }

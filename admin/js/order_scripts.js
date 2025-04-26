@@ -448,6 +448,17 @@ function orderfunc() {
             setTimeout(loadInitialOrders, 50);
         });
      }
+     // Lấy tất cả các modal của order
+    const orderModals = document.querySelectorAll('.ORDERS .order-modal'); // Chỉ lấy modal trong phần order
 
+    orderModals.forEach(modal => {
+        modal.addEventListener('click', function(event) {
+            // Kiểm tra xem nơi click có phải là chính cái nền modal không
+            if (event.target === modal) {
+                console.log(`Clicked outside content on modal: ${modal.id}`);
+                closeModal(modal); // Gọi hàm closeModal đã có
+            }
+        });
+    });
 
 };
