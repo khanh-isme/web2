@@ -116,5 +116,32 @@ function renderProductSale(products) {
     attachProductClickEvent(); // Thêm sự kiện click cho sản phẩm trong phần sale
 }
 
-// Gọi hàm fetchData() khi trang tải
-fetchData();
+const navLinks = document.querySelectorAll(".nav-link");
+
+    navLinks.forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const page = this.dataset.page;
+
+            fetch(`/web2/pages/${page}`)
+                .then(response => response.text())
+                .then(html => {
+                    const contentDiv = document.getElementById("content");
+                    if (contentDiv) {
+                        contentDiv.innerHTML = html;
+                        console.log(`✅ Đã cập nhật nội dung ${page}`);
+
+                        if (page.includes("shop") && typeof initShopScript === "function") {
+                            resetFilters();
+                            initShopScript();
+                        }
+                    }
+                })
+                .catch(error => console.error(`❌ Lỗi khi tải ${page}:`, error));
+        });
+    });
+
+
+    
+document.addEventListener("DOMContentLoaded", fetchData());
+

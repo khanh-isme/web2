@@ -1,63 +1,68 @@
 
 
 (function () {
-    
     window.initShopScript = function() {
-        console.log("✅ Shop script initialized");
-
-         // Kiểm tra xem script đã chạy chưa
-         //đánh dấu khi shopScriptInitialized thực sự chạy xong
-         if (!window.shopScriptInitialized) {
-            window.shopScriptInitialized = true;
-            console.log("✅ Shop script initialized");
-        
-            resetFilters();
-            fetchProducts(1);
-        } else {
-            console.log("🚨 Script đã chạy trước đó, bỏ qua init.");
-        }
-        
-
-        // Reset bộ lọc về mặc định
-        function resetFilters() {
-            window.selectedGender = '';
-            window.selectedCategory = '';
-            window.selectedCollection = '';
-        }
-
-
-        // Các toggle bộ lọc
-        function toggleFilter(headerClass, optionsId) {
-            const header = document.querySelector(headerClass);
-            const options = document.getElementById(optionsId);
-            if (header && options) {
-                options.style.display = options.style.display === 'block' ? 'none' : 'block';
-                header.classList.toggle('collapsed');
-            }
-        }
-
-        window.toggleSize = () => toggleFilter('.filter-header', 'gender-options');
-        window.toggleSize1 = () => toggleFilter('.filter-header-color', 'color-options');
-        window.toggleSize2 = () => toggleFilter('.filter-header-collection', 'collection-options');
 
         const productsPerPage = 7;
         let currentPage = 1;
         let totalPages = 1;
         let isFetching = false;
+        let selectedGenderRadio = null;
+        let selectedCategoryRadio = null;
+        
+        window.productName = window.productName || '';
+        window.selectedGender = window.selectedGender || '';
+        window.selectedCategory = window.selectedCategory || '';
+        window.size = window.size || '';
+        window.minPrice = window.minPrice || '';
+        window.maxPrice = window.maxPrice || '';
 
-        let productName = document.getElementById("productName").value;
-        window.selectedCategory = document.getElementById("category").value;
-        window.selectedCollection = document.getElementById("collection").value;
-        window.selectedGender =document.getElementById("gender").value;
-        let size = document.getElementById("size").value;
-        let minPrice = document.getElementById("minPrice").value;
-        let maxPrice = document.getElementById("maxPrice").value;
-        console.log(productName); 
+        console.log(window.selectButtonFlag); 
+       
 
+        function getFilterValues() {
+            window.productName = document.getElementById("productName")?.value.trim() || window.productName;
+
+            // Lấy giá trị gender từ một input ẩn hoặc nơi nào đó trong DOM
+            if(window.selectButtonFlag){
+                window.selectedGender =document.getElementById("gender").value;
+                window.selectedCategory= document.getElementById("category").value;
+            }
+
+            if (window.selectedGender) {
+                const genderRadio = document.querySelector(`input[name="gender"][value="${window.selectedGender}"]`);//genderRadio là 1 DOM element
+                if (genderRadio) {
+                    genderRadio.checked = true;
+                    selectedGenderRadio = genderRadio;
+                    console.log("đã chọn radio ", genderRadio.value) 
+                }
+            }
+
+            console.log("DEBUG selectedCategory:", window.selectedCategory);
+
+
+            if (window.selectedCategory) {
+                const categoryRadio = document.querySelector(`input[name="category"][value="${window.selectedCategory}"]`);
+                if (categoryRadio){
+                    categoryRadio.checked = true;
+                    selectedCategoryRadio = categoryRadio;
+                    console.log("đã chọn radio ", categoryRadio.value) 
+                } 
+            }
+
+            window.size = document.getElementById("size")?.value || window.size ;
+            window.minPrice = document.getElementById("minPrice")?.value ||  window.minPrice;
+            window.maxPrice = document.getElementById("maxPrice")?.value ||  window.maxPrice;
+            console.log("🔍 Đã cập nhật filter mới");
+        }
+        
+        
+    
 
         async function fetchProducts(page) {
-            if (isFetching || page < 1 || page > totalPages) return;
+            if (isFetching ) return;  //|| page < 1 || page > totalPages
             isFetching = true;
+            getFilterValues();
 
             try {
                 let url = `/web2/includes/get_products.php?page=${page}&limit=${productsPerPage}`;
@@ -70,26 +75,33 @@
                 if (maxPrice) url += `&maxPrice=${encodeURIComponent(maxPrice)}`;
                 if (window.selectedGender) url += `&gender=${window.selectedGender}`;
                 if (window.selectedCategory) url += `&category=${encodeURIComponent(window.selectedCategory)}`;
-                if (window.selectedCollection) url += `&collection=${encodeURIComponent(window.selectedCollection)}`;
+                
 
                 console.log("📡 Fetching:", url);
 
                 const response = await fetch(url);
                 const data = await response.json();
+                console.log(data);
                 
                 if (data.products) {
                     displayProducts(data.products);
                     totalPages = data.totalPages;
                     updatePaginationButtons();
+
+                    
+
                 } else {
                     console.error('❌ API error:', data.message);
                 }
             } catch (error) {
                 console.error('❌ Lỗi khi tải sản phẩm:', error);
             } finally {
+                console.log("isFetching đã được reset")
                 isFetching = false;
             }
         }
+
+
 
         function displayProducts(products) {
             const productContainer = document.getElementById('product-for-shop');
@@ -127,28 +139,85 @@
             }
         };
 
+      
+
+        // Lấy danh sách filter từ các input đang được chọn
+        function getSelectedFilters() {
+            const filters = {
+                gender: '',
+                category: ''
+            };
+
+            // Lấy giá trị radio gender được chọn
+            const selectedGenderDemo = document.querySelector('input[name="gender"]:checked');
+            if (selectedGenderDemo) {
+                document.getElementById("gender").value = '';
+                filters.gender = selectedGenderDemo.value;
+                window.selectedGender = selectedGenderDemo.value;
+            } else {
+                filters.gender = '';
+                window.selectedGender = '';
+            }
+            
+            
+            const selectedCategoryDemo =document.querySelector('input[name="category"]:checked');
+            if (selectedCategoryDemo) {
+                document.getElementById("category").value = '';
+                filters.category = selectedCategoryDemo.value;
+                window.selectedCategory = selectedCategoryDemo.value;
+            } else {
+                filters.category = '';
+                window.selectedCategory = '';
+            }
+            
+            return filters;
+        }
+
+        // Gọi filter 
         function applyFilter() {
+            const filters = getSelectedFilters();
+            console.log("Đang lọc bằng filter:", filters);
             currentPage = 1;
             fetchProducts(currentPage);
         }
 
-        window.filterMen = () => { window.selectedGender = 'nam'; applyFilter(); };
-        window.filterWomen = () => { window.selectedGender = 'nu'; applyFilter(); };
-        window.filterUnisex = () => { window.selectedGender = 'unisex'; applyFilter(); };
-        window.filterCategory = (category) => { window.selectedCategory = category; applyFilter(); };
-        window.filterCollection = (collection) => { window.selectedCollection = collection; applyFilter(); };
-
-        document.addEventListener('click', function (event) {
-            if (event.target.closest('#color-options a')) {
-                filterCategory(event.target.textContent.trim());
-            }
-            if (event.target.closest('#collection-options a')) {
-                filterCollection(event.target.textContent);
-            }
+        // Lắng nghe sự kiện thay đổi (checkbox hoặc radio) -> gọi applyFilter
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener('change', applyFilter);
         });
 
 
-        $(document).off("click", ".product a");// Xóa sự kiện click cũ để tránh xung đột
+        
+
+        document.querySelectorAll('input[name="gender"]').forEach(radio => {
+            radio.addEventListener('click', function () {
+                if (selectedGenderRadio === this) {
+                    this.checked = false;
+                    selectedGenderRadio = null;
+                } else {
+                    selectedGenderRadio = this;
+                }
+                applyFilter();
+            });
+        });
+
+        document.querySelectorAll('input[name="category"]').forEach(radio => {
+            radio.addEventListener('click', function () {
+                if (selectedCategoryRadio === this) {
+                    this.checked = false;
+                    selectedCategoryRadio = null;
+                } else {
+                    selectedCategoryRadio = this;
+                }
+                applyFilter();
+            });
+        });
+
+
+
+
+
+
         // Xử lý sự kiện click vào sản phẩm
         $(document).on("click", ".product a", function (event) {
             event.preventDefault();
@@ -170,32 +239,30 @@
                 .catch(error => console.error('Lỗi khi tải sản phẩm:', error));
         });
         
-
-        // Xử lý khi người dùng bấm "Quay lại" hoặc "Tiến tới"
         
-        
-
-        // Kiểm tra nếu `shop.php` được tải qua AJAX
-        $(document).ajaxComplete(function (event, xhr, settings) {
-            if (settings.data && settings.data.includes("shop.php")) {
-                console.log("🔄 Shop page loaded - Reset filters.");
-                resetFilters();
-                fetchProducts(1);
-
-            }
-        });
-        
-
         // Gọi fetchProducts khi trang được load
         fetchProducts(currentPage);
     }
-
-    // Khởi chạy script ban đầu kiểm tra nó chưa chạy thì mới gọi
-    $(document).ready(function () {
-        if (!window.shopScriptInitialized) {
-            initShopScript();
-        }
-    });
     
 
+    
 })();
+
+window.resetFilters = function(){
+    console.log("🔄 Đặt lại toàn bộ bộ lọc");
+        // Reset các biến toàn cục
+        window.selectedGender = '';
+        window.selectedCategory = '';
+        window.productName='';
+        window.size='';
+        window.maxPrice='';
+        window.minPrice='';
+
+        document.getElementById("productName").value = '';
+        document.getElementById("category").value = '';
+        document.getElementById("gender").value = '';
+        document.getElementById("size").value = '';
+        document.getElementById("minPrice").value = '';
+        document.getElementById("maxPrice").value = '';
+
+}

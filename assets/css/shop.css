@@ -43,15 +43,12 @@
 
   .filter-options {
     margin-top: 10px;
-    display: none;
   }
 
   .filter-options-element {
     margin-bottom: 10px;
     display: block;
     cursor: pointer; 
-    
-  
   }
 
   .filter-header-color {
@@ -92,7 +89,7 @@
   }
   .filter-header-collection.collapsed::after {
     transform: rotate(180deg);
-  }
+  } 
 
 
 

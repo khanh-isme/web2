@@ -18,14 +18,22 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 
+
+
 // Nhận tham số từ request
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 7;
 $gender = isset($_GET['gender']) ? trim($_GET['gender']) : '';
 $category = isset($_GET['category']) ? trim($_GET['category']) : '';
-$collection = isset($_GET['collection']) ? trim($_GET['collection']) : '';
 $name = isset($_GET['name']) ? trim($_GET['name']) : '';
 $minPrice = isset($_GET['minPrice']) ? (int)$_GET['minPrice'] : 0;
+
+if ($page < 1) $page = 1;
+if ($limit < 1) $limit = 7;
+
+
+
+
 
 $offset = ($page - 1) * $limit;
 $response = [
@@ -52,12 +60,7 @@ if (!empty($category)) {
     $types .= "s";
 }
 
-// Lọc theo bộ sưu tập
-if (!empty($collection)) {
-    $whereConditions[] = "collection_id = (SELECT id FROM collection WHERE name = ?)";
-    $params[] = $collection;
-    $types .= "s";
-}
+
 
 // Lọc theo tên sản phẩm (tìm kiếm)
 if (!empty($name)) {
@@ -107,7 +110,6 @@ while ($row = $productsResult->fetch_assoc()) {
         'price' => number_format($row['price'], 0, ',', '.') . ' VND',
         'image' => $row['image'] ?? 'default.jpg',
         'category_id' => $row['category_id'],
-        'collection_id' => $row['collection_id'],
         'gender' => $row['gender'],
         'created_at' => date('c', strtotime($row['created_at'])) // Định dạng ISO 8601
     ];

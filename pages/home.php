@@ -31,7 +31,7 @@ include(__DIR__ . "/../includes/config.php");
             
                 <p> there's is nothing </p>
     
-                <><a href="" class="main-btn" id="home-link" data-page="shop.php"> Shop Now <i class='bx bx-right-arrow-alt'></i> </a>
+                <a href=""  class="nav-link" data-page="shop.php"> Shop Now <i class='bx bx-right-arrow-alt'></i> </a>
                 
             </div>
             

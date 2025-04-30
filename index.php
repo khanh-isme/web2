@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike</title>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="/web2/assets/css/header.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Header logic -->
+    <script src="/web2/assets/js/header.js" defer></script>
+</head>
 <body>
 
     <?php include "includes/header.php"; ?>
@@ -16,44 +25,8 @@
     <div id="content">
         <?php include "pages/home.php"; ?>
     </div>
-
-    <script>
-        
-        $(document).ready(function() {
-            $(".nav-link").click(function(e) {
-                e.preventDefault();
-                var page = $(this).data("page");
-
-                $.ajax({
-                    url: "/web2/includes/check_ajax.php",
-                    method: "POST",
-                    data: {
-                        page: page
-                    },
-                    success: function(data) {
-                        $("#content").html(data);
-                        console.log("Trang đã load:", page);
-
-                        if (page === 'shop.php') {
-                            console.log("Checking if shop.js is already loaded...");
-
-                            if (typeof initShopScript === "undefined") {
-                                console.log("Reloading shop.js...");
-                                $.getScript("/web2/assets/js/shop.js");
-                            } else {
-                                console.log("shop.js is already loaded.");
-                                initShopScript(); // Gọi lại nếu đã load trước đó
-                            }
-                        }
-                    },
-                    error: function() {
-                        $("#content").html("<p>Lỗi khi tải trang!</p>");
-                    }
-                });
-            });
-        });
-    </script>
-    <script src="/web2/assets/js/shop.js"></script>
 </body>
 
+<script src="/web2/assets/js/home.js"></script>
+<script src="/web2/assets/js/shop.js"></script>
 </html>
