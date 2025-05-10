@@ -400,9 +400,11 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `phone` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `address` text COLLATE utf8mb4_general_ci,
+  `status` varchar(20) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'active',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY `username` (`username`),
+  CHECK (`status` IN ('active', 'deleted'))
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -411,30 +413,32 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `phone`, `address`) VALUES
-(1,'nguyenvana','Nguyễn Văn A','nguyenvana@example.com','123456','0987654321','Hà Nội'),
-(2,'tranthib','Trần Thị B','tranthib@example.com','abcdef','0977123456','TP HCM'),
-(3,'levanc','Lê Văn C','levanc@example.com','pass123','0912345678','Đà Nẵng'),
-(4,'hoangthid','Hoàng Thị D','hoangthid@example.com','securepass','0933221144','Cần Thơ'),
-(5,'phamvane','Phạm Văn E','phamvane@example.com','e123456','0966554433','Hải Phòng'),
-(6,'vuthif','Vũ Thị F','vuthif@example.com','fpassword','0922113344','Huế'),
-(7,'buivang','Bùi Văn G','buivang@example.com','gpass','0944556677','Nha Trang'),
-(8,'dangthih','Đặng Thị H','dangthih@example.com','hpassword','0988223344','Vũng Tàu'),
-(9,'ngovani','Ngô Văn I','ngovani@example.com','ipass123','0911998877','Quảng Ninh'),
-(10,'duongthij','Dương Thị J','duongthij@example.com','jpassword','0955332244','Bắc Ninh'),
-(11,'trinhvank','Trịnh Văn K','trinhvank@example.com','ksecure','0999223344','Thanh Hóa'),
-(12,'doanthil','Đoàn Thị L','doanthil@example.com','lpass','0944559922','Nam Định'),
-(13,'maivanm','Mai Văn M','maivanm@example.com','mpassword','0900557788','Hòa Bình'),
-(14,'chauthin','Châu Thị N','chauthin@example.com','npass','0933225566','Bình Dương'),
-(15,'luongvano','Lương Văn O','luongvano@example.com','opassword','0977448822','Lạng Sơn'),
-(16,'phanthip','Phan Thị P','phanthip@example.com','ppass123','0966991155','Quảng Bình'),
-(17,'caovanq','Cao Văn Q','caovanq@example.com','qpassword','0922334455','Cà Mau'),
-(18,'tatheir','Tạ Thị R','tatheir@example.com','rpass','0999887766','Kon Tum'),
-(19,'truongvans','Trương Văn S','truongvans@example.com','spassword','0900223344','Bắc Giang'),
-(20,'lythit','Lý Thị T','lythit@example.com','tpass123','0944778899','Đắk Lắk');
+INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `phone`, `address`, `status`) VALUES
+(1,'nguyenvana','Nguyễn Văn A','nguyenvana@example.com','123456','0987654321','Hà Nội','active'),
+(2,'tranthib','Trần Thị B','tranthib@example.com','abcdef','0977123456','TP HCM','active'),
+(3,'levanc','Lê Văn C','levanc@example.com','pass123','0912345678','Đà Nẵng','active'),
+(4,'hoangthid','Hoàng Thị D','hoangthid@example.com','securepass','0933221144','Cần Thơ','active'),
+(5,'phamvane','Phạm Văn E','phamvane@example.com','e123456','0966554433','Hải Phòng','active'),
+(6,'vuthif','Vũ Thị F','vuthif@example.com','fpassword','0922113344','Huế','active'),
+(7,'buivang','Bùi Văn G','buivang@example.com','gpass','0944556677','Nha Trang','active'),
+(8,'dangthih','Đặng Thị H','dangthih@example.com','hpassword','0988223344','Vũng Tàu','active'),
+(9,'ngovani','Ngô Văn I','ngovani@example.com','ipass123','0911998877','Quảng Ninh','active'),
+(10,'duongthij','Dương Thị J','duongthij@example.com','jpassword','0955332244','Bắc Ninh','active'),
+(11,'trinhvank','Trịnh Văn K','trinhvank@example.com','ksecure','0999223344','Thanh Hóa','active'),
+(12,'doanthil','Đoàn Thị L','doanthil@example.com','lpass','0944559922','Nam Định','active'),
+(13,'maivanm','Mai Văn M','maivanm@example.com','mpassword','0900557788','Hòa Bình','active'),
+(14,'chauthin','Châu Thị N','chauthin@example.com','npass','0933225566','Bình Dương','active'),
+(15,'luongvano','Lương Văn O','luongvano@example.com','opassword','0977448822','Lạng Sơn','active'),
+(16,'phanthip','Phan Thị P','phanthip@example.com','ppass123','0966991155','Quảng Bình','active'),
+(17,'caovanq','Cao Văn Q','caovanq@example.com','qpassword','0922334455','Cà Mau','active'),
+(18,'tatheir','Tạ Thị R','tatheir@example.com','rpass','0999887766','Kon Tum','active'),
+(19,'truongvans','Trương Văn S','truongvans@example.com','spassword','0900223344','Bắc Giang','active'),
+(20,'lythit','Lý Thị T','lythit@example.com','tpass123','0944778899','Đắk Lắk','active');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
