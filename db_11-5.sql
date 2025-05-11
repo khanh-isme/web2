@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `shoe2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `shoe2`;
+CREATE DATABASE  IF NOT EXISTS `shoe` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `shoe`;
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: localhost    Database: shoe
@@ -389,7 +389,7 @@ CREATE TABLE `receipt_details` (
 INSERT INTO `receipt_details` (`id`, `receipt_id`, `product_size_id`, `quantity`, `price`) VALUES
 (5, 4, 1, 4, 30.00),
 (6, 4, 2, 4, 30.00),
-(7, 4, 337, 2, 30.00),
+(7, 4, 335, 2, 30.00),
 (8, 5, 29, 8, 13.00);
 
 LOCK TABLES `suppliers` WRITE;
