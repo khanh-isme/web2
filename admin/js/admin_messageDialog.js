@@ -1,5 +1,5 @@
 let messageDialog=document.querySelector('#messageDialog');
-function showMessageDialog(message)
+function showMessageDialog(message) 
 {
     if(message!=='')
     {

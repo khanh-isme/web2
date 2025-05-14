@@ -1,3 +1,8 @@
+body
+{
+    background: #FAFAFA;
+}
+
 @keyframes showMessageDialog {
     0% {
         transform: translateX(100%);  /* Đưa phần tử ra ngoài màn hình (bên phải) */
@@ -32,6 +37,7 @@
     line-height: 75px;  /* Căn giữa văn bản */
     opacity: 0;  /* Ban đầu ẩn phần tử */
     z-index: 999999;
+    border: 2px solid gray;
 }
 
 .icon
@@ -49,4 +55,34 @@
 .green
 {
     color: green;
+}
+
+.x-ctn
+{
+    padding: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 100%;
+    background-color: whitesmoke;
+}
+
+.x-ctn:hover
+{
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.x
+{
+    color: gray;
+    width: 30px;
+    text-align: center;
+    font-size: 30px;
+    line-height: 30px;
+}
+
+.hidden
+{
+    display: none !important;
 }

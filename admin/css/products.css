@@ -1,0 +1,546 @@
+/* Content styles */
+input[readonly], textarea[readonly], select[disabled] {
+    background-color: #f5f5f5;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.product-content {
+    margin: 10px;
+    flex: 1;
+    padding: 20px;
+    border: solid 3px black;
+    border-radius: 8px;
+    max-height: calc(100vh - 40px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 40px);
+}
+
+/* Header styling */
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.product-header h1 {
+    font-size: 40px;
+    color: black;
+    margin: 0;
+}
+
+.product-help-text {
+    font-size: 14px;
+    color: black;
+    flex: 1;
+    text-align: left;
+    margin: 25px 0 0 20px;
+    font-weight: bold;
+}
+
+.product-header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.remove-size-row,
+.add-size-button,
+.product-add-button {
+    padding: 10px 20px;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.remove-size-row:hover,
+.add-size-button:hover,
+.product-add-button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Search section */
+.product-search-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.product-search-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.product-search-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-search-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.product-search-bar {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.product-search-row input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1;
+}
+
+.product-search-button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.product-search-button:hover {
+    background-color: #444;
+}
+
+.product-filter-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.product-filter-group label {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 5px;
+}
+
+.product-filter-group input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1;
+}
+
+/* Status info */
+.product-status-info {
+    margin-bottom: 15px;
+    padding-left: 5px;
+    color: black;
+    font-weight: 700;
+}
+
+/* Table styles */
+.table-scroll {
+    max-height: 400px; /* Chiều cao cố định cho phần dữ liệu */
+    overflow-y: auto; /* Thêm thanh cuộn dọc */
+    border: 1px solid #ddd; /* Đường viền cho phần cuộn */
+    border-radius: 8px;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
+    background-color: white;
+}
+
+.product-table thead {
+    background-color: #f5f5f5;
+    text-align: left;
+    font-weight: bold;
+    position: sticky; /* Giữ tiêu đề cố định khi cuộn */
+    top: 0;
+    z-index: 1;
+}
+
+.product-table th,
+.product-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #2c3e50;
+    text-align: left;
+    white-space: nowrap; /* Ngăn nội dung xuống dòng */
+    overflow: hidden; /* Ẩn nội dung tràn */
+    text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung quá dài */
+    table-layout: auto;
+    text-wrap: wrap;
+}
+
+.product-table .product-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.product-table tbody tr {
+    display: table-row; 
+    width: 100%;
+}
+
+.product-edit-button, .product-delete-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.product-edit-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.product-edit-button:hover {
+    background-color: #45a049;
+}
+
+.product-delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.product-delete-button:hover {
+    background-color: #da190b;
+}
+
+/* Modal styles */
+.product-modal {
+    display: none; /* Ẩn modal theo mặc định */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.product-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: solid 2px black;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.product-modal-body {
+    display: flex;
+    gap: 20px;
+}
+
+.product-modal-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.product-modal-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-image-preview {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 0px;
+}
+
+.product-form-group p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.product-form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.product-form-group input,
+.product-form-group select,
+.product-form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.product-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.product-add-save-button,
+.product-edit-save-button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.product-add-save-button:hover,
+.product-edit-save-button:hover{
+    background-color: white;
+    color: black;
+}
+
+.product-modal-footer {
+    display: flex;
+    justify-content: flex-end; /* Đẩy nút Save sang bên phải */
+    margin-top: 20px; /* Tạo khoảng cách giữa footer và nội dung */
+}
+
+.product-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.product-modal-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+}
+
+.product-close-button {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.product-close-button:hover {
+    color: #ff0000;
+}
+
+/* Modal styles */
+.product-add-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.product-add-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%; /* Giảm chiều rộng vì chỉ còn 2 cột */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: solid 2px black;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.product-add-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.product-add-modal-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+}
+
+.product-add-close-button {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.product-add-close-button:hover {
+    color: #ff0000;
+}
+
+.product-add-modal-body {
+    display: flex;
+    gap: 20px; /* Khoảng cách giữa các cột */
+    align-items: stretch; /* Đảm bảo các cột có chiều cao bằng nhau */
+}
+
+.product-add-modal-column {
+    flex: 1; /* Các cột có chiều rộng bằng nhau */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.product-add-modal-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa theo chiều ngang */
+    justify-content: center; /* Căn giữa theo chiều dọc */
+    border-right: 1px solid #ddd; /* Đường phân cách giữa các cột */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.product-form-group input,
+.product-form-group select,
+.product-form-group textarea {
+    width: 100%; /* Đảm bảo các thẻ chiếm toàn bộ chiều rộng của cột */
+    padding: 10px; /* Tạo khoảng cách bên trong */
+    border: 1px solid #ddd; /* Đường viền */
+    border-radius: 4px; /* Bo góc */
+    font-size: 14px; /* Kích thước chữ đồng nhất */
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+}
+
+.product-form-group label {
+    font-weight: bold; /* Làm chữ in đậm */
+    font-size: 16px; /* Tăng cỡ chữ */
+    margin-bottom: 5px; /* Tạo khoảng cách giữa label và input */
+    display: block; /* Đảm bảo label nằm trên input */
+}
+
+.product-add-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.product-add-save-button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.product-add-save-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.product-image-upload {
+    text-align: center; /* Căn giữa nội dung văn bản */
+}
+
+.product-image-upload label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+.product-image-upload input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.product-image-preview {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Định dạng nút tùy chỉnh */
+.custom-file-label {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-label:hover {
+    background-color: white;
+    color: black;
+}

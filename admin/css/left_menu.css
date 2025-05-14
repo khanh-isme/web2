@@ -21,6 +21,7 @@ ul
     flex-direction: column;
     align-items: center;
     padding: 10px;
+    z-index: 999;
 }
 
 #logo-ctn
@@ -47,7 +48,6 @@ ul
 .menu-item
 {
     position: relative;
-    z-index: 1;
     display: flex;
     width: 100%;
     font-size: 18px;
@@ -88,7 +88,6 @@ ul
 .menu-item lb
 {
     position: relative;
-    z-index: 1;
 }
 
 .menu-icon
@@ -110,8 +109,6 @@ ul
 
 #account
 {
-    position: relative;
-    z-index: 1;
     display: flex;
     width: 100%;
     font-size: 18px;
@@ -147,4 +144,79 @@ ul
     color: rgb(73, 73, 73);
     font-size: 26px;
     margin:0 20px 0 10px;
+}
+
+#change-password-btn
+{
+    display: none;
+    flex-direction: column;
+    padding: 5px 10px 5px 10px;
+    align-items: center;
+    background: whitesmoke;
+    border: 2px solid gray;
+    position: absolute;
+    left: 80%;
+    width: 80%;
+    cursor: pointer;
+}
+
+#change-password-btn:hover
+{
+    background-color: lightgray;
+}
+
+#change-password-form
+{
+    position: fixed;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    display: none;
+    flex-direction: column;
+    width: 450px;
+    border: 2px solid gray;
+    padding: 30px 20px 10px 20px;
+    background: whitesmoke;
+    font-size: 18px;
+}
+
+#change-password-form.active
+{
+    display: flex;
+}
+
+#change-password-form input
+{
+    width: 100%;
+    height: 35px;
+    border: 2px solid gray;
+    font-size: 18px;
+    margin: 3px 0 5px 0;
+    outline: none;
+    padding: 3px;
+}
+
+#change-password-form button
+{
+    width: max-content;
+    font-size: 18px;
+    color: black;
+    padding: 5px 10px 5px 10px;
+    border: 2px solid gray;
+    background: whitesmoke;
+}
+
+#change-password-form button:hover
+{
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+#center-wrapper
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7px;
 }
