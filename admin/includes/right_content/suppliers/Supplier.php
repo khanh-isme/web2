@@ -1,14 +1,17 @@
 <?php
 require_once '../../connect.php';
 
-class Supplier {
+class Supplier
+{
     private $db;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->db = $db;
     }
 
-    public function getAllSuppliers() {
+    public function getAllSuppliers()
+    {
         $query = "SELECT id, name, address, email, phone, contact, created_at FROM suppliers WHERE deleted = 0";
         $result = $this->db->query($query);
         if (!$result) {
@@ -21,7 +24,8 @@ class Supplier {
         return $suppliers;
     }
 
-    public function getSupplierById($id) {
+    public function getSupplierById($id)
+    {
         $query = "SELECT id, name, address, email, phone, contact, created_at FROM suppliers WHERE id = ?";
         $stmt = $this->db->prepare($query);
         if (!$stmt) {
@@ -35,7 +39,8 @@ class Supplier {
         return $result->fetch_assoc();
     }
 
-    public function addSupplier($name, $address, $email, $phone, $contact) {
+    public function addSupplier($name, $address, $email, $phone, $contact)
+    {
         $query = "INSERT INTO suppliers (name, address, email, phone, contact) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         if (!$stmt) {
@@ -48,7 +53,8 @@ class Supplier {
         return true;
     }
 
-    public function updateSupplier($id, $name, $address, $email, $phone, $contact) {
+    public function updateSupplier($id, $name, $address, $email, $phone, $contact)
+    {
         $query = "UPDATE suppliers SET name = ?, address = ?, email = ?, phone = ?, contact = ? WHERE id = ?";
         $stmt = $this->db->prepare($query);
         if (!$stmt) {
@@ -61,7 +67,8 @@ class Supplier {
         return true;
     }
 
-    public function deleteSupplier($id) {
+    public function deleteSupplier($id)
+    {
         $query = "UPDATE suppliers SET deleted = 1 WHERE id = ?";
         $stmt = $this->db->prepare($query);
         if (!$stmt) {
@@ -74,4 +81,3 @@ class Supplier {
         return true;
     }
 }
-?>

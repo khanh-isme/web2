@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $params[] = $searchDateTo . ' 23:59:59';
         $types .= 's';
     }
-     if (!empty($searchShippingName)) {
+    if (!empty($searchShippingName)) {
         $conditions[] = "shipping_name LIKE ?";
         $params[] = "%" . $searchShippingName . "%";
         $types .= 's';
@@ -65,9 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     // --- THÊM LOGIC LỌC ĐỊA CHỈ ---
     if (!empty($searchShippingAddress)) {
-       $conditions[] = "shipping_address LIKE ?"; // Sử dụng LIKE cho địa chỉ
-       $params[] = "%" . $searchShippingAddress . "%"; // Thêm wildcard
-       $types .= 's'; // Kiểu string
+        $conditions[] = "shipping_address LIKE ?"; // Sử dụng LIKE cho địa chỉ
+        $params[] = "%" . $searchShippingAddress . "%"; // Thêm wildcard
+        $types .= 's'; // Kiểu string
     }
     // --- KẾT THÚC LOGIC LỌC ĐỊA CHỈ ---
 
@@ -109,9 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['sql_error'] = $conn->error;
         $response['debug_sql'] = $sql;
     }
-
 } else {
-     $response['message'] = 'Invalid request method.';
+    $response['message'] = 'Invalid request method.';
 }
 
 $conn->close();
@@ -119,4 +118,3 @@ $conn->close();
 // Trả về kết quả JSON
 echo json_encode($response);
 exit();
-?>

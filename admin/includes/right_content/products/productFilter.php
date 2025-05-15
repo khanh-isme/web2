@@ -93,4 +93,3 @@ try {
 } catch (Exception $e) {
     echo json_encode(['error' => 'Error filtering products: ' . $e->getMessage()]);
 }
-?>

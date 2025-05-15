@@ -45,7 +45,7 @@ if ($orderId) {
         $response['sql_error'] = $conn->error;
     }
 } else {
-     $response['message'] = 'Valid Order ID is required.';
+    $response['message'] = 'Valid Order ID is required.';
 }
 
 $conn->close();
@@ -53,4 +53,3 @@ $conn->close();
 // Trả về kết quả JSON
 echo json_encode($response);
 exit();
-?>

@@ -109,5 +109,3 @@ $conn->close();
 // Trả về phản hồi dưới dạng JSON
 echo json_encode($response);
 exit(); // Dừng script
-
-?>

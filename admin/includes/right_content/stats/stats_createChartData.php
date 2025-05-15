@@ -1,6 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') 
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require '../../connect.php';
 
     header('Content-Type: application/json');
@@ -17,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
 
     $categoriesColor = [
-        'Total' => [  
+        'Total' => [
             'background' => 'rgba(54, 162, 235, 0.5)', // xanh dương nhạt
             'border' => 'rgba(54, 162, 235, 1)'
         ],
@@ -46,26 +45,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     function getTimeRange()
     {
         global $statsByTimeOption;
-        if ($statsByTimeOption === 'all') 
-        {
+        if ($statsByTimeOption === 'all') {
             return ['2023-01-01 00:00:00', date('Y-m-d H:i:s')];
-        } 
-        else 
-        {
+        } else {
             global $byDayFrom;
             global $byDayTo;
-            return [$byDayFrom.' 00:00:00', $byDayTo.' 23:59:59'];
+            return [$byDayFrom . ' 00:00:00', $byDayTo . ' 23:59:59'];
         }
     }
 
     function createTotalCategoryData()
     {
-        $status="success";
+        $status = "success";
         global $conn;
         global $categoriesColor;
-        $timeRange=getTimeRange();
+        $timeRange = getTimeRange();
 
-        $sql="  SELECT categories.name AS category, SUM(orders.total_amount / 1000000) AS categorySum
+        $sql = "  SELECT categories.name AS category, SUM(orders.total_amount / 1000000) AS categorySum
                 FROM order_details
                 JOIN orders ON order_details.order_id = orders.order_id
                 JOIN product_size ON order_details.product_size_id = product_size.id
@@ -74,9 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 WHERE orders.status = 'delivered'
                 AND orders.order_date BETWEEN ? AND ?
                 GROUP BY categories.name ";
-        
+
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss",$timeRange[0],$timeRange[1]);
+        $stmt->bind_param("ss", $timeRange[0], $timeRange[1]);
         if (!$stmt->execute()) {
             $errorCode = $stmt->errno;
 
@@ -95,32 +91,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             echo json_encode($response);
             exit;
         }
-        $result=$stmt->get_result();
-        if($result->num_rows==0)
-        {
-            $status='warning';
+        $result = $stmt->get_result();
+        if ($result->num_rows == 0) {
+            $status = 'warning';
         }
 
-        $dataArray=[];
-        while($row=$result->fetch_assoc())
-        {
-            $dataArray[$row['category']]=$row['categorySum'];
+        $dataArray = [];
+        while ($row = $result->fetch_assoc()) {
+            $dataArray[$row['category']] = $row['categorySum'];
         }
-        
+
         $labels = ['Tổng'];
         $datas = [0];
 
         global $categories;
-        foreach($categories as $category)
-        {
-            $labels[]=$category;
+        foreach ($categories as $category) {
+            $labels[] = $category;
 
             $value = (float)($dataArray[$category] ?? 0);
             $datas[0] += $value;
             $datas[] = $value;
         }
 
-        $datasets=[[
+        $datasets = [[
             'label' => 'Doanh thu theo danh mục (triệu VND)',
             'data' => $datas,
             'backgroundColor' => [
@@ -142,33 +135,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             'borderWidth' => '1'
         ]];
 
-        return [$labels,$datasets,$status];
+        return [$labels, $datasets, $status];
     }
 
-    function createTotalTimeData() 
+    function createTotalTimeData()
     {
-        $status='success';
+        $status = 'success';
         global $conn;
         global $categoriesColor;
-        $timeRange=getTimeRange();
+        $timeRange = getTimeRange();
 
         $labels = [];
-        $datasets=[];
+        $datasets = [];
         global $categories;
 
-        $dayFrom=new DateTime($timeRange[0]);
-        $dayTo=new DateTime($timeRange[1]);
+        $dayFrom = new DateTime($timeRange[0]);
+        $dayTo = new DateTime($timeRange[1]);
         global $timeRangeUnit;
 
-        switch($timeRangeUnit)
-        {
+        switch ($timeRangeUnit) {
             case 'day':
-                for($i = (clone $dayFrom);$i<=$dayTo;$i->modify("+1 day"))
-                {
-                    $labels[]=$i->format('d-m-Y');
+                for ($i = (clone $dayFrom); $i <= $dayTo; $i->modify("+1 day")) {
+                    $labels[] = $i->format('d-m-Y');
                 }
 
-                $sql="  SELECT 
+                $sql = "  SELECT 
                         DATE(orders.order_date) AS day,
                         SUM(orders.total_amount / 1000000) AS total
                         FROM order_details
@@ -179,21 +170,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                         WHERE orders.status = 'delivered'
                         AND orders.order_date BETWEEN ? AND ? ";
 
-                $categorySQL='AND (false ';
-                if(!empty($categories))
-                {
-                    foreach($categories as $category)
-                    {
-                        $categorySQL.="or categories.name = '$category' ";
+                $categorySQL = 'AND (false ';
+                if (!empty($categories)) {
+                    foreach ($categories as $category) {
+                        $categorySQL .= "or categories.name = '$category' ";
                     }
                 }
-                $categorySQL.=')';
-                $sql.=$categorySQL ." GROUP BY day ORDER BY day ASC ";
-                
+                $categorySQL .= ')';
+                $sql .= $categorySQL . " GROUP BY day ORDER BY day ASC ";
+
                 $stmt = $conn->prepare($sql);
-                $day1=$dayFrom->format('Y-m-d H:i:s');
-                $day2=$dayTo->format('Y-m-d H:i:s');
-                $stmt->bind_param("ss",$day1,$day2);
+                $day1 = $dayFrom->format('Y-m-d H:i:s');
+                $day2 = $dayTo->format('Y-m-d H:i:s');
+                $stmt->bind_param("ss", $day1, $day2);
                 if (!$stmt->execute()) {
                     $errorCode = $stmt->errno;
 
@@ -212,27 +201,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     echo json_encode($response);
                     exit;
                 }
-                $result=$stmt->get_result();
-                if($result->num_rows==0)
-                {
-                    $status='warning';
+                $result = $stmt->get_result();
+                if ($result->num_rows == 0) {
+                    $status = 'warning';
                 }
 
-                $dataArray=[];
-                while($row=$result->fetch_assoc())
-                {
-                    $dataArray[$row['day']] = $row['total']; 
+                $dataArray = [];
+                while ($row = $result->fetch_assoc()) {
+                    $dataArray[$row['day']] = $row['total'];
                 }
 
-                $datas=[];
+                $datas = [];
 
-                for($i = (clone $dayFrom);$i<=$dayTo;$i->modify("+1 day"))
-                {
-                    $currentDay=$i->format('Y-m-d');
-                    $datas[]=$dataArray[$currentDay] ?? 0;
+                for ($i = (clone $dayFrom); $i <= $dayTo; $i->modify("+1 day")) {
+                    $currentDay = $i->format('Y-m-d');
+                    $datas[] = $dataArray[$currentDay] ?? 0;
                 }
 
-                $datasets=[[
+                $datasets = [[
                     'label' => 'Doanh thu theo thời gian (triệu VND)',
                     'data' => $datas,
                     'backgroundColor' => [
@@ -243,14 +229,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     ],
                     'borderWidth' => '1'
                 ]];
-                return [$labels,$datasets,$status];
+                return [$labels, $datasets, $status];
             case 'month':
-                for($i = (clone $dayFrom);$i<=$dayTo;$i->modify("first day of next month"))
-                {
-                    $labels[]=$i->format('m-Y');
+                for ($i = (clone $dayFrom); $i <= $dayTo; $i->modify("first day of next month")) {
+                    $labels[] = $i->format('m-Y');
                 }
 
-                $sql="  SELECT 
+                $sql = "  SELECT 
                         DATE_FORMAT(orders.order_date, '%Y-%m') AS month,
                         SUM(orders.total_amount / 1000000) AS total
                         FROM order_details
@@ -261,21 +246,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                         WHERE orders.status = 'delivered'
                         AND orders.order_date BETWEEN ? AND ? ";
 
-                $categorySQL='AND (false ';
-                if(!empty($categories))
-                {
-                    foreach($categories as $category)
-                    {
-                        $categorySQL.="or categories.name = '$category' ";
+                $categorySQL = 'AND (false ';
+                if (!empty($categories)) {
+                    foreach ($categories as $category) {
+                        $categorySQL .= "or categories.name = '$category' ";
                     }
                 }
-                $categorySQL.=')';
-                $sql.=$categorySQL ." GROUP BY month ORDER BY month ASC ";
-                
+                $categorySQL .= ')';
+                $sql .= $categorySQL . " GROUP BY month ORDER BY month ASC ";
+
                 $stmt = $conn->prepare($sql);
-                $day1=$dayFrom->format('Y-m-d H:i:s');
-                $day2=$dayTo->format('Y-m-d H:i:s');
-                $stmt->bind_param("ss",$day1,$day2);
+                $day1 = $dayFrom->format('Y-m-d H:i:s');
+                $day2 = $dayTo->format('Y-m-d H:i:s');
+                $stmt->bind_param("ss", $day1, $day2);
                 if (!$stmt->execute()) {
                     $errorCode = $stmt->errno;
 
@@ -294,27 +277,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     echo json_encode($response);
                     exit;
                 }
-                $result=$stmt->get_result();
-                if($result->num_rows==0)
-                {
-                    $status='warning';
+                $result = $stmt->get_result();
+                if ($result->num_rows == 0) {
+                    $status = 'warning';
                 }
 
-                $dataArray=[];
-                while($row=$result->fetch_assoc())
-                {
-                    $dataArray[$row['month']] = $row['total']; 
+                $dataArray = [];
+                while ($row = $result->fetch_assoc()) {
+                    $dataArray[$row['month']] = $row['total'];
                 }
 
-                $datas=[];
+                $datas = [];
 
-                for($i = (clone $dayFrom);$i<=$dayTo;$i->modify("first day of next month"))
-                {
-                    $currentMonth=$i->format('Y-m');
-                    $datas[]=$dataArray[$currentMonth] ?? 0;
+                for ($i = (clone $dayFrom); $i <= $dayTo; $i->modify("first day of next month")) {
+                    $currentMonth = $i->format('Y-m');
+                    $datas[] = $dataArray[$currentMonth] ?? 0;
                 }
 
-                $datasets=[[
+                $datasets = [[
                     'label' => 'Doanh thu theo thời gian (triệu VND)',
                     'data' => $datas,
                     'backgroundColor' => [
@@ -325,14 +305,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     ],
                     'borderWidth' => '1'
                 ]];
-                return [$labels,$datasets,$status];
+                return [$labels, $datasets, $status];
             case 'year':
-                for($i = (clone $dayFrom);$i<=$dayTo;$i->modify("first day of January next year"))
-                {
-                    $labels[]=$i->format('Y');
+                for ($i = (clone $dayFrom); $i <= $dayTo; $i->modify("first day of January next year")) {
+                    $labels[] = $i->format('Y');
                 }
 
-                $sql="  SELECT 
+                $sql = "  SELECT 
                         DATE_FORMAT(orders.order_date,'%Y') AS year,
                         SUM(orders.total_amount / 1000000) AS total
                         FROM order_details
@@ -343,21 +322,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                         WHERE orders.status = 'delivered'
                         AND orders.order_date BETWEEN ? AND ? ";
 
-                $categorySQL='AND (false ';
-                if(!empty($categories))
-                {
-                    foreach($categories as $category)
-                    {
-                        $categorySQL.="or categories.name = '$category' ";
+                $categorySQL = 'AND (false ';
+                if (!empty($categories)) {
+                    foreach ($categories as $category) {
+                        $categorySQL .= "or categories.name = '$category' ";
                     }
                 }
-                $categorySQL.=')';
-                $sql.=$categorySQL ." GROUP BY year ORDER BY year ASC ";
-                
+                $categorySQL .= ')';
+                $sql .= $categorySQL . " GROUP BY year ORDER BY year ASC ";
+
                 $stmt = $conn->prepare($sql);
-                $day1=$dayFrom->format('Y-m-d H:i:s');
-                $day2=$dayTo->format('Y-m-d H:i:s');
-                $stmt->bind_param("ss",$day1,$day2);
+                $day1 = $dayFrom->format('Y-m-d H:i:s');
+                $day2 = $dayTo->format('Y-m-d H:i:s');
+                $stmt->bind_param("ss", $day1, $day2);
                 if (!$stmt->execute()) {
                     $errorCode = $stmt->errno;
 
@@ -376,27 +353,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     echo json_encode($response);
                     exit;
                 }
-                $result=$stmt->get_result();
-                if($result->num_rows==0)
-                {
-                    $status='warning';
+                $result = $stmt->get_result();
+                if ($result->num_rows == 0) {
+                    $status = 'warning';
                 }
 
-                $dataArray=[];
-                while($row=$result->fetch_assoc())
-                {
-                    $dataArray[$row['year']] = $row['total']; 
+                $dataArray = [];
+                while ($row = $result->fetch_assoc()) {
+                    $dataArray[$row['year']] = $row['total'];
                 }
 
-                $datas=[];
+                $datas = [];
 
-                for($i = (clone $dayFrom);$i<=$dayTo;$i->modify("first day of January next year"))
-                {
-                    $currentYear=$i->format('Y');
-                    $datas[]=$dataArray[$currentYear] ?? 0;
+                for ($i = (clone $dayFrom); $i <= $dayTo; $i->modify("first day of January next year")) {
+                    $currentYear = $i->format('Y');
+                    $datas[] = $dataArray[$currentYear] ?? 0;
                 }
 
-                $datasets=[[
+                $datasets = [[
                     'label' => 'Doanh thu theo thời gian (triệu VND)',
                     'data' => $datas,
                     'backgroundColor' => [
@@ -407,33 +381,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     ],
                     'borderWidth' => '1'
                 ]];
-                return [$labels,$datasets,$status];
+                return [$labels, $datasets, $status];
         }
     }
-    
-    function createCategoryTimeData() 
+
+    function createCategoryTimeData()
     {
-        $status='success';
+        $status = 'success';
         global $conn;
         global $categoriesColor;
-        $timeRange=getTimeRange();
+        $timeRange = getTimeRange();
 
         $labels = [];
-        $datasets=[];
+        $datasets = [];
         global $categories;
 
-        $dayFrom=new DateTime($timeRange[0]);
-        $dayTo=new DateTime($timeRange[1]);
+        $dayFrom = new DateTime($timeRange[0]);
+        $dayTo = new DateTime($timeRange[1]);
         global $timeRangeUnit;
-        switch($timeRangeUnit)
-        {
+        switch ($timeRangeUnit) {
             case "day":
-                for($i = (clone $dayFrom);$i<=$dayTo;$i->modify("+1 day"))
-                {
-                    $labels[]=$i->format('d-m-Y');
+                for ($i = (clone $dayFrom); $i <= $dayTo; $i->modify("+1 day")) {
+                    $labels[] = $i->format('d-m-Y');
                 }
-                
-                $sql="  SELECT 
+
+                $sql = "  SELECT 
                         DATE(orders.order_date) AS day,
                         categories.name AS category,
                         SUM(orders.total_amount / 1000000) AS total
@@ -446,11 +418,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                         AND orders.order_date BETWEEN ? AND ?
                         GROUP BY day, category
                         ORDER BY day ASC ";
-                
+
                 $stmt = $conn->prepare($sql);
-                $day1=$dayFrom->format('Y-m-d H:i:s');
-                $day2=$dayTo->format('Y-m-d H:i:s');
-                $stmt->bind_param("ss",$day1,$day2);
+                $day1 = $dayFrom->format('Y-m-d H:i:s');
+                $day2 = $dayTo->format('Y-m-d H:i:s');
+                $stmt->bind_param("ss", $day1, $day2);
                 if (!$stmt->execute()) {
                     $errorCode = $stmt->errno;
 
@@ -469,46 +441,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     echo json_encode($response);
                     exit;
                 }
-                $result=$stmt->get_result();
-                if($result->num_rows==0)
-                {
-                    $status='warning';
+                $result = $stmt->get_result();
+                if ($result->num_rows == 0) {
+                    $status = 'warning';
                 }
 
-                $dataArray=[];
-                while($row=$result->fetch_assoc())
-                {
-                    $dataArray[$row['day']][$row['category']] = $row['total']; 
+                $dataArray = [];
+                while ($row = $result->fetch_assoc()) {
+                    $dataArray[$row['day']][$row['category']] = $row['total'];
                 }
 
-                $categoryData=[];
-                for ($i = clone $dayFrom ; $i<=$dayTo ; $i->modify('+1 day'))
-                {
-                    $currentDay=$i->format('Y-m-d');
-                    foreach($categories as $category)
-                    {
-                        $categoryData[$category][]=$dataArray[$currentDay][$category] ?? 0;        
+                $categoryData = [];
+                for ($i = clone $dayFrom; $i <= $dayTo; $i->modify('+1 day')) {
+                    $currentDay = $i->format('Y-m-d');
+                    foreach ($categories as $category) {
+                        $categoryData[$category][] = $dataArray[$currentDay][$category] ?? 0;
                     }
                 }
 
-                foreach($categories as $category)
-                {
-                    $datasets[]=[
+                foreach ($categories as $category) {
+                    $datasets[] = [
                         'label' => $category,
-                        'data' => $categoryData[$category]??[],
+                        'data' => $categoryData[$category] ?? [],
                         'backgroundColor' => $categoriesColor[$category]['background'],
                         'borderColor' => $categoriesColor[$category]['border'],
                         'borderWidth' => '1'
                     ];
                 }
-                return [$labels,$datasets, $status];
+                return [$labels, $datasets, $status];
             case "month":
-                for($i = (clone $dayFrom);$i<=$dayTo;$i->modify("first day of next month"))
-                {
-                    $labels[]="Tháng {$i->format('m')} ({$i->format('Y')})";
+                for ($i = (clone $dayFrom); $i <= $dayTo; $i->modify("first day of next month")) {
+                    $labels[] = "Tháng {$i->format('m')} ({$i->format('Y')})";
                 }
-                
-                $sql="  SELECT 
+
+                $sql = "  SELECT 
                         DATE_FORMAT(orders.order_date, '%Y-%m') AS month,
                         categories.name AS category,
                         SUM(orders.total_amount / 1000000) AS total
@@ -521,11 +487,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                         AND orders.order_date BETWEEN ? AND ?
                         GROUP BY month, category
                         ORDER BY month ASC; ";
-                
+
                 $stmt = $conn->prepare($sql);
-                $day1=$dayFrom->format('Y-m-d H:i:s');
-                $day2=$dayTo->format('Y-m-d H:i:s');
-                $stmt->bind_param("ss",$day1,$day2);
+                $day1 = $dayFrom->format('Y-m-d H:i:s');
+                $day2 = $dayTo->format('Y-m-d H:i:s');
+                $stmt->bind_param("ss", $day1, $day2);
                 if (!$stmt->execute()) {
                     $errorCode = $stmt->errno;
 
@@ -544,46 +510,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     echo json_encode($response);
                     exit;
                 }
-                $result=$stmt->get_result();
-                if($result->num_rows==0)
-                {
-                    $status='warning';
+                $result = $stmt->get_result();
+                if ($result->num_rows == 0) {
+                    $status = 'warning';
                 }
 
-                $dataArray=[];
-                while($row=$result->fetch_assoc())
-                {
-                    $dataArray[$row['month']][$row['category']] = $row['total']; 
+                $dataArray = [];
+                while ($row = $result->fetch_assoc()) {
+                    $dataArray[$row['month']][$row['category']] = $row['total'];
                 }
-                
-                $categoryData=[];
-                for ($i = clone $dayFrom ; $i<=$dayTo ; $i->modify('first day of next month'))
-                {
-                    $currentMonth=$i->format('Y-m');
-                    foreach($categories as $category)
-                    {
-                        $categoryData[$category][]=$dataArray[$currentMonth][$category] ?? 0;        
+
+                $categoryData = [];
+                for ($i = clone $dayFrom; $i <= $dayTo; $i->modify('first day of next month')) {
+                    $currentMonth = $i->format('Y-m');
+                    foreach ($categories as $category) {
+                        $categoryData[$category][] = $dataArray[$currentMonth][$category] ?? 0;
                     }
                 }
 
-                foreach($categories as $category)
-                {
-                    $datasets[]=[
+                foreach ($categories as $category) {
+                    $datasets[] = [
                         'label' => $category,
-                        'data' => $categoryData[$category]??[],
+                        'data' => $categoryData[$category] ?? [],
                         'backgroundColor' => $categoriesColor[$category]['background'],
                         'borderColor' => $categoriesColor[$category]['border'],
                         'borderWidth' => '1'
                     ];
                 }
-                return [$labels,$datasets, $status];
+                return [$labels, $datasets, $status];
             case "year":
-                for($i = (clone $dayFrom);$i<=$dayTo;$i->modify("first day of January next year"))
-                {
-                    $labels[]="Năm {$i->format('Y')}";
+                for ($i = (clone $dayFrom); $i <= $dayTo; $i->modify("first day of January next year")) {
+                    $labels[] = "Năm {$i->format('Y')}";
                 }
-                
-                $sql="  SELECT 
+
+                $sql = "  SELECT 
                         DATE_FORMAT(orders.order_date, '%Y') AS year,
                         categories.name AS category,
                         SUM(orders.total_amount / 1000000) AS total
@@ -596,11 +556,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                         AND orders.order_date BETWEEN ? AND ?
                         GROUP BY year, category
                         ORDER BY year ASC; ";
-                
+
                 $stmt = $conn->prepare($sql);
-                $day1=$dayFrom->format('Y-m-d H:i:s');
-                $day2=$dayTo->format('Y-m-d H:i:s');
-                $stmt->bind_param("ss",$day1,$day2);
+                $day1 = $dayFrom->format('Y-m-d H:i:s');
+                $day2 = $dayTo->format('Y-m-d H:i:s');
+                $stmt->bind_param("ss", $day1, $day2);
                 if (!$stmt->execute()) {
                     $errorCode = $stmt->errno;
 
@@ -619,64 +579,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     echo json_encode($response);
                     exit;
                 }
-                $result=$stmt->get_result();
-                if($result->num_rows==0)
-                {
-                    $status='warning';
+                $result = $stmt->get_result();
+                if ($result->num_rows == 0) {
+                    $status = 'warning';
                 }
 
-                $dataArray=[];
-                while($row=$result->fetch_assoc())
-                {
-                    $dataArray[$row['year']][$row['category']] = $row['total']; 
+                $dataArray = [];
+                while ($row = $result->fetch_assoc()) {
+                    $dataArray[$row['year']][$row['category']] = $row['total'];
                 }
-                
-                $categoryData=[];
-                for ($i = clone $dayFrom ; $i<=$dayTo ; $i->modify('first day of January next year'))
-                {
-                    $currentYear=$i->format('Y');
-                    foreach($categories as $category)
-                    {
-                        $categoryData[$category][]=$dataArray[$currentYear][$category] ?? 0;        
+
+                $categoryData = [];
+                for ($i = clone $dayFrom; $i <= $dayTo; $i->modify('first day of January next year')) {
+                    $currentYear = $i->format('Y');
+                    foreach ($categories as $category) {
+                        $categoryData[$category][] = $dataArray[$currentYear][$category] ?? 0;
                     }
                 }
 
-                foreach($categories as $category)
-                {
-                    $datasets[]=[
+                foreach ($categories as $category) {
+                    $datasets[] = [
                         'label' => $category,
-                        'data' => $categoryData[$category]??[],
+                        'data' => $categoryData[$category] ?? [],
                         'backgroundColor' => $categoriesColor[$category]['background'],
                         'borderColor' => $categoriesColor[$category]['border'],
                         'borderWidth' => '1'
                     ];
                 }
-                return [$labels,$datasets, $status];
+                return [$labels, $datasets, $status];
         }
     }
 
     $labels = [];
     $datasets = [];
-    $status='';
+    $status = '';
     $response = [];
     switch ($statsBy) {
         case 'total-category':
             [$labels, $datasets, $status] = createTotalCategoryData();
             break;
-    
+
         case 'total-time':
             [$labels, $datasets, $status] = createTotalTimeData();
             break;
-    
+
         case 'category-time':
             [$labels, $datasets, $status] = createCategoryTimeData();
             break;
-    
+
         default:
             echo json_encode(['status' => 'error', 'message' => 'Loại thống kê không hợp lệ.']);
             exit();
     }
-    
+
     $response = [
         'status' => $status,
         'chartData' => [
@@ -685,7 +640,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         ]
     ];
 
-    
+
     echo json_encode($response);
 } else {
     echo "Phương thức không hợp lệ!";

@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['customer_id'])) {
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-             // --- THAY ĐỔI CHÍNH Ở ĐÂY ---
+            // --- THAY ĐỔI CHÍNH Ở ĐÂY ---
             $stmt->bind_param("si", $newStatus, $customerId); // s = string (cho status), i = integer (cho id)
             // ---------------------------
 
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['customer_id'])) {
         }
     }
 } else {
-     $response['message'] = 'Invalid request method or missing customer ID.';
+    $response['message'] = 'Invalid request method or missing customer ID.';
 }
 
 $conn->close();
@@ -55,4 +55,3 @@ $conn->close();
 // Trả về kết quả
 echo json_encode($response);
 exit();
-?>

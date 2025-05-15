@@ -1,12 +1,16 @@
 /* --- order_styles.css --- */
 
 /* General styles (copied from customer_styles) */
-input[readonly], textarea[readonly], select[disabled] {
+input[readonly],
+textarea[readonly],
+select[disabled] {
     background-color: #f5f5f5;
     color: #888;
     cursor: not-allowed;
 }
-.ORDERS.content-ctn { /* Specific to ORDERS tab */
+
+.ORDERS.content-ctn {
+    /* Specific to ORDERS tab */
     height: 100vh;
 }
 
@@ -19,7 +23,8 @@ input[readonly], textarea[readonly], select[disabled] {
     border-radius: 8px;
     /* Removed fixed height, let flexbox handle it */
     /* height: 100vh; */
-    overflow: hidden; /* Keep hidden to manage scroll internally */
+    overflow: hidden;
+    /* Keep hidden to manage scroll internally */
     display: flex;
     flex-direction: column;
 }
@@ -98,27 +103,34 @@ input[readonly], textarea[readonly], select[disabled] {
 }
 
 .order-search-bar,
-.order-search-row select { /* Apply style to select as well */
+.order-search-row select {
+    /* Apply style to select as well */
     flex-grow: 1;
     padding: 7px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
-    box-sizing: border-box; /* Include padding in width */
-    height: 33px; /* Match height */
+    box-sizing: border-box;
+    /* Include padding in width */
+    height: 33px;
+    /* Match height */
 }
 
 .order-search-row input[type="text"],
-.order-search-row input[type="number"], /* Added number type */
-.order-search-row input[type="date"], /* Added date type */
+.order-search-row input[type="number"],
+/* Added number type */
+.order-search-row input[type="date"],
+/* Added date type */
 .order-search-row input[type="tel"] {
     padding: 8px 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 13px;
     flex: 1;
-    box-sizing: border-box; /* Include padding in width */
-    height: 36px; /* Match height */
+    box-sizing: border-box;
+    /* Include padding in width */
+    height: 36px;
+    /* Match height */
 }
 
 .order-filter-group {
@@ -160,12 +172,15 @@ input[readonly], textarea[readonly], select[disabled] {
 }
 
 /* Table styles for Orders */
-.order-table-scroll { /* Using specific class for order table scroll */
-    flex-grow: 1; /* Allow scroll area to fill remaining space */
+.order-table-scroll {
+    /* Using specific class for order table scroll */
+    flex-grow: 1;
+    /* Allow scroll area to fill remaining space */
     overflow-y: auto;
     border: 1px solid #ddd;
     border-radius: 8px;
-    max-height: 55vh; /* Adjust max height as needed */
+    max-height: 55vh;
+    /* Adjust max height as needed */
     /* min-height: 45vh; */
 }
 
@@ -173,7 +188,8 @@ input[readonly], textarea[readonly], select[disabled] {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
-    table-layout: fixed; /* Important for consistent columns */
+    table-layout: fixed;
+    /* Important for consistent columns */
 }
 
 .order-table thead {
@@ -187,10 +203,12 @@ input[readonly], textarea[readonly], select[disabled] {
 
 .order-table th,
 .order-table td {
-    padding: 12px 10px; /* Slightly reduced padding */
+    padding: 12px 10px;
+    /* Slightly reduced padding */
     border-bottom: 1px solid #ddd;
     vertical-align: middle;
-    font-size: 13px; /* Slightly reduced font size */
+    font-size: 13px;
+    /* Slightly reduced font size */
     color: #2c3e50;
     text-align: left;
     white-space: nowrap;
@@ -209,7 +227,8 @@ input[readonly], textarea[readonly], select[disabled] {
 
 /* Style for View and Edit buttons in the Order table */
 .order-table .order-view-button,
-.order-table .order-edit-button { /* Use specific class names */
+.order-table .order-edit-button {
+    /* Use specific class names */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -224,23 +243,28 @@ input[readonly], textarea[readonly], select[disabled] {
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     margin-left: 5px;
     vertical-align: middle;
-    color: #495057; /* Default icon color */
+    color: #495057;
+    /* Default icon color */
 }
 
 .order-table .order-view-button:hover {
-    background-color: #007bff; /* Blue for view */
+    background-color: #007bff;
+    /* Blue for view */
     color: white;
     border-color: #007bff;
 }
+
 .order-table .order-edit-button:hover {
-    background-color: black; /* Black for edit (like customer) */
+    background-color: black;
+    /* Black for edit (like customer) */
     color: white;
     border-color: black;
 }
 
 
 /* Modal styles for Orders */
-.order-modal { /* Generic modal class for orders */
+.order-modal {
+    /* Generic modal class for orders */
     display: none;
     position: fixed;
     top: 0;
@@ -261,14 +285,16 @@ input[readonly], textarea[readonly], select[disabled] {
     padding: 30px;
     border-radius: 8px;
     width: 100%;
-    max-width: 600px; /* Adjust as needed, maybe larger for details */
+    max-width: 600px;
+    /* Adjust as needed, maybe larger for details */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
     border: solid 2px black;
-    max-height: 100vh; /* Limit height */
+    max-height: 100vh;
+    /* Limit height */
     overflow-y: auto;
 }
 
@@ -278,16 +304,19 @@ input[readonly], textarea[readonly], select[disabled] {
     gap: 15px;
 }
 
-.order-modal-body p { /* Style for paragraphs in view modal */
+.order-modal-body p {
+    /* Style for paragraphs in view modal */
     margin: 5px 0;
     line-height: 1.4;
 }
+
 .order-modal-body strong {
     color: #333;
 }
 
 
-.order-form-group { /* Form group inside modals */
+.order-form-group {
+    /* Form group inside modals */
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -301,14 +330,16 @@ input[readonly], textarea[readonly], select[disabled] {
     font-size: 14px;
 }
 
-.order-form-group select { /* Style for select dropdown */
+.order-form-group select {
+    /* Style for select dropdown */
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
-    height: 40px; /* Match other inputs */
+    height: 40px;
+    /* Match other inputs */
 }
 
 /* Specific styles for view-order-items if needed */
@@ -317,12 +348,15 @@ input[readonly], textarea[readonly], select[disabled] {
     border-collapse: collapse;
     margin-top: 10px;
 }
-#view-order-items th, #view-order-items td {
+
+#view-order-items th,
+#view-order-items td {
     border: 1px solid #ddd;
     padding: 8px;
     font-size: 13px;
     text-align: left;
 }
+
 #view-order-items th {
     background-color: #f9f9f9;
     font-weight: bold;
@@ -340,11 +374,13 @@ input[readonly], textarea[readonly], select[disabled] {
     line-height: 1;
     transition: color 0.3s ease;
 }
+
 .order-close-button:hover {
     color: #ff0000;
 }
 
-.order-save-button { /* Save button in edit modal */
+.order-save-button {
+    /* Save button in edit modal */
     padding: 10px 20px;
     background-color: black;
     color: white;
@@ -390,6 +426,7 @@ input[readonly], textarea[readonly], select[disabled] {
 #order-edit-modal {
     /* Inherits from .order-modal */
 }
+
 #order-view-modal {
     /* Inherits from .order-modal */
 }

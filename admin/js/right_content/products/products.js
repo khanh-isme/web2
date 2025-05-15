@@ -143,38 +143,37 @@ function closeAndOpenProductForm() {
         }
     });
 
-    if(editForm)
-    {
+    if (editForm) {
         changeImageInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
             const editImage = document.getElementById("product-edit-image"); // Thêm dòng này
-    
+
             if (file) {
                 const reader = new FileReader();
-    
+
                 reader.onload = (e) => {
                     editImage.src = e.target.result;
                 };
-    
+
                 reader.readAsDataURL(file);
             } else {
                 console.log('No file selected');
                 editImage.src = './imgs/blank.png';
             }
         });
-    
+
         editForm.addEventListener('submit', function (event) {
             event.preventDefault();
-    
+
             const formData = new FormData(this);
             formData.append('action', 'update'); // Thêm action vào FormData
-    
+
             // Lấy đường dẫn gốc của ảnh từ preview
             const imagePreview = document.getElementById('product-edit-image');
             if (imagePreview && imagePreview.src) {
                 formData.append('image_src', imagePreview.src); // Gửi đường dẫn gốc
             }
-    
+
             fetch('includes/right_content/products/actionProduct.php', {
                 method: 'POST',
                 body: formData
@@ -203,8 +202,7 @@ function closeAndOpenProductForm() {
         });
     }
 
-    if(addProductForm)
-    {
+    if (addProductForm) {
         addProductImageInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (file) {
@@ -216,14 +214,14 @@ function closeAndOpenProductForm() {
                 reader.readAsDataURL(file);
             }
         });
-        
+
         // Xử lý submit form
         addProductForm.addEventListener('submit', function (event) {
             event.preventDefault();
-        
+
             const formData = new FormData(this);
             formData.append('action', 'add'); // Thêm action vào FormData
-        
+
             fetch('includes/right_content/products/actionProduct.php', {
                 method: 'POST',
                 body: formData
@@ -251,7 +249,7 @@ function closeAndOpenProductForm() {
                     console.error('Error:', error);
                     alert('An error occurred while adding the product.');
                 });
-            });
+        });
     }
 }
 

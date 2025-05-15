@@ -1,26 +1,30 @@
 <?php
 require_once '../../connect.php';
-class Category {
+class Category
+{
     private $conn;
 
-    public function __construct($dbConnection){
+    public function __construct($dbConnection)
+    {
         $this->conn = $dbConnection;
     }
 
-    public function getAllCategories() {
+    public function getAllCategories()
+    {
         $sql = "SELECT id, name FROM categories";
         $result = $this->conn->query($sql);
 
         $categories = [];
-        if($result->num_rows > 0){
-            while($row = $result->fetch_assoc()){
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $categories[] = $row;
             }
         }
         return $categories;
     }
 
-    public function getCategoryById($id){
+    public function getCategoryById($id)
+    {
         $sql = "SELECT id, name FROM categories WHERE id = ? ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
@@ -29,7 +33,8 @@ class Category {
         return $result->fetch_assoc();
     }
 
-    public function isCategoryExists($category_id) {
+    public function isCategoryExists($category_id)
+    {
         $sql = "SELECT id FROM categories WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $category_id);
@@ -38,4 +43,3 @@ class Category {
         return $result->num_rows > 0;
     }
 }
-?>

@@ -1,14 +1,11 @@
-function handleStatsMenu()
-{
+function handleStatsMenu() {
     let statsByOption = document.querySelector("#stats-by-time-option");
-    statsByOption.addEventListener("change",()=>{
+    statsByOption.addEventListener("change", () => {
         let statsTime = document.querySelector("#stats-time");
-        if(statsByOption.value==='all')
-        {
+        if (statsByOption.value === 'all') {
             statsTime.classList.add("disabled");
         }
-        else
-        {
+        else {
             statsTime.classList.remove("disabled");
         }
     });

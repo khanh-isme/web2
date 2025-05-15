@@ -1,64 +1,62 @@
-body
-{
+body {
     background: #FAFAFA;
 }
 
 @keyframes showMessageDialog {
     0% {
-        transform: translateX(100%);  /* Đưa phần tử ra ngoài màn hình (bên phải) */
+        transform: translateX(100%);
         opacity: 0;
     }
+
     10% {
-        transform: translateX(-30px);  /* Di chuyển vào vị trí ban đầu (trong màn hình) */
+        transform: translateX(-30px);
         opacity: 1;
     }
+
     80% {
-        transform: translateX(-30px);  /* Giữ phần tử ở trong màn hình */
+        transform: translateX(-30px);
         opacity: 1;
     }
+
     100% {
-        transform: translateX(100%);  /* Đưa phần tử ra ngoài màn hình (bên phải) */
+        transform: translateX(100%);
         opacity: 0;
     }
 }
 
 #messageDialog {
     display: inline-flex;
-    position: fixed;  /* Dùng position fixed để cố định phần tử ở một vị trí */
-    top: 30px;  /* Vị trí phần tử */
-    right: 0;   /* Giữ phần tử ở bên phải màn hình */
+    position: fixed;
+    top: 30px;
+    right: 0;
     height: 75px;
     min-width: 300px;
-    padding: 0 20px 0 20px; 
+    padding: 0 20px 0 20px;
     background-color: whitesmoke;
     color: black;
     border-radius: 5px;
     text-align: center;
-    line-height: 75px;  /* Căn giữa văn bản */
-    opacity: 0;  /* Ban đầu ẩn phần tử */
+    line-height: 75px;
+    opacity: 0;
     z-index: 999999;
     border: 2px solid gray;
 }
 
-.icon
-{
+.icon {
     vertical-align: middle;
     font-size: 35px;
     margin-right: 10px;
 }
 
-.red
-{
+.red {
     color: red;
 }
 
-.green
-{
+.green {
     color: green;
 }
 
-.x-ctn
-{
+.x-ctn {
     padding: 0;
     position: absolute;
     top: 10px;
@@ -67,14 +65,12 @@ body
     background-color: whitesmoke;
 }
 
-.x-ctn:hover
-{
+.x-ctn:hover {
     cursor: pointer;
     background-color: lightgray;
 }
 
-.x
-{
+.x {
     color: gray;
     width: 30px;
     text-align: center;
@@ -82,7 +78,6 @@ body
     line-height: 30px;
 }
 
-.hidden
-{
+.hidden {
     display: none !important;
 }

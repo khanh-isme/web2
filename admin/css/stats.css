@@ -1,22 +1,19 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-#stats-ctn
-{
+#stats-ctn {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 10px;
 }
 
-#stats-ctn::-webkit-scrollbar
-{
+#stats-ctn::-webkit-scrollbar {
     display: none;
 }
 
-#chart-ctn
-{
+#chart-ctn {
     position: relative;
     width: 100%;
     border: 1px solid black;
@@ -25,13 +22,11 @@
     align-items: center;
 }
 
-canvas
-{
+canvas {
     width: 100%;
 }
 
-#chart-footer
-{
+#chart-footer {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -39,16 +34,15 @@ canvas
     margin: 0px 5px 3px 0px;
 }
 
-#chart-mode-ctn
-{
+#chart-mode-ctn {
     display: flex;
     flex-direction: column;
     align-items: end;
     padding-right: 3px;
 }
 
-#chart-reload,#chart-mode
-{
+#chart-reload,
+#chart-mode {
     border: 1px solid black;
     background: none;
     height: 30px;
@@ -56,14 +50,13 @@ canvas
     margin-left: 3px;
 }
 
-#chart-reload:hover,#chart-mode:hover
-{
+#chart-reload:hover,
+#chart-mode:hover {
     background: lightgray;
 }
 
-#chart-input-warning
-{
-    width:100%;
+#chart-input-warning {
+    width: 100%;
     height: 30px;
     font-size: 18px;
     position: absolute;
@@ -76,26 +69,22 @@ canvas
     color: gray;
 }
 
-#chart-input-warning.active
-{
+#chart-input-warning.active {
     display: flex;
 }
 
-#chart-input-warning i
-{
-    margin-right:5px; 
+#chart-input-warning i {
+    margin-right: 5px;
     font-size: 30px;
     color: gray;
 }
 
-.disabled
-{
+.disabled {
     pointer-events: none;
     opacity: 0.5;
 }
 
-#stats-menu-option-form
-{
+#stats-menu-option-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,28 +97,24 @@ canvas
     padding-top: 20px;
 }
 
-.stats-option-ctn
-{
+.stats-option-ctn {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
     width: 80%;
 }
 
-#stats-time
-{
+#stats-time {
     width: 100% !important;
 }
 
-.stats-option-ctn.border
-{
+.stats-option-ctn.border {
     border: 2px solid black;
     width: 100%;
     padding: 5px;
 }
 
-.stats-option-slt
-{
+.stats-option-slt {
     border-radius: 0;
     width: 100%;
     height: 40px;
@@ -143,18 +128,17 @@ canvas
 #stats-by-slt option {
     font-size: 16px;
     color: rgb(73, 73, 73);
-    background-color: #fff; /* nếu bạn muốn đổi màu nền */
+    background-color: #fff;
+    /* nếu bạn muốn đổi màu nền */
 }
 
-#category-menu label
-{
+#category-menu label {
     margin: 3px 0 3px 0;
 }
 
-.category-cb
-{
-    -webkit-appearance: none;   
-    -moz-appearance: none;     
+.category-cb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     border: 2px solid black;
     background: none;
@@ -165,13 +149,12 @@ canvas
     position: relative;
 }
 
-.category-cb:focus
-{
+.category-cb:focus {
     outline: none;
     color: gray;
     background: none;
     box-shadow: none;
-} 
+}
 
 .category-cb:checked::after {
     content: "\2713";
@@ -182,14 +165,12 @@ canvas
     color: black;
 }
 
-#stats
-{
+#stats {
     margin-top: 10px;
     width: 100%;
 }
 
-#weekly-stats-ctn
-{
+#weekly-stats-ctn {
     display: flex;
     flex-direction: row;
     height: max-content;
@@ -198,8 +179,7 @@ canvas
     margin-top: 5px;
 }
 
-#weekly-stats-ctn > div
-{
+#weekly-stats-ctn>div {
     width: calc(33.33333% - 10px);
     padding: 10px;
     border: 1px solid gray;
@@ -207,8 +187,7 @@ canvas
     background: lightgray;
 }
 
-#ranking-select
-{
+#ranking-select {
     width: 100%;
     height: 40px;
     border: 1px solid black;
@@ -250,5 +229,3 @@ canvas
     background-color: #f1f1f1;
     cursor: pointer;
 }
-
-

@@ -29,4 +29,3 @@ echo json_encode([
 
 // Đóng kết nối
 $conn->close();
-?>

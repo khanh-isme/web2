@@ -1,15 +1,18 @@
 <?php
 require_once '../../connect.php';
-class Product {
+class Product
+{
     private $conn;
 
     // Constructor để khởi tạo kết nối database
-    public function __construct($dbConnection) {
+    public function __construct($dbConnection)
+    {
         $this->conn = $dbConnection;
     }
 
     // Lấy danh sách sản phẩm với thông tin liên kết
-    public function getAllProducts() {
+    public function getAllProducts()
+    {
         $sql = "
             SELECT 
                 p.id, 
@@ -34,7 +37,7 @@ class Product {
                 p.id
         ";
         $result = $this->conn->query($sql);
-    
+
         $products = [];
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -45,7 +48,8 @@ class Product {
     }
 
     // Lấy thông tin chi tiết sản phẩm theo ID
-    public function getProductById($id) {
+    public function getProductById($id)
+    {
         $sql = "
             SELECT 
                 p.id, 
@@ -77,7 +81,8 @@ class Product {
     }
 
     // Thêm sản phẩm mới
-    public function addProduct($name, $category_id, $price, $description, $image, $gender) {
+    public function addProduct($name, $category_id, $price, $description, $image, $gender)
+    {
         $sql = "
             INSERT INTO products (name, category_id, price, description, image, gender, deleted) 
             VALUES (?, ?, ?, ?, ?, ?, 0)
@@ -88,10 +93,11 @@ class Product {
     }
 
     // chua xử lý cập nhật img
-    public function updateProduct($id, $name, $category_id, $price, $description, $gender, $image = null) {
+    public function updateProduct($id, $name, $category_id, $price, $description, $gender, $image = null)
+    {
         $sql = "UPDATE products 
                 SET name = ?, category_id = ?, price = ?, description = ?, gender = ?";
-        
+
         // Nếu có ảnh mới, thêm vào câu lệnh SQL
         if ($image) {
             $sql .= ", image = ?";
@@ -117,14 +123,11 @@ class Product {
         }
     }
 
-    public function deleteProduct($id) {
+    public function deleteProduct($id)
+    {
         $sql = "UPDATE products SET deleted = 1 WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
-
 }
-?>
-
-

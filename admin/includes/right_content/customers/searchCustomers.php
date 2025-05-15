@@ -93,9 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // <<< Kiểm tra POST
         $response['sql_error'] = $conn->error;
         $response['sql_query'] = $sql;
     }
-
 } else {
-     $response['message'] = 'Invalid request method.'; // <<< Lỗi nếu không phải POST
+    $response['message'] = 'Invalid request method.'; // <<< Lỗi nếu không phải POST
 }
 
 $conn->close();
@@ -103,4 +102,3 @@ $conn->close();
 // Trả về kết quả JSON
 echo json_encode($response);
 exit();
-?>

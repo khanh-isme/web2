@@ -8,4 +8,3 @@ $product = new Product($conn);
 $products = $product->getAllProducts();
 
 echo json_encode($products);
-?>

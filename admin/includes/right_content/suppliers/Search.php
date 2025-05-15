@@ -92,4 +92,3 @@ switch ($action) {
         echo json_encode(['success' => false, 'error' => 'Hành động không hợp lệ']);
         break;
 }
-?>

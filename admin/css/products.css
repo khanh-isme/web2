@@ -1,5 +1,7 @@
 /* Content styles */
-input[readonly], textarea[readonly], select[disabled] {
+input[readonly],
+textarea[readonly],
+select[disabled] {
     background-color: #f5f5f5;
     color: #888;
     cursor: not-allowed;
@@ -157,15 +159,19 @@ input[readonly], textarea[readonly], select[disabled] {
 
 /* Table styles */
 .table-scroll {
-    max-height: 400px; /* Chiều cao cố định cho phần dữ liệu */
-    overflow-y: auto; /* Thêm thanh cuộn dọc */
-    border: 1px solid #ddd; /* Đường viền cho phần cuộn */
+    max-height: 400px;
+    /* Chiều cao cố định cho phần dữ liệu */
+    overflow-y: auto;
+    /* Thêm thanh cuộn dọc */
+    border: 1px solid #ddd;
+    /* Đường viền cho phần cuộn */
     border-radius: 8px;
 }
 
 .product-table {
     width: 100%;
-    border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
+    border-collapse: collapse;
+    /* Loại bỏ khoảng cách giữa các ô */
     background-color: white;
 }
 
@@ -173,7 +179,8 @@ input[readonly], textarea[readonly], select[disabled] {
     background-color: #f5f5f5;
     text-align: left;
     font-weight: bold;
-    position: sticky; /* Giữ tiêu đề cố định khi cuộn */
+    position: sticky;
+    /* Giữ tiêu đề cố định khi cuộn */
     top: 0;
     z-index: 1;
 }
@@ -186,9 +193,12 @@ input[readonly], textarea[readonly], select[disabled] {
     font-size: 14px;
     color: #2c3e50;
     text-align: left;
-    white-space: nowrap; /* Ngăn nội dung xuống dòng */
-    overflow: hidden; /* Ẩn nội dung tràn */
-    text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung quá dài */
+    white-space: nowrap;
+    /* Ngăn nội dung xuống dòng */
+    overflow: hidden;
+    /* Ẩn nội dung tràn */
+    text-overflow: ellipsis;
+    /* Thêm dấu "..." nếu nội dung quá dài */
     table-layout: auto;
     text-wrap: wrap;
 }
@@ -204,11 +214,12 @@ input[readonly], textarea[readonly], select[disabled] {
 }
 
 .product-table tbody tr {
-    display: table-row; 
+    display: table-row;
     width: 100%;
 }
 
-.product-edit-button, .product-delete-button {
+.product-edit-button,
+.product-delete-button {
     padding: 5px 10px;
     margin: 0 5px;
     border: none;
@@ -237,7 +248,8 @@ input[readonly], textarea[readonly], select[disabled] {
 
 /* Modal styles */
 .product-modal {
-    display: none; /* Ẩn modal theo mặc định */
+    display: none;
+    /* Ẩn modal theo mặc định */
     position: fixed;
     top: 0;
     left: 0;
@@ -253,7 +265,7 @@ input[readonly], textarea[readonly], select[disabled] {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    width: 50%; 
+    width: 50%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     display: flex;
@@ -345,15 +357,17 @@ input[readonly], textarea[readonly], select[disabled] {
 }
 
 .product-add-save-button:hover,
-.product-edit-save-button:hover{
+.product-edit-save-button:hover {
     background-color: white;
     color: black;
 }
 
 .product-modal-footer {
     display: flex;
-    justify-content: flex-end; /* Đẩy nút Save sang bên phải */
-    margin-top: 20px; /* Tạo khoảng cách giữa footer và nội dung */
+    justify-content: flex-end;
+    /* Đẩy nút Save sang bên phải */
+    margin-top: 20px;
+    /* Tạo khoảng cách giữa footer và nội dung */
 }
 
 .product-modal-header {
@@ -400,7 +414,8 @@ input[readonly], textarea[readonly], select[disabled] {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    width: 50%; /* Giảm chiều rộng vì chỉ còn 2 cột */
+    width: 50%;
+    /* Giảm chiều rộng vì chỉ còn 2 cột */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     display: flex;
@@ -439,12 +454,15 @@ input[readonly], textarea[readonly], select[disabled] {
 
 .product-add-modal-body {
     display: flex;
-    gap: 20px; /* Khoảng cách giữa các cột */
-    align-items: stretch; /* Đảm bảo các cột có chiều cao bằng nhau */
+    gap: 20px;
+    /* Khoảng cách giữa các cột */
+    align-items: stretch;
+    /* Đảm bảo các cột có chiều cao bằng nhau */
 }
 
 .product-add-modal-column {
-    flex: 1; /* Các cột có chiều rộng bằng nhau */
+    flex: 1;
+    /* Các cột có chiều rộng bằng nhau */
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -455,9 +473,12 @@ input[readonly], textarea[readonly], select[disabled] {
 .product-add-modal-left {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Căn giữa theo chiều ngang */
-    justify-content: center; /* Căn giữa theo chiều dọc */
-    border-right: 1px solid #ddd; /* Đường phân cách giữa các cột */
+    align-items: center;
+    /* Căn giữa theo chiều ngang */
+    justify-content: center;
+    /* Căn giữa theo chiều dọc */
+    border-right: 1px solid #ddd;
+    /* Đường phân cách giữa các cột */
     padding: 10px;
     box-sizing: border-box;
 }
@@ -465,19 +486,29 @@ input[readonly], textarea[readonly], select[disabled] {
 .product-form-group input,
 .product-form-group select,
 .product-form-group textarea {
-    width: 100%; /* Đảm bảo các thẻ chiếm toàn bộ chiều rộng của cột */
-    padding: 10px; /* Tạo khoảng cách bên trong */
-    border: 1px solid #ddd; /* Đường viền */
-    border-radius: 4px; /* Bo góc */
-    font-size: 14px; /* Kích thước chữ đồng nhất */
-    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+    width: 100%;
+    /* Đảm bảo các thẻ chiếm toàn bộ chiều rộng của cột */
+    padding: 10px;
+    /* Tạo khoảng cách bên trong */
+    border: 1px solid #ddd;
+    /* Đường viền */
+    border-radius: 4px;
+    /* Bo góc */
+    font-size: 14px;
+    /* Kích thước chữ đồng nhất */
+    box-sizing: border-box;
+    /* Đảm bảo padding không làm tăng kích thước */
 }
 
 .product-form-group label {
-    font-weight: bold; /* Làm chữ in đậm */
-    font-size: 16px; /* Tăng cỡ chữ */
-    margin-bottom: 5px; /* Tạo khoảng cách giữa label và input */
-    display: block; /* Đảm bảo label nằm trên input */
+    font-weight: bold;
+    /* Làm chữ in đậm */
+    font-size: 16px;
+    /* Tăng cỡ chữ */
+    margin-bottom: 5px;
+    /* Tạo khoảng cách giữa label và input */
+    display: block;
+    /* Đảm bảo label nằm trên input */
 }
 
 .product-add-modal-footer {
@@ -502,7 +533,8 @@ input[readonly], textarea[readonly], select[disabled] {
 }
 
 .product-image-upload {
-    text-align: center; /* Căn giữa nội dung văn bản */
+    text-align: center;
+    /* Căn giữa nội dung văn bản */
 }
 
 .product-image-upload label {

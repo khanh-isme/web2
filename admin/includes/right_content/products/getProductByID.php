@@ -43,4 +43,3 @@ try {
 } catch (Exception $e) {
     echo json_encode(['error' => 'Error fetching product: ' . $e->getMessage()]);
 }
-?>

@@ -27,7 +27,7 @@
                         <option>Khách hàng trung thành</option>
                     </select>
                     <table id="ranking-table">
-                        
+
                     </table>
                     <div id="loyalty-explanation" style="padding: 10px; background-color: whitesmoke; border-left: 4px solid gray;">
                         <h4 style="margin-top: 0;">Cách tính điểm trung thành</h4>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
         <form id="stats-menu-option-form" class="hidden">
             <div class="stats-option-ctn">
                 <label for="stats-by-slt">Thống kê theo:</label>
@@ -61,9 +61,9 @@
                         <div id="time-range-option-ctn" class="stats-option-ctn border">
                             <div id="by-day-option-ctn" class="stats-option">
                                 <label for="by-day-from">Từ ngày:</label>
-                                <input name="by-day-from" id="by-day-from" type="date" value="<?php echo date("Y-m-d");?>" class="stats-option-slt">
+                                <input name="by-day-from" id="by-day-from" type="date" value="<?php echo date("Y-m-d"); ?>" class="stats-option-slt">
                                 <label for="by-day-to">Đến hết ngày:</label>
-                                <input name="by-day-to" id="by-day-to" type="date" value="<?php echo date("Y-m-d");?>" class="stats-option-slt">
+                                <input name="by-day-to" id="by-day-to" type="date" value="<?php echo date("Y-m-d"); ?>" class="stats-option-slt">
                             </div>
                         </div>
                     </div>
@@ -90,18 +90,18 @@
         </form>
     </div>
     <div class="PRODUCTS content-ctn">
-    PRODUCTS
+        PRODUCTS
     </div>
     <div class="ORDERS content-ctn">
-    ORDERS
+        ORDERS
     </div>
     <div class="CUSTOMERS content-ctn">
-    CUSTOMERS
+        CUSTOMERS
     </div>
     <div class="EMPLOYEES content-ctn">
-    EMPLOYEES
+        EMPLOYEES
     </div>
     <div class="SUPPLIERS content-ctn">
-    SUPPLIERS
+        SUPPLIERS
     </div>
 </div>

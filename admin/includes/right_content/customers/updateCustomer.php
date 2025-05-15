@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-             // Use null for phone/address if they are empty strings after trimming and DB allows NULL
+            // Use null for phone/address if they are empty strings after trimming and DB allows NULL
             $phone_to_update = ($phone === '') ? null : $phone;
             $address_to_update = ($address === '') ? null : $address;
 
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
                 if ($stmt->affected_rows > 0) {
                     $response['status'] = 'success';
                     $response['message'] = "Customer updated successfully!";
-                     // Trả về dữ liệu đã cập nhật để JS có thể cập nhật bảng
+                    // Trả về dữ liệu đã cập nhật để JS có thể cập nhật bảng
                     $response['updated_data'] = [
                         'id' => $id,
                         'name' => $name,
@@ -100,7 +100,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
         $response['message'] = 'Validation failed.';
         $response['errors'] = $errors;
     }
-
 } else {
     $response['message'] = 'Invalid request method or missing ID.';
 }
@@ -108,4 +107,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
 $conn->close();
 echo json_encode($response);
 exit();
-?>

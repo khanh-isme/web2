@@ -30,14 +30,14 @@ if ($method === 'POST') {
             $product_description = $data['product_description'] ?? '';
             $product_price = $data['product_price'] ?? 0;
             $image_src = $data['image_src'] ?? ''; // Lấy đường dẫn gốc từ client
-        
+
             // Kiểm tra dữ liệu bắt buộc
             if (empty($product_name) || empty($product_category)) {
                 echo json_encode(['success' => false, 'message' => 'Thiếu hoặc không hợp lệ các trường bắt buộc']);
                 exit;
             }
 
-           $image_db_path = ''; // Khởi tạo biến
+            $image_db_path = ''; // Khởi tạo biến
 
             if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
                 $upload_dir = '../../../../assets/images/';
@@ -67,14 +67,14 @@ if ($method === 'POST') {
                     $product_category,
                     $product_price,
                     $product_description,
-                    $image_db_path, 
+                    $image_db_path,
                     $product_gender
                 );
-        
+
                 if (!$added) {
                     throw new Exception('Không thể thêm sản phẩm mới');
                 }
-        
+
                 echo json_encode(['success' => true, 'message' => 'Thêm sản phẩm thành công']);
             } catch (Exception $e) {
                 echo json_encode(['success' => false, 'message' => 'Lỗi: ' . $e->getMessage()]);
@@ -88,7 +88,7 @@ if ($method === 'POST') {
                 echo json_encode(['success' => false, 'message' => 'Thiếu ID sản phẩm']);
                 exit;
             }
-        
+
             try {
                 // Kiểm tra sản phẩm có tồn tại không
                 $stmt = $conn->prepare("SELECT id FROM products WHERE id = ? AND deleted = 0");
@@ -98,13 +98,13 @@ if ($method === 'POST') {
                 if ($result->num_rows === 0) {
                     throw new Exception('Sản phẩm không tồn tại hoặc đã bị xóa');
                 }
-        
+
                 // Xóa sản phẩm bằng class Product
                 $deleted = $product->deleteProduct($id);
                 if (!$deleted) {
                     throw new Exception('Không thể xóa sản phẩm');
                 }
-        
+
                 echo json_encode(['success' => true, 'message' => 'Xóa sản phẩm thành công']);
             } catch (Exception $e) {
                 echo json_encode(['success' => false, 'message' => 'Lỗi: ' . $e->getMessage()]);
@@ -120,7 +120,7 @@ if ($method === 'POST') {
             $price = $data['price'] ?? 0;
             $description = $data['description'] ?? '';
             $image_src = $data['image_src'] ?? ''; // Lấy đường dẫn gốc từ client
-        
+
             // Kiểm tra dữ liệu bắt buộc
             if (empty($id) || empty($name) || empty($category_id)) {
                 echo json_encode(['success' => false, 'message' => 'Thiếu hoặc không hợp lệ các trường bắt buộc']);
@@ -160,11 +160,11 @@ if ($method === 'POST') {
                     $gender,
                     $image_db_path // Lưu đường dẫn ảnh nếu có
                 );
-        
+
                 if (!$result['success']) {
                     throw new Exception($result['message']);
                 }
-        
+
                 echo json_encode(['success' => true, 'message' => 'Cập nhật sản phẩm thành công']);
             } catch (Exception $e) {
                 echo json_encode(['success' => false, 'message' => 'Lỗi: ' . $e->getMessage()]);
@@ -180,4 +180,3 @@ if ($method === 'POST') {
 }
 
 $conn->close();
-?>

@@ -1,7 +1,8 @@
 <?php
 require_once("../../connect.php");
 
-function getWeeklyValue($conn, $query) {
+function getWeeklyValue($conn, $query)
+{
     $value = 0;
     $stmt = $conn->prepare($query);
     if ($stmt) {
@@ -13,12 +14,14 @@ function getWeeklyValue($conn, $query) {
     return $value;
 }
 
-function percentChange($current, $previous) {
+function percentChange($current, $previous)
+{
     if ($previous == 0) return $current == 0 ? 0 : 100;
     return round((($current - $previous) / $previous) * 100, 2);
 }
 
-function formatChangeHTML($change) {
+function formatChangeHTML($change)
+{
     $color = $change >= 0 ? "green" : "red";
     $icon = $change >= 0 ? "Tăng" : "Giảm";
     return "<span style='color: $color;font-size:12px'>$icon $change% so với tuần trước</span>";
@@ -65,4 +68,3 @@ echo json_encode([
     "weeklyOrders" => "<h3>Đơn hàng</h3>" . "<p style='line-height: 40px; font-size: 20px'>" . $weeklyOrders . "</p>" . formatChangeHTML(percentChange($weeklyOrders, $lastWeeklyOrders)),
     "addedToCart" => "<h3>Giỏ hàng</h3>" . "<p style='line-height: 40px; font-size: 20px'>" . $addedToCart . "</p>" . formatChangeHTML(percentChange($addedToCart, $lastAddedToCart))
 ]);
-?>

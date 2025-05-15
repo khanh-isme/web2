@@ -11,13 +11,13 @@ function Supplier_PageEvent() {
         btn_switch_r.classList.remove("active");
     });
 
-    if(btn_switch_r)
-    btn_switch_r.addEventListener("click", () => {
-        receiptDetail.style.display = "grid";
-        supplierDetail.style.display = "none";
-        btn_switch_r.classList.add("active");
-        btn_switch_s.classList.remove("active");
-    });
+    if (btn_switch_r)
+        btn_switch_r.addEventListener("click", () => {
+            receiptDetail.style.display = "grid";
+            supplierDetail.style.display = "none";
+            btn_switch_r.classList.add("active");
+            btn_switch_s.classList.remove("active");
+        });
 
     // Render Supplier Table
     function loadSuppliers() {
@@ -35,17 +35,17 @@ function Supplier_PageEvent() {
                     if (data.success != false) {
                         const tbody = document.getElementById("supplier-list");
                         tbody.innerHTML = "";
-                        Promise.all([checkPermission('EDIT_SUPPLIER'),checkPermission('DELETE_SUPPLIER')])
-                        .then(([canEdit,canDetele])=>{
-                            document.getElementById("total-suppliers").textContent = data.length;
-                            if (data.length === 0) {
-                                tbody.innerHTML = '<tr><td colspan="6">Không có nhà cung cấp nào.</td></tr>';
-                                return;
-                            }
-                            data.forEach(supplier => {
-                                const row = document.createElement("tr");
-                                row.dataset.id = supplier.id;
-                                row.innerHTML = `
+                        Promise.all([checkPermission('EDIT_SUPPLIER'), checkPermission('DELETE_SUPPLIER')])
+                            .then(([canEdit, canDetele]) => {
+                                document.getElementById("total-suppliers").textContent = data.length;
+                                if (data.length === 0) {
+                                    tbody.innerHTML = '<tr><td colspan="6">Không có nhà cung cấp nào.</td></tr>';
+                                    return;
+                                }
+                                data.forEach(supplier => {
+                                    const row = document.createElement("tr");
+                                    row.dataset.id = supplier.id;
+                                    row.innerHTML = `
                                 <td>${supplier.id.toString()}</td>
                                 <td>${supplier.name}</td>
                                 <td>${supplier.contact}</td>
@@ -53,14 +53,14 @@ function Supplier_PageEvent() {
                                 <td>${supplier.phone}</td>
                                 <td>
                                     <div class="sr-table-action">
-                                        ${canEdit?`<button class="edit-supplier-btn"><i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa</button>`:''}
-                                        ${canDetele?`<button class="delete-supplier-btn"><i class="fa-solid fa-trash"></i> Xóa</button>`:''}
+                                        ${canEdit ? `<button class="edit-supplier-btn"><i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa</button>` : ''}
+                                        ${canDetele ? `<button class="delete-supplier-btn"><i class="fa-solid fa-trash"></i> Xóa</button>` : ''}
                                     </div>
                                 </td>
                             `;
-                                tbody.appendChild(row);
+                                    tbody.appendChild(row);
+                                });
                             });
-                        });
                     }
                     else {
                         console.error(data.error);
@@ -131,94 +131,93 @@ function Supplier_PageEvent() {
     const closeSupplierFormBtn = document.querySelector(".close-supplier-form");
     const supplierAddForm = document.getElementById("supplier-add-form");
 
-    if(addSupplierBtn)
-    {
+    if (addSupplierBtn) {
         addSupplierBtn.addEventListener("click", () => {
             supplierAddForm.reset();
             supplierAddCtn.style.display = "flex";
         });
     }
-    
-    if(document.getElementById('supplier-add-ctn'))
-    document.getElementById('supplier-add-ctn').addEventListener("click", (e) => {
-        const popupContainer = document.getElementById('supplier-add-ctn'); // toàn màn hình
-        const popupContent = document.getElementById('supplier-form-container'); // nội dung form
 
-        if (popupContainer && popupContainer.style.display !== 'none') {
-            // Nếu click nằm ngoài nội dung
-            if (!popupContent.contains(e.target)) {
-                popupContainer.style.display = 'none'; // Ẩn popup
+    if (document.getElementById('supplier-add-ctn'))
+        document.getElementById('supplier-add-ctn').addEventListener("click", (e) => {
+            const popupContainer = document.getElementById('supplier-add-ctn'); // toàn màn hình
+            const popupContent = document.getElementById('supplier-form-container'); // nội dung form
+
+            if (popupContainer && popupContainer.style.display !== 'none') {
+                // Nếu click nằm ngoài nội dung
+                if (!popupContent.contains(e.target)) {
+                    popupContainer.style.display = 'none'; // Ẩn popup
+                }
             }
-        }
-    });
+        });
 
 
     // Xử lý submit form thêm nhà cung cấp
-    if(document.getElementById("supplier-add-form"))
-    document.getElementById("supplier-add-form").addEventListener("submit", (e) => {
-        e.preventDefault();
+    if (document.getElementById("supplier-add-form"))
+        document.getElementById("supplier-add-form").addEventListener("submit", (e) => {
+            e.preventDefault();
 
-        const emailInput = document.getElementById("add-email");
-        const phoneInput = document.getElementById("add-phone");
-        const emailError = document.getElementById("email-error");
-        const phoneError = document.getElementById("phone-error");
-        let valid = true;
+            const emailInput = document.getElementById("add-email");
+            const phoneInput = document.getElementById("add-phone");
+            const emailError = document.getElementById("email-error");
+            const phoneError = document.getElementById("phone-error");
+            let valid = true;
 
-        if(validateEmail(emailInput) === false) {
-            emailError.style.display = "inline";
-            valid = false;
-        } else {
-            emailError.style.display = "none";
-        }
+            if (validateEmail(emailInput) === false) {
+                emailError.style.display = "inline";
+                valid = false;
+            } else {
+                emailError.style.display = "none";
+            }
 
-        if(validatePhone(phoneInput) === false) {
-            phoneError.style.display = "inline";
-            valid = false;
-        } else {
-            phoneError.style.display = "none";
-        }
+            if (validatePhone(phoneInput) === false) {
+                phoneError.style.display = "inline";
+                valid = false;
+            } else {
+                phoneError.style.display = "none";
+            }
 
-        if (!valid) {
-            return; // Không submit nếu có lỗi
-        }
+            if (!valid) {
+                return; // Không submit nếu có lỗi
+            }
 
-        const formData = new FormData(e.target);
-        formData.append("action", "add");
+            const formData = new FormData(e.target);
+            formData.append("action", "add");
 
-        fetch("includes/right_content/suppliers/supplierAction.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.text())
-            .then(responseData => {
-                try {
-                    let data = JSON.parse(responseData);
-                    if (data.success) {
-                        alert("Thêm nhà cung cấp thành công!");
-                        document.getElementById("supplier-add-form").reset();
-                        document.querySelector(".supplier-add-ctn").style.display = "none";
-                        loadSuppliers();
-                        document.getElementById("total-suppliers").textContent = parseInt(document.getElementById("total-suppliers").textContent) + 1;
-                    } else {
-                        alert(data.error || "Thêm nhà cung cấp thất bại!");
-                    }
-                }
-                catch (error) {
-                    console.error(error);
-                    console.error(responseData);
-                }
+            fetch("includes/right_content/suppliers/supplierAction.php", {
+                method: "POST",
+                body: formData
             })
-            .catch(error => {
-                console.error("Error adding supplier:", error);
-                alert("Có lỗi xảy ra khi thêm nhà cung cấp!");
-            });
-    });
+                .then(response => response.text())
+                .then(responseData => {
+                    try {
+                        let data = JSON.parse(responseData);
+                        if (data.success) {
+                            alert("Thêm nhà cung cấp thành công!");
+                            document.getElementById("supplier-add-form").reset();
+                            document.querySelector(".supplier-add-ctn").style.display = "none";
+                            loadSuppliers();
+                            document.getElementById("total-suppliers").textContent = parseInt(document.getElementById("total-suppliers").textContent) + 1;
+                        } else {
+                            alert(data.error || "Thêm nhà cung cấp thất bại!");
+                        }
+                    }
+                    catch (error) {
+                        console.error(error);
+                        console.error(responseData);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error adding supplier:", error);
+                    alert("Có lỗi xảy ra khi thêm nhà cung cấp!");
+                });
+        });
 
-    if(closeSupplierFormBtn)
-    closeSupplierFormBtn.addEventListener("click", () => {
-        supplierAddCtn.style.display = "none";
-        supplierAddForm.reset();
-    });
+    if (closeSupplierFormBtn)
+        closeSupplierFormBtn.addEventListener("click", () => {
+            supplierAddCtn.style.display = "none";
+            supplierAddForm.reset();
+        });
 
 
     // Xử lý sự kiện chỉnh sửa và xóa 
@@ -282,70 +281,70 @@ function Supplier_PageEvent() {
     });
 
     // Xử lý submit form chỉnh sửa nhà cung cấp
-    if(document.getElementById("supplier-modify-form"))
-    document.getElementById("supplier-modify-form").addEventListener("submit", (e) => {
-        e.preventDefault(); // Ngăn hành vi mặc định của form
+    if (document.getElementById("supplier-modify-form"))
+        document.getElementById("supplier-modify-form").addEventListener("submit", (e) => {
+            e.preventDefault(); // Ngăn hành vi mặc định của form
 
-        const emailInput = document.getElementById("modify-email");
-        const phoneInput = document.getElementById("modify-phone");
-        const emailError = document.getElementById("emailm-error");
-        const phoneError = document.getElementById("phonem-error");
-        let valid = true;
+            const emailInput = document.getElementById("modify-email");
+            const phoneInput = document.getElementById("modify-phone");
+            const emailError = document.getElementById("emailm-error");
+            const phoneError = document.getElementById("phonem-error");
+            let valid = true;
 
-        if(validateEmail(emailInput) === false) {
-            emailError.style.display = "inline";
-            valid = false;
-        } else {
-            emailError.style.display = "none";
-        }
+            if (validateEmail(emailInput) === false) {
+                emailError.style.display = "inline";
+                valid = false;
+            } else {
+                emailError.style.display = "none";
+            }
 
-        if(validatePhone(phoneInput) === false) {
-            phoneError.style.display = "inline";
-            valid = false;
-        } else {
-            phoneError.style.display = "none";
-        }
+            if (validatePhone(phoneInput) === false) {
+                phoneError.style.display = "inline";
+                valid = false;
+            } else {
+                phoneError.style.display = "none";
+            }
 
-        if (!valid) {
-            return; // Không submit nếu có lỗi
-        }
+            if (!valid) {
+                return; // Không submit nếu có lỗi
+            }
 
-        const formData = new FormData(e.target);
-        const mode = formData.get("form-mode");
-        formData.append("action", mode === "edit" ? "update" : "add");
-        formData.append("id", formData.get("edit-id")); // Dùng edit-id cho trường hợp chỉnh sửa
+            const formData = new FormData(e.target);
+            const mode = formData.get("form-mode");
+            formData.append("action", mode === "edit" ? "update" : "add");
+            formData.append("id", formData.get("edit-id")); // Dùng edit-id cho trường hợp chỉnh sửa
 
-        fetch("includes/right_content/suppliers/supplierAction.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.text())
-            .then(responseData => {
-                try {
-                    let data = JSON.parse(responseData);
-                    if (data.success) {
-                        alert("Cập nhật nhà cung cấp thành công!");
-                        document.querySelector(".supplier-modify-ctn").style.display = "none";
-                        loadSuppliers();
-                    } else {
-                        alert(data.error || "Cập nhật nhà cung cấp thất bại!");
-                    }
-                }
-                catch (error) {
-                    console.error(error);
-                    console.error(responseData);
-                }
+            fetch("includes/right_content/suppliers/supplierAction.php", {
+                method: "POST",
+                body: formData
             })
-            .catch(error => {
-                console.error("Error updating supplier:", error);
-                alert("Có lỗi xảy ra khi cập nhật nhà cung cấp!");
-            });
-    });
+                .then(response => response.text())
+                .then(responseData => {
+                    try {
+                        let data = JSON.parse(responseData);
+                        if (data.success) {
+                            alert("Cập nhật nhà cung cấp thành công!");
+                            document.querySelector(".supplier-modify-ctn").style.display = "none";
+                            loadSuppliers();
+                        } else {
+                            alert(data.error || "Cập nhật nhà cung cấp thất bại!");
+                        }
+                    }
+                    catch (error) {
+                        console.error(error);
+                        console.error(responseData);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error updating supplier:", error);
+                    alert("Có lỗi xảy ra khi cập nhật nhà cung cấp!");
+                });
+        });
 
-    if(document.querySelector(".close-supplier-modify-form"))
-    document.querySelector(".close-supplier-modify-form").addEventListener("click", () => {
-        document.querySelector(".supplier-modify-ctn").style.display = "none";
-    });
+    if (document.querySelector(".close-supplier-modify-form"))
+        document.querySelector(".close-supplier-modify-form").addEventListener("click", () => {
+            document.querySelector(".supplier-modify-ctn").style.display = "none";
+        });
 
 
     // ---------------------------------------Receipt--------------------------------------------------
@@ -375,21 +374,19 @@ function Supplier_PageEvent() {
 
     let selectedSupplierId = null;
 
-    if(addReceiptForm)
-    {
+    if (addReceiptForm) {
         // Open/Close Add Receipt Form
         openAddReceiptFormBtn.addEventListener('click', () => {
             addReceiptForm.style.display = 'flex';
         });
-    
+
         closeAddReceiptFormBtn.addEventListener('click', () => {
             addReceiptForm.style.display = 'none';
             document.querySelector('.receipt-detail-form-container').reset();
         });
     }
 
-    if(detailAddReceiptForm)
-    {
+    if (detailAddReceiptForm) {
         // Open/Close Detail Form
         openDetailAddReceiptFormBtn.addEventListener('click', () => {
             if (!selectedSupplierId) {
@@ -400,7 +397,7 @@ function Supplier_PageEvent() {
             addReceiptForm.style.display = 'none';
             updateReceiptInfo();
         });
-    
+
         closeDetailAddReceiptFormBtn.addEventListener('click', () => {
             detailFormContainer.style.display = 'none';
             addRowBtn.style.display = 'inline-block';
@@ -413,15 +410,14 @@ function Supplier_PageEvent() {
     }
 
     // Supplier Search
-    if(supplierSearchInput)
-    {
+    if (supplierSearchInput) {
         supplierSearchInput.addEventListener('input', debounce(() => {
             const keyword = supplierSearchInput.value.trim();
             if (keyword.length < 2) {
                 suggestionsList.innerHTML = '';
                 return;
             }
-    
+
             fetch(`includes/right_content/suppliers/Search.php?action=supplier&keyword=${encodeURIComponent(keyword)}`)
                 .then(response => response.text())
                 .then(responseData => {
@@ -543,8 +539,7 @@ function Supplier_PageEvent() {
     }
 
     // Add new row
-    if(addRowBtn)
-    {
+    if (addRowBtn) {
         addRowBtn.addEventListener('click', () => {
             const currentRowIndex = receiptProductTableBody.children.length;
             const newRow = document.createElement('tr');
@@ -570,33 +565,33 @@ function Supplier_PageEvent() {
             <td><span class="total-price">0</span> đ</td>
             <td><button type="button" class="remove-row-btn">🗑️</button></td>
         `;
-        receiptProductTableBody.appendChild(newRow);
+            receiptProductTableBody.appendChild(newRow);
 
-        // Setup Product Search for New Row
-        setupProductSearch(newRow);
+            // Setup Product Search for New Row
+            setupProductSearch(newRow);
 
-        // Add Size Button
-        newRow.querySelector('.add-size-btn').addEventListener('click', () => {
-            addSizeInput(newRow.querySelector('.sizes-wrapper'), null, '', newRow);
-        });
-        newRow.querySelector('.price').addEventListener('input', () => updateRowTotals(newRow));
-    
-        // Remove Row
-        newRow.querySelector('.remove-row-btn').addEventListener('click', () => {
-            const rows = receiptProductTableBody.querySelectorAll('tr');
-            if (rows.length <= 1) {
-                alert("Không thể xóa hàng cuối cùng!");
-                return;
-            }
-            newRow.remove();
+            // Add Size Button
+            newRow.querySelector('.add-size-btn').addEventListener('click', () => {
+                addSizeInput(newRow.querySelector('.sizes-wrapper'), null, '', newRow);
+            });
+            newRow.querySelector('.price').addEventListener('input', () => updateRowTotals(newRow));
+
+            // Remove Row
+            newRow.querySelector('.remove-row-btn').addEventListener('click', () => {
+                const rows = receiptProductTableBody.querySelectorAll('tr');
+                if (rows.length <= 1) {
+                    alert("Không thể xóa hàng cuối cùng!");
+                    return;
+                }
+                newRow.remove();
+                updateRowNumbers();
+                updateTotalAmount();
+            });
+
             updateRowNumbers();
-            updateTotalAmount();
         });
-    
-        updateRowNumbers();
-    });
     }
-        // Price Input
+    // Price Input
 
     // Update Row Numbers and Input Names
     function updateRowNumbers() {
@@ -647,11 +642,10 @@ function Supplier_PageEvent() {
     }
 
     // Xử lý submit form
-    if(document.querySelector(".receipt-detail-form-container"))
-    {
+    if (document.querySelector(".receipt-detail-form-container")) {
         document.querySelector(".receipt-detail-form-container").addEventListener("submit", (e) => {
             e.preventDefault();
-    
+
             const supplierId = selectedSupplierId;
             if (!supplierId) {
                 alert("Vui lòng chọn nhà cung cấp!");
@@ -659,7 +653,7 @@ function Supplier_PageEvent() {
             }
             const discountPercent = parseFloat(document.getElementById("percent").value) || 0;
             const notes = "Phiếu nhập từ form";
-    
+
             const details = [];
             const rows = document.querySelectorAll("#receipt-product-rows tr");
             rows.forEach((row, index) => {
@@ -668,7 +662,7 @@ function Supplier_PageEvent() {
                 const sellPrice = parseFloat(row.querySelector(".sell-price").textContent.replace(/[^\d.-]/g, '')) || 0;
                 const sizes = row.querySelectorAll('input[name^="size"]');
                 const quantities = row.querySelectorAll('input[name^="quantity"]');
-    
+
                 sizes.forEach((size, sizeIndex) => {
                     const quantity = parseInt(quantities[sizeIndex].value) || 0;
                     if (quantity > 0) {
@@ -682,7 +676,7 @@ function Supplier_PageEvent() {
                     }
                 });
             });
-    
+
             const data = {
                 receipt: {
                     supplier_id: supplierId,
@@ -691,7 +685,7 @@ function Supplier_PageEvent() {
                 },
                 details: details
             };
-    
+
             fetch("includes/right_content/suppliers/addReceipt.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -751,8 +745,7 @@ function Supplier_PageEvent() {
     }
 
     // Initialize First Row
-    if(receiptProductTableBody)
-    {
+    if (receiptProductTableBody) {
 
         const firstRow = receiptProductTableBody.querySelector('tr');
         setupProductSearch(firstRow);
@@ -920,8 +913,7 @@ function Supplier_PageEvent() {
     }
 
     // Đóng form chi tiết
-    if(closeDetailFormBtn)
-    {
+    if (closeDetailFormBtn) {
         closeDetailFormBtn.addEventListener('click', () => {
             detailFormContainer.style.display = 'none';
             // Khôi phục trạng thái ban đầu của form
@@ -938,25 +930,25 @@ function Supplier_PageEvent() {
 
 function validateEmail(input) {
     const regex = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    const emailErrora = document.getElementById("email-error") ;
+    const emailErrora = document.getElementById("email-error");
     const emailErrorm = document.getElementById("emailm-error");
     if (!input.value) {
-        if(emailErrora)
+        if (emailErrora)
             emailErrora.style.display = "none";
-        if(emailErrorm)
+        if (emailErrorm)
             emailErrorm.style.display = "none";
         return false;
     }
     if (!regex.test(input.value)) {
-        if(emailErrora)
+        if (emailErrora)
             emailErrora.style.display = "inline";
-        if(emailErrorm)
+        if (emailErrorm)
             emailErrorm.style.display = "inline";
         return false;
     } else {
-        if(emailErrora)
+        if (emailErrora)
             emailErrora.style.display = "none";
-        if(emailErrorm)
+        if (emailErrorm)
             emailErrorm.style.display = "none";
         return true;
     }
@@ -967,22 +959,22 @@ function validatePhone(input) {
     const phoneErrora = document.getElementById("phone-error");
     const phoneErrorm = document.getElementById("phonem-error");
     if (!input.value) {
-        if(phoneErrora)
+        if (phoneErrora)
             phoneErrora.style.display = "none";
-        if(phoneErrorm)
+        if (phoneErrorm)
             phoneErrorm.style.display = "none";
         return false;
     }
     if (!regex.test(input.value)) {
-        if(phoneErrora)
+        if (phoneErrora)
             phoneErrora.style.display = "inline";
-        if(phoneErrorm)
+        if (phoneErrorm)
             phoneErrorm.style.display = "inline";
         return false;
     } else {
-        if(phoneErrora)
+        if (phoneErrora)
             phoneErrora.style.display = "none";
-        if(phoneErrorm)
+        if (phoneErrorm)
             phoneErrorm.style.display = "none";
         return true;
     }

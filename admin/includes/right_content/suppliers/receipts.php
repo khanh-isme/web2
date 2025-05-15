@@ -85,4 +85,3 @@ if ($action === 'receipts') {
 }
 
 $conn->close();
-?>

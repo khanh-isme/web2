@@ -23,4 +23,3 @@ try {
 }
 
 $conn->close();
-?>
