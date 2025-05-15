@@ -1,26 +1,25 @@
 <?php
-function responseHTML($permissions,$user)
+function responseHTML($permissions, $user)
 {
-    $permissionsMap=[];
+    $permissionsMap = [];
     foreach ($permissions as $perm) {
-        $permissionsMap[$perm]=true;
+        $permissionsMap[$perm] = true;
     };
-    
-    $html =""; 
-    $right ='<div id="right_content">';
-    $html.="<div id='left_menu'>
+
+    $html = "";
+    $right = '<div id="right_content">';
+    $html .= "<div id='left_menu'>
     <div id='logo-ctn'>
         <img src='imgs/logo.png' id='logo'>
     </div>
     <div id='menu-ctn'>
         <ul id='menu'>";
-    if(isset($permissionsMap["STATS"]))
-    {
-        $html.="<li class='menu-item STATS' data-value='STATS'>
+    if (isset($permissionsMap["STATS"])) {
+        $html .= "<li class='menu-item STATS' data-value='STATS'>
                     <lb><i class='fa-solid fa-chart-column menu-icon'></i>Thống kê doanh thu</lb>
                 </li>";
-            
-        $right.='<div class="STATS content-ctn">
+
+        $right .= '<div class="STATS content-ctn">
                 <div id="stats-ctn">
                     <div id="chart-ctn" class="hidden">
                         <canvas id="status-chart" width="300" height="150"></canvas>
@@ -82,9 +81,9 @@ function responseHTML($permissions,$user)
                                 <div id="time-range-option-ctn" class="stats-option-ctn border">
                                     <div id="by-day-option-ctn" class="stats-option">
                                         <label for="by-day-from">Từ ngày:</label>
-                                        <input name="by-day-from" id="by-day-from" type="date" value="'.date("Y-m-d").'" class="stats-option-slt">
+                                        <input name="by-day-from" id="by-day-from" type="date" value="' . date("Y-m-d") . '" class="stats-option-slt">
                                         <label for="by-day-to">Đến hết ngày:</label>
-                                        <input name="by-day-to" id="by-day-to" type="date" value="'.date("Y-m-d").'" class="stats-option-slt">
+                                        <input name="by-day-to" id="by-day-to" type="date" value="' . date("Y-m-d") . '" class="stats-option-slt">
                                     </div>
                                 </div>
                             </div>
@@ -111,24 +110,23 @@ function responseHTML($permissions,$user)
                 </form>
             </div>';
     }
-    if(isset($permissionsMap["PRODUCTS"]))
-    {
-        $html.="<li class='menu-item PRODUCTS' data-value='PRODUCTS'>
+    if (isset($permissionsMap["PRODUCTS"])) {
+        $html .= "<li class='menu-item PRODUCTS' data-value='PRODUCTS'>
                     <lb><i class='fa-solid fa-cube menu-icon'></i>Sản phẩm</lb>
                 </li>";
 
-        $right.='<div class="PRODUCTS content-ctn">
+        $right .= '<div class="PRODUCTS content-ctn">
         <div class="product-content">
             <div class="product-header">
                 <h1>Products</h1>
                 <p class="product-help-text">Add, view and edit your products all in one place. <a href="#">Need help?</a></p>
         ';
-        if(isset($permissionsMap["ADD_PRODUCT"]))
-                $right.='<div class="product-header-buttons">
+        if (isset($permissionsMap["ADD_PRODUCT"]))
+            $right .= '<div class="product-header-buttons">
                     <button class="product-add-button">ADD PRODUCT</button>
                 </div>';
-        
-            $right.='</div>
+
+        $right .= '</div>
 
             <form id="product-filter-form" method="GET" action="productFilter.php">
                 <div class="product-search-section">
@@ -197,8 +195,8 @@ function responseHTML($permissions,$user)
                 </table>
             </div>
         </div>';
-        if(isset($permissionsMap["EDIT_PRODUCT"]))
-                                $right.='
+        if (isset($permissionsMap["EDIT_PRODUCT"]))
+            $right .= '
         <!-- Modal Form for Editing Product -->
         <form id="product-edit-form" action="includes/updateProduct.php" method="POST" enctype="multipart/form-data">
             <div id="product-edit-modal" class="product-modal">
@@ -253,8 +251,8 @@ function responseHTML($permissions,$user)
                 </div>
             </div>
         </form>';
-        if(isset($permissionsMap['ADD_PRODUCT']))
-        $right.='
+        if (isset($permissionsMap['ADD_PRODUCT']))
+            $right .= '
         <!-- ADD Product Modal -->
         
         <form id="product-add-form" action="includes/addProduct.php" method="POST" enctype="multipart/form-data">
@@ -309,16 +307,15 @@ function responseHTML($permissions,$user)
                 </div>
             </div>
         </form>';
-        $right.='
+        $right .= '
     </div>';
-    }   
-    if(isset($permissionsMap["ORDERS"]))
-    {
-        $html.="<li class='menu-item ORDERS' data-value='ORDERS'>
+    }
+    if (isset($permissionsMap["ORDERS"])) {
+        $html .= "<li class='menu-item ORDERS' data-value='ORDERS'>
                     <lb><i class='fa-solid fa-receipt menu-icon'></i>Đơn hàng</lb>
                 </li>";
 
-        $right.='<div class="ORDERS content-ctn">
+        $right .= '<div class="ORDERS content-ctn">
                 <div class="order-content"> <div class="order-header">
                         <h1>Orders</h1>
                         </div>
@@ -394,10 +391,9 @@ function responseHTML($permissions,$user)
                     </div>
                 </div>
                 ';
-                if(isset($permissionsMap["MANAGE_ORDER_STATUS"]))
-                {
-                    $right.=
-                        '<form id="order-edit-form" action="#" method="POST">
+        if (isset($permissionsMap["MANAGE_ORDER_STATUS"])) {
+            $right .=
+                '<form id="order-edit-form" action="#" method="POST">
                             <div id="order-edit-modal" class="order-modal"> <div class="order-modal-content"> <div class="order-modal-header"> <h1>Edit Order Status</h1>
                                         <span class="order-close-button" data-modal-id="order-edit-modal">&times;</span> </div>
                                     <div class="order-modal-body"> <input type="hidden" name="order_id" id="edit-order-id">
@@ -417,27 +413,25 @@ function responseHTML($permissions,$user)
                                 </div>
                             </div>
                         </form>';
-                    }
-            $right.='</div>';
-
+        }
+        $right .= '</div>';
     }
-    if(isset($permissionsMap["CUSTOMERS"]))
-    {
-        $html.="<li class='menu-item CUSTOMERS' data-value='CUSTOMERS'>
+    if (isset($permissionsMap["CUSTOMERS"])) {
+        $html .= "<li class='menu-item CUSTOMERS' data-value='CUSTOMERS'>
                     <lb><i class='fa-solid fa-user menu-icon'></i>Khách hàng</lb>   
                 </li>";
 
-        $right.='<div class="CUSTOMERS content-ctn">
+        $right .= '<div class="CUSTOMERS content-ctn">
                     <div class="customer-content">
                         <div class="customer-header">
                             <h1>Customers</h1>';
-                            if(isset($permissionsMap["ADD_CUSTOMER"]))
-                                $right.=
-                            '<div class="customer-header-buttons">
+        if (isset($permissionsMap["ADD_CUSTOMER"]))
+            $right .=
+                '<div class="customer-header-buttons">
                                 <button class="customer-add-button" id="open-add-modal-button">ADD CUSTOMER</button>
                             </div>';
 
-                        $right.='</div>
+        $right .= '</div>
 
                         <form id="customer-search-form">
                             <div class="customer-search-section">
@@ -499,8 +493,8 @@ function responseHTML($permissions,$user)
                             </table>
                         </div>
                     </div>';
-                    if(isset($permissionsMap["EDIT_CUSTOMER"]))
-                                $right.='
+        if (isset($permissionsMap["EDIT_CUSTOMER"]))
+            $right .= '
                     <form id="customer-edit-form">
                         <div id="customer-edit-modal" class="customer-modal"> <div class="customer-modal-content">
                                 <div class="customer-modal-header">
@@ -533,9 +527,9 @@ function responseHTML($permissions,$user)
                         </div>
                     </form>';
 
-                    if(isset($permissionsMap["ADD_CUSTOMER"]))
-                                $right.=
-                    '<form id="customer-add-form">
+        if (isset($permissionsMap["ADD_CUSTOMER"]))
+            $right .=
+                '<form id="customer-add-form">
                         <div id="customer-add-modal" class="customer-modal"> <div class="customer-modal-content">
                                 <div class="customer-modal-header">
                                     <h1>Add New Customer</h1>
@@ -573,23 +567,21 @@ function responseHTML($permissions,$user)
                             </div>
                         </div>
                     </form>';
-                    $right.='
+        $right .= '
                 </div>
             ';
     }
-    if(isset($permissionsMap["EMPLOYEES"]))
-    {
-        $html.="<li class='menu-item EMPLOYEES' data-value='EMPLOYEES'>
+    if (isset($permissionsMap["EMPLOYEES"])) {
+        $html .= "<li class='menu-item EMPLOYEES' data-value='EMPLOYEES'>
                     <lb><i class='fa-solid fa-user-tie menu-icon'></i>Nhân viên</lb>
                 </li>";
     }
-    if(isset($permissionsMap["SUPPLIERS"]))
-    {
-        $html.="<li class='menu-item SUPPLIERS' data-value='SUPPLIERS'>
+    if (isset($permissionsMap["SUPPLIERS"])) {
+        $html .= "<li class='menu-item SUPPLIERS' data-value='SUPPLIERS'>
                     <lb><i class='fa-solid fa-truck menu-icon'></i>Nhà cung cấp</lb>
                 </li>";
-        
-        $right.='<div class="SUPPLIERS content-ctn">
+
+        $right .= '<div class="SUPPLIERS content-ctn">
         <div class="sr-container">
             <div class="sr-main">
                 <div class="sr-topbar">
@@ -628,10 +620,10 @@ function responseHTML($permissions,$user)
                 </div>
                 <div class="sr-table-switch">
                     <button id="sr-switch-supplier" class="active">Supplier</button>';
-                    if(isset($permissionsMap['VIEW_RECEIPT']))
-                            $right.='
+        if (isset($permissionsMap['VIEW_RECEIPT']))
+            $right .= '
                     <button id="sr-switch-receipt">Receipt</button>';
-                    $right.='
+        $right .= '
                 </div>
                 <div id="supplier-details" class="sr-supplier-details">
                     <div class="sr-recent-orders">
@@ -642,10 +634,11 @@ function responseHTML($permissions,$user)
                                 <input type="text" id="supplier-search" placeholder="Tìm kiếm nhà cung cấp...">
                                 <ul id="suggestions-list" class="suggestions-list"></ul>
                             </div>';
-                            if(isset($permissionsMap['ADD_SUPPLIER']))
-                            $right.='
-                            <button id="add-supplier-btn">Add Supplier</button>';
-                            $right.='
+        if (isset($permissionsMap['ADD_SUPPLIER'])) {
+            $right .= '
+                                <button id="add-supplier-btn">Add Supplier</button>';
+        }
+        $right .= '
                         </div>
                         <table class="sr-order-table">
                             <thead>
@@ -667,10 +660,10 @@ function responseHTML($permissions,$user)
                     <div class="sr-recent-orders">
                         <div class="sr-card-header">
                             <h2>Recent Receipts</h2>';
-                            if(isset($permissionsMap['ADD_RECEIPT']))
-                            $right.='
+        if (isset($permissionsMap['ADD_RECEIPT']))
+            $right .= '
                             <button id="add-receipt-btn">Add Receipt</button>';
-                            $right.='
+        $right .= '
                         </div>
                         <table class="sr-order-table">
                             <thead>
@@ -700,8 +693,8 @@ function responseHTML($permissions,$user)
                 </div>
             </div>
         </div>';
-if(isset($permissionsMap['ADD_SUPPLIER']))
-                            $right.='
+        if (isset($permissionsMap['ADD_SUPPLIER']))
+            $right .= '
         <!-- ADD SUPPLIER FORM -->
         <div class="supplier-add-ctn" id="supplier-add-ctn">
             <div class="supplier-form-container" id="supplier-form-container"> 
@@ -732,11 +725,11 @@ if(isset($permissionsMap['ADD_SUPPLIER']))
                     </div>
                     <button type="submit" class="form-button">Thêm Nhà Cung Cấp</button>
                 </form>';
-                $right.='
+        $right .= '
             </div>
         </div>';
-        if(isset($permissionsMap['EDIT_SUPPLIER']))
-                            $right.='
+        if (isset($permissionsMap['EDIT_SUPPLIER']))
+            $right .= '
         <!-- MODIFY SUPPLIER FORM -->
         <div class="supplier-modify-ctn">
             <div class="supplier-form-container"> 
@@ -773,11 +766,11 @@ if(isset($permissionsMap['ADD_SUPPLIER']))
                     </div>
                     <button type="submit" class="modify-form-button">Cập nhật Nhà Cung Cấp</button>
                 </form>';
-                $right.='
+        $right .= '
             </div>
         </div>';
-if(isset($permissionsMap['ADD_RECEIPT']))
-                            $right.='
+        if (isset($permissionsMap['ADD_RECEIPT']))
+            $right .= '
         <!-- ADD RECEIPT -->
         <div class="receipt-add-form" id="receipt-add-form">
             <div class="receipt-main-form-container">
@@ -791,8 +784,8 @@ if(isset($permissionsMap['ADD_RECEIPT']))
                 <button type="button" id="open-receipt-detail-form-btn">Thêm</button>
             </div>
         </div>';
-        if(isset($permissionsMap['ADD_RECEIPT']))
-                            $right.='
+        if (isset($permissionsMap['ADD_RECEIPT']))
+            $right .= '
         <div class="receipt-detail-form-ctn">
             <form class="receipt-detail-form-container">
                 <button type="button" class="close-receipt-detail-form">
@@ -845,17 +838,17 @@ if(isset($permissionsMap['ADD_RECEIPT']))
                 </div>
             </form>
         </div>';
-        $right.='
+        $right .= '
     </div>';
     }
-    
-    $html.="</ul>
+
+    $html .= "</ul>
             </div>
                 <div id='admin-account-ctn'>
                     <div id='account'>
                         <lb>
-                            <p id='admin-username'><i class='fa-solid fa-at admin-username-icon'></i>". htmlspecialchars($user['fullname'], ENT_QUOTES, 'UTF-8') ."<p>
-                            <p id='admin-role'><i class='fa-solid fa-hashtag admin-role-icon'></i>". htmlspecialchars($user['role'], ENT_QUOTES, 'UTF-8') ."</p>
+                            <p id='admin-username'><i class='fa-solid fa-at admin-username-icon'></i>" . htmlspecialchars($user['fullname'], ENT_QUOTES, 'UTF-8') . "<p>
+                            <p id='admin-role'><i class='fa-solid fa-hashtag admin-role-icon'></i>" . htmlspecialchars($user['role'], ENT_QUOTES, 'UTF-8') . "</p>
                         </lb>
                         <div id='change-password-btn'>Đổi mật khẩu</div>
                     </div>
@@ -875,7 +868,6 @@ if(isset($permissionsMap['ADD_RECEIPT']))
                 </div>
             </div>";
 
-            $html .= $right.'</div>';
+    $html .= $right . '</div>';
     return $html;
 }
-?>

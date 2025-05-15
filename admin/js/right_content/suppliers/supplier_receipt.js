@@ -941,17 +941,23 @@ function validateEmail(input) {
     const emailErrora = document.getElementById("email-error") ;
     const emailErrorm = document.getElementById("emailm-error");
     if (!input.value) {
-        emailErrora.style.display = "none";
-        emailErrorm.style.display = "none";
+        if(emailErrora)
+            emailErrora.style.display = "none";
+        if(emailErrorm)
+            emailErrorm.style.display = "none";
         return false;
     }
     if (!regex.test(input.value)) {
-        emailErrora.style.display = "inline";
-        emailErrorm.style.display = "inline";
+        if(emailErrora)
+            emailErrora.style.display = "inline";
+        if(emailErrorm)
+            emailErrorm.style.display = "inline";
         return false;
     } else {
-        emailErrora.style.display = "none";
-        emailErrorm.style.display = "none";
+        if(emailErrora)
+            emailErrora.style.display = "none";
+        if(emailErrorm)
+            emailErrorm.style.display = "none";
         return true;
     }
 }
@@ -961,17 +967,23 @@ function validatePhone(input) {
     const phoneErrora = document.getElementById("phone-error");
     const phoneErrorm = document.getElementById("phonem-error");
     if (!input.value) {
-        phoneErrora.style.display = "none";
-        phoneErrorm.style.display = "none";
+        if(phoneErrora)
+            phoneErrora.style.display = "none";
+        if(phoneErrorm)
+            phoneErrorm.style.display = "none";
         return false;
     }
     if (!regex.test(input.value)) {
-        phoneErrora.style.display = "inline";
-        phoneErrorm.style.display = "inline";
+        if(phoneErrora)
+            phoneErrora.style.display = "inline";
+        if(phoneErrorm)
+            phoneErrorm.style.display = "inline";
         return false;
     } else {
-        phoneErrora.style.display = "none";
-        phoneErrorm.style.display = "none";
+        if(phoneErrora)
+            phoneErrora.style.display = "none";
+        if(phoneErrorm)
+            phoneErrorm.style.display = "none";
         return true;
     }
 }
