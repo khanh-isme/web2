@@ -1,39 +1,33 @@
 <?php
-// --- Tệp: includes/deleteCustomer.php (Đã cập nhật cho Soft Delete) ---
+include '../../connect.php';
 
-include '../../connect.php'; // Kết nối CSDL
-
-header('Content-Type: application/json'); // Trả về JSON
+header('Content-Type: application/json');
 
 $response = ['status' => 'error', 'message' => 'Invalid Request.'];
 
-// Chỉ xử lý nếu là POST và có customer_id
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['customer_id'])) {
-    $customerId = filter_var($_POST['customer_id'], FILTER_VALIDATE_INT); // Lấy và lọc ID
+    $customerId = filter_var($_POST['customer_id'], FILTER_VALIDATE_INT);
 
     if ($customerId === false || $customerId <= 0) {
         $response['message'] = 'Invalid Customer ID.';
     } else {
-        // --- THAY ĐỔI CHÍNH Ở ĐÂY ---
-        // Chuẩn bị câu lệnh UPDATE để đổi status thành 'deleted'
+
         $newStatus = 'deleted';
         $sql = "UPDATE users SET status = ? WHERE id = ?";
-        // ---------------------------
 
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-            // --- THAY ĐỔI CHÍNH Ở ĐÂY ---
-            $stmt->bind_param("si", $newStatus, $customerId); // s = string (cho status), i = integer (cho id)
-            // ---------------------------
+
+            $stmt->bind_param("si", $newStatus, $customerId);
 
             if ($stmt->execute()) {
-                // Kiểm tra xem có hàng nào thực sự bị cập nhật không
+
                 if ($stmt->affected_rows > 0) {
                     $response['status'] = 'success';
-                    $response['message'] = 'Customer marked as deleted successfully.'; // Thay đổi thông báo
+                    $response['message'] = 'Customer marked as deleted successfully.';
                 } else {
-                    // Không tìm thấy khách hàng hoặc trạng thái đã là 'deleted'
+
                     $response['message'] = 'Customer not found or status already set.';
                 }
             } else {
@@ -52,6 +46,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['customer_id'])) {
 
 $conn->close();
 
-// Trả về kết quả
 echo json_encode($response);
 exit();

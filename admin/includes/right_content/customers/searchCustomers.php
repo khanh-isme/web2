@@ -1,20 +1,16 @@
 <?php
-// --- Tệp: includes/searchCustomers.php ---
+include '../../connect.php'; 
 
-include '../../connect.php'; // Kết nối CSDL
-
-header('Content-Type: application/json'); // Trả về JSON
+header('Content-Type: application/json'); 
 
 $response = ['status' => 'error', 'message' => 'Invalid request.'];
 $customers = [];
-$params = []; // Mảng chứa các giá trị tham số cho bind_param
-$types = '';  // Chuỗi chứa kiểu dữ liệu cho bind_param
-$conditions = []; // Mảng chứa các điều kiện WHERE
+$params = []; 
+$types = '';  
+$conditions = []; 
 
-// Chỉ xử lý nếu là POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST') { // <<< Kiểm tra POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
-    // Lấy các tham số tìm kiếm từ POST
     $searchId = trim($_POST['search_id'] ?? '');
     $searchUsername = trim($_POST['search_username'] ?? '');
     $searchName = trim($_POST['search_name'] ?? '');
@@ -22,23 +18,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // <<< Kiểm tra POST
     $searchPhone = trim($_POST['search_phone'] ?? '');
     $searchAddress = trim($_POST['search_address'] ?? '');
 
-    // --- Xây dựng mệnh đề WHERE động ---
-    $sql = "SELECT id, username, name, email, phone, address FROM users WHERE (status = 'active' or status = 'locked')"; // Chỉ lấy khách hàng đang hoạt động
+    $sql = "SELECT id, username, name, email, phone, address FROM users WHERE (status = 'active' or status = 'locked')"; 
 
     if (!empty($searchId) && is_numeric($searchId)) {
         $conditions[] = "id = ?";
         $params[] = $searchId;
-        $types .= 'i'; // integer
+        $types .= 'i'; 
     }
     if (!empty($searchUsername)) {
         $conditions[] = "username LIKE ?";
-        $params[] = "%" . $searchUsername . "%"; // Thêm wildcard
-        $types .= 's'; // string
+        $params[] = "%" . $searchUsername . "%"; 
+        $types .= 's'; 
     }
     if (!empty($searchName)) {
         $conditions[] = "name LIKE ?";
-        $params[] = "%" . $searchName . "%"; // Thêm wildcard
-        $types .= 's'; // string
+        $params[] = "%" . $searchName . "%"; 
+        $types .= 's'; 
     }
     if (!empty($searchEmail)) {
         $conditions[] = "email LIKE ?";
@@ -56,20 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // <<< Kiểm tra POST
         $types .= 's';
     }
 
-    // Nối các điều kiện vào câu SQL
     if (!empty($conditions)) {
         $sql .= " AND " . implode(" AND ", $conditions);
     }
 
-    $sql .= " ORDER BY name ASC"; // Thêm ORDER BY
+    $sql .= " ORDER BY name ASC"; 
 
-    // --- Thực thi câu lệnh ---
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        // Gắn tham số nếu có
+        
         if (!empty($params)) {
-            $stmt->bind_param($types, ...$params); // Sử dụng toán tử spread (...)
+            $stmt->bind_param($types, ...$params); 
         }
 
         if ($stmt->execute()) {
@@ -94,11 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // <<< Kiểm tra POST
         $response['sql_query'] = $sql;
     }
 } else {
-    $response['message'] = 'Invalid request method.'; // <<< Lỗi nếu không phải POST
+    $response['message'] = 'Invalid request method.'; 
 }
 
 $conn->close();
 
-// Trả về kết quả JSON
 echo json_encode($response);
 exit();

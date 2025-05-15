@@ -6,7 +6,7 @@ $type = $_POST['type'] ?? '';
 function renderTable($headers, $rows)
 {
     $html = "<thead><tr>";
-    $html .= "<th>STT</th>"; // Thêm tiêu đề STT
+    $html .= "<th>STT</th>";
     foreach ($headers as $header) {
         $html .= "<th>$header</th>";
     }
@@ -15,7 +15,7 @@ function renderTable($headers, $rows)
     $stt = 1;
     foreach ($rows as $row) {
         $html .= "<tr>";
-        $html .= "<td>$stt</td>"; // Thêm cột STT
+        $html .= "<td>$stt</td>";
         foreach ($row as $cell) {
             $html .= "<td>$cell</td>";
         }

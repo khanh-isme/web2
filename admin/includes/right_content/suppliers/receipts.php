@@ -6,7 +6,6 @@ header('Content-Type: application/json');
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
 if ($action === 'receipts') {
-    // Lấy danh sách phiếu nhập
     $query = "SELECT r.id, r.receipt_date, r.total_amount, r.discount_percent, s.name AS supplier_name 
               FROM receipts r 
               JOIN suppliers s ON r.supplier_id = s.id 
@@ -27,10 +26,9 @@ if ($action === 'receipts') {
 
     echo json_encode(['success' => true, 'results' => $receipts, 'total_cost' => number_format($total, 2)]);
 } elseif ($action === 'receipt_details' && isset($_GET['receipt_id'])) {
-    // Lấy chi tiết phiếu nhập
+    
     $receipt_id = (int)$_GET['receipt_id'];
 
-    // Lấy thông tin phiếu nhập
     $query = "SELECT r.*, s.name AS supplier_name 
               FROM receipts r 
               JOIN suppliers s ON r.supplier_id = s.id 
@@ -46,7 +44,6 @@ if ($action === 'receipts') {
         exit;
     }
 
-    // Lấy chi tiết phiếu nhập
     $query = "SELECT rd.*, ps.size, p.id AS product_id, p.name AS product_name 
               FROM receipt_details rd 
               JOIN product_size ps ON rd.product_size_id = ps.id 

@@ -1,5 +1,4 @@
 function closeAndOpenProductForm() {
-    // Tải danh sách sản phẩm
     loadProducts();
 
     const editModal = document.getElementById("product-edit-modal");
@@ -13,8 +12,6 @@ function closeAndOpenProductForm() {
     const addProductImageInput = document.getElementById('add-product-image');
     const addProductImagePreview = document.getElementById('add-product-image-preview');
     const addProductForm = document.getElementById('product-add-form');
-
-    // Tải danh sách bộ lọc (categories và genders)
     fetch("includes/right_content/products/getCategories.php")
         .then(response => response.text())
         .then(responseData => {
@@ -23,11 +20,7 @@ function closeAndOpenProductForm() {
                 const categoryFilterSelect = document.getElementById("product-filter-category");
 
                 categoryFilterSelect.innerHTML = '';
-
-                // Thêm tùy chọn mặc định cho category
                 categoryFilterSelect.appendChild(new Option('-- Select Category --', '', true, true));
-
-                // Thêm danh sách categories
                 data.categories.forEach(category => {
                     const option = document.createElement("option");
                     option.value = category.id;
@@ -44,18 +37,12 @@ function closeAndOpenProductForm() {
         .catch(error => {
             console.error("Error fetching categories:", error);
         });
-
-    // Kích hoạt bộ lọc sản phẩm
     productFilter();
-
-    // Xử lý sự kiện click trong bảng
     table.addEventListener("click", (event) => {
-        const target = event.target.closest('button'); // Tìm button gần nhất
+        const target = event.target.closest('button');
         if (!target) return;
 
         const productId = target.getAttribute("data-id");
-
-        // Xử lý nút Edit
         if (target.classList.contains("product-edit-button")) {
             fetch(`includes/right_content/products/getProductByID.php?id=${productId}`)
                 .then(response => response.text())
@@ -73,8 +60,6 @@ function closeAndOpenProductForm() {
                     console.error("Error fetching product data:", error);
                 });
         }
-
-        // Xử lý nút Delete
         if (target.classList.contains("product-delete-button")) {
             if (confirm(`Bạn có chắc chắn muốn xóa sản phẩm với ID ${productId}?`)) {
                 fetch('includes/right_content/products/actionProduct.php', {
@@ -88,7 +73,7 @@ function closeAndOpenProductForm() {
                             let data = JSON.parse(responseData);
                             if (data.success) {
                                 alert(data.message);
-                                loadProducts(); // Tải lại danh sách sản phẩm
+                                loadProducts();
                             } else {
                                 alert('Lỗi: ' + data.message);
                             }
@@ -105,8 +90,6 @@ function closeAndOpenProductForm() {
             }
         }
     });
-
-    // Đóng modal chỉnh sửa
     if (editModalClose) {
         editModalClose.addEventListener("click", () => {
             if (editModal) {
@@ -114,8 +97,6 @@ function closeAndOpenProductForm() {
             }
         });
     }
-
-    // Mở modal thêm sản phẩm
     if (addProductButton) {
         addProductButton.addEventListener("click", () => {
             if (addModal) {
@@ -123,8 +104,6 @@ function closeAndOpenProductForm() {
             }
         });
     }
-
-    // Đóng modal thêm sản phẩm
     if (addModalClose) {
         addModalClose.addEventListener("click", () => {
             if (addModal) {
@@ -132,8 +111,6 @@ function closeAndOpenProductForm() {
             }
         });
     }
-
-    // Đóng modal khi click bên ngoài
     window.addEventListener("click", (event) => {
         if (event.target === editModal) {
             editModal.style.display = "none";
@@ -146,7 +123,7 @@ function closeAndOpenProductForm() {
     if (editForm) {
         changeImageInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
-            const editImage = document.getElementById("product-edit-image"); // Thêm dòng này
+            const editImage = document.getElementById("product-edit-image");
 
             if (file) {
                 const reader = new FileReader();
@@ -166,12 +143,10 @@ function closeAndOpenProductForm() {
             event.preventDefault();
 
             const formData = new FormData(this);
-            formData.append('action', 'update'); // Thêm action vào FormData
-
-            // Lấy đường dẫn gốc của ảnh từ preview
+            formData.append('action', 'update');
             const imagePreview = document.getElementById('product-edit-image');
             if (imagePreview && imagePreview.src) {
-                formData.append('image_src', imagePreview.src); // Gửi đường dẫn gốc
+                formData.append('image_src', imagePreview.src);
             }
 
             fetch('includes/right_content/products/actionProduct.php', {
@@ -214,13 +189,11 @@ function closeAndOpenProductForm() {
                 reader.readAsDataURL(file);
             }
         });
-
-        // Xử lý submit form
         addProductForm.addEventListener('submit', function (event) {
             event.preventDefault();
 
             const formData = new FormData(this);
-            formData.append('action', 'add'); // Thêm action vào FormData
+            formData.append('action', 'add');
 
             fetch('includes/right_content/products/actionProduct.php', {
                 method: 'POST',
@@ -260,8 +233,6 @@ function loadProducts() {
             let products = JSON.parse(responseData);
             const tbody = document.querySelector('.product-table tbody');
             tbody.innerHTML = '';
-
-            // Gọi cả hai permission song song
             Promise.all([
                 checkPermission('EDIT_PRODUCT'),
                 checkPermission('DELETE_PRODUCT')
@@ -311,9 +282,6 @@ function openEditProductModal(product) {
     const editGender = document.getElementById("product-edit-gender");
     const editDetails = document.getElementById("product-edit-details");
     const editStock = document.getElementById("product-edit-stock");
-
-
-    // Điền dữ liệu vào form
     editImage.src = product.image ? `${product.image}` : './imgs/blank.png';
     editId.value = product.id;
     editName.value = product.name;
@@ -330,11 +298,6 @@ function openEditProductModal(product) {
         editStock.value = 'Chưa có thông tin size';
     }
     editStock.disabled = true;
-
-    // Xử lý sự kiện thay đổi ảnh
-
-
-    // Tải danh sách category
     fetch('includes/right_content/products/getCategories.php')
         .then(response => response.text())
         .then(responseData => {
@@ -367,8 +330,6 @@ function openAddProductModal() {
     const addModal = document.getElementById("product-add-modal");
 
     const addProductForm = document.getElementById('product-add-form');
-
-    // Tải danh sách category
     fetch('includes/right_content/products/getCategories.php')
         .then(response => response.text())
         .then(responseData => {
@@ -400,14 +361,7 @@ function openAddProductModal() {
             console.error('Error loading categories:', error);
             alert('Không thể tải danh sách danh mục. Vui lòng thử lại sau.');
         });
-
-    // Preview ảnh sản phẩm
-
-
-    // Reset form khi mở modal
     addProductForm.reset();
-
-    // Hiển thị modal
     addModal.style.display = "flex";
 }
 
@@ -422,7 +376,6 @@ function checkProductId() {
             try {
                 let product = JSON.parse(responseData);
                 if (product && !product.error) {
-                    // Nếu sản phẩm tồn tại, hiển thị thông báo và khóa các trường
                     alert('Product ID already exists. You can only update stock and supplier information.');
 
                     document.getElementById('add-product-name').value = product.name || '';
@@ -437,7 +390,6 @@ function checkProductId() {
                     document.getElementById('add-product-description').value = product.description || '';
                     document.getElementById('add-product-description').readOnly = true;
                 } else {
-                    // Nếu sản phẩm không tồn tại, mở các trường để nhập liệu
                     document.getElementById('add-product-name').value = '';
                     document.getElementById('add-product-name').readOnly = false;
 

@@ -17,27 +17,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $categoriesColor = [
         'Total' => [
-            'background' => 'rgba(54, 162, 235, 0.5)', // xanh dương nhạt
+            'background' => 'rgba(54, 162, 235, 0.5)',
             'border' => 'rgba(54, 162, 235, 1)'
         ],
         'Sneakers' => [
-            'background' => 'rgba(255, 206, 86, 0.5)', // vàng nhạt
+            'background' => 'rgba(255, 206, 86, 0.5)',
             'border' => 'rgba(255, 206, 86, 1)'
         ],
         'Boots' => [
-            'background' => 'rgba(144, 238, 144, 0.5)', // Xanh lá cây nhạt
+            'background' => 'rgba(144, 238, 144, 0.5)',
             'border' => 'rgba(144, 238, 144, 1)'
         ],
         'Sandals' => [
-            'background' => 'rgba(255, 99, 132, 0.5)', // đỏ nhạt
+            'background' => 'rgba(255, 99, 132, 0.5)',
             'border' => 'rgba(255, 99, 132, 1)'
         ],
         'Loafers' => [
-            'background' => 'rgba(75, 192, 192, 0.5)', // xanh ngọc nhạt
+            'background' => 'rgba(75, 192, 192, 0.5)',
             'border' => 'rgba(75, 192, 192, 1)'
         ],
         'Athletic' => [
-            'background' => 'rgba(153, 102, 255, 0.5)', // tím nhạt
+            'background' => 'rgba(153, 102, 255, 0.5)',
             'border' => 'rgba(153, 102, 255, 1)'
         ]
     ];

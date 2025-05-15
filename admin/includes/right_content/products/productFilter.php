@@ -6,7 +6,6 @@ header('Content-Type: application/json');
 
 $product = new Product($conn);
 
-// Lấy dữ liệu từ request
 $keyword = $_POST['keyword'] ?? '';
 $category_id = $_POST['category_id'] ?? '';
 $gender = $_POST['gender'] ?? '';
@@ -14,7 +13,6 @@ $price_min = $_POST['price_min'] ?? 0;
 $price_max = $_POST['price_max'] ?? PHP_INT_MAX;
 
 try {
-    // Truy vấn sản phẩm theo bộ lọc
     $sql = "
         SELECT 
             p.id, 
@@ -35,7 +33,6 @@ try {
             p.deleted = 0
     ";
 
-    // Thêm điều kiện lọc
     $conditions = [];
     $params = [];
     $types = '';

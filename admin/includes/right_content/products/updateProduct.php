@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['id'], $_POST['name'], $_POST['price'], $_POST['category_id'], $_POST['collection_id'], $_POST['description'], $_POST['gender'])) {
         $productObj = new Product($conn);
 
-        // Xử lý ảnh (sẽ bổ sung và sữa chữa sau)
         $imagePath = null;
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $imageTmpPath = $_FILES['image']['tmp_name'];

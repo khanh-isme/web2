@@ -1,4 +1,3 @@
-/* =============== Globals ============== */
 :root {
     --black: #0A0A0A;
     --primary: #ED624E;
@@ -13,7 +12,6 @@
 }
 
 
-/* ===================== Container and Main ===================== */
 .sr-container {
     position: relative;
     max-width: 100%;
@@ -32,7 +30,6 @@
     left: 60px;
 }
 
-/* ===================== Topbar ===================== */
 .sr-topbar {
     display: flex;
     align-items: center;
@@ -53,7 +50,6 @@
     white-space: nowrap;
 }
 
-/* ======================= Cards ====================== */
 .sm-card-box {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -94,7 +90,6 @@
     color: var(--secondary);
 }
 
-/* ================== Change Table Buttons ============== */
 .sr-table-switch {
     display: flex;
     gap: 10px;
@@ -119,7 +114,6 @@
     color: var(--white);
 }
 
-/* ================== Order Details ============== */
 .sr-receipt-details,
 .sr-supplier-details {
     display: grid;
@@ -268,7 +262,6 @@
     border-color: var(--secondary);
 }
 
-/* ====================== Responsive ====================== */
 @media (max-width: 991px) {
     .sr-main {
         width: 100%;
@@ -318,7 +311,6 @@
     }
 }
 
-/* ADD Supplier Form */
 .supplier-add-ctn {
     display: none;
     position: fixed;
@@ -410,7 +402,6 @@
     background-color: var(--accent-dark);
 }
 
-/* MODIFY Supplier Form */
 .supplier-modify-ctn {
     display: none;
     position: fixed;
@@ -462,7 +453,6 @@
     background-color: var(--accent-light);
 }
 
-/* Add Receipt Form */
 .receipt-add-form {
     display: none;
     position: fixed;
@@ -688,7 +678,6 @@ button#open-receipt-detail-form-btn:hover {
     margin-top: 1rem;
 }
 
-/* Responsive */
 @media (max-width: 500px) {
     .supplier-form-container {
         padding: 20px;

@@ -4,13 +4,11 @@ class Product
 {
     private $conn;
 
-    // Constructor để khởi tạo kết nối database
     public function __construct($dbConnection)
     {
         $this->conn = $dbConnection;
     }
 
-    // Lấy danh sách sản phẩm với thông tin liên kết
     public function getAllProducts()
     {
         $sql = "
@@ -47,7 +45,6 @@ class Product
         return $products;
     }
 
-    // Lấy thông tin chi tiết sản phẩm theo ID
     public function getProductById($id)
     {
         $sql = "
@@ -80,7 +77,6 @@ class Product
         return $result->fetch_assoc();
     }
 
-    // Thêm sản phẩm mới
     public function addProduct($name, $category_id, $price, $description, $image, $gender)
     {
         $sql = "
@@ -92,13 +88,11 @@ class Product
         return $stmt->execute();
     }
 
-    // chua xử lý cập nhật img
     public function updateProduct($id, $name, $category_id, $price, $description, $gender, $image = null)
     {
         $sql = "UPDATE products 
                 SET name = ?, category_id = ?, price = ?, description = ?, gender = ?";
 
-        // Nếu có ảnh mới, thêm vào câu lệnh SQL
         if ($image) {
             $sql .= ", image = ?";
         }
@@ -107,7 +101,6 @@ class Product
 
         $stmt = $this->conn->prepare($sql);
 
-        // Nếu có ảnh mới, bind thêm tham số ảnh
         if ($image) {
             $stmt->bind_param("sidsssi", $name, $category_id, $price, $description, $gender, $image, $id);
         } else {

@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 
 require_once 'getPermission.php';
 
-// Giả sử danh sách quyền được lưu trong session
+
 $permissions = getPermissions($_SESSION['user']['username']);
 
 $data = json_decode(file_get_contents('php://input'), true);

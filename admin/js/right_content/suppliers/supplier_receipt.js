@@ -18,8 +18,6 @@ function Supplier_PageEvent() {
             btn_switch_r.classList.add("active");
             btn_switch_s.classList.remove("active");
         });
-
-    // Render Supplier Table
     function loadSuppliers() {
         fetch("includes/right_content/suppliers/supplierAction.php", {
             method: "POST",
@@ -124,8 +122,6 @@ function Supplier_PageEvent() {
             row.style.backgroundColor = "#ffff99";
         }
     }
-
-    // Form thêm nhà cung cấp
     const supplierAddCtn = document.querySelector(".supplier-add-ctn");
     const addSupplierBtn = document.getElementById("add-supplier-btn");
     const closeSupplierFormBtn = document.querySelector(".close-supplier-form");
@@ -140,19 +136,15 @@ function Supplier_PageEvent() {
 
     if (document.getElementById('supplier-add-ctn'))
         document.getElementById('supplier-add-ctn').addEventListener("click", (e) => {
-            const popupContainer = document.getElementById('supplier-add-ctn'); // toàn màn hình
-            const popupContent = document.getElementById('supplier-form-container'); // nội dung form
+            const popupContainer = document.getElementById('supplier-add-ctn');
+            const popupContent = document.getElementById('supplier-form-container');
 
             if (popupContainer && popupContainer.style.display !== 'none') {
-                // Nếu click nằm ngoài nội dung
                 if (!popupContent.contains(e.target)) {
-                    popupContainer.style.display = 'none'; // Ẩn popup
+                    popupContainer.style.display = 'none';
                 }
             }
         });
-
-
-    // Xử lý submit form thêm nhà cung cấp
     if (document.getElementById("supplier-add-form"))
         document.getElementById("supplier-add-form").addEventListener("submit", (e) => {
             e.preventDefault();
@@ -178,7 +170,7 @@ function Supplier_PageEvent() {
             }
 
             if (!valid) {
-                return; // Không submit nếu có lỗi
+                return;
             }
 
             const formData = new FormData(e.target);
@@ -218,9 +210,6 @@ function Supplier_PageEvent() {
             supplierAddCtn.style.display = "none";
             supplierAddForm.reset();
         });
-
-
-    // Xử lý sự kiện chỉnh sửa và xóa 
     document.getElementById("supplier-list").addEventListener("click", (e) => {
         if (e.target.closest(".edit-supplier-btn")) {
             const row = e.target.closest("tr");
@@ -279,11 +268,9 @@ function Supplier_PageEvent() {
             }
         }
     });
-
-    // Xử lý submit form chỉnh sửa nhà cung cấp
     if (document.getElementById("supplier-modify-form"))
         document.getElementById("supplier-modify-form").addEventListener("submit", (e) => {
-            e.preventDefault(); // Ngăn hành vi mặc định của form
+            e.preventDefault();
 
             const emailInput = document.getElementById("modify-email");
             const phoneInput = document.getElementById("modify-phone");
@@ -306,13 +293,13 @@ function Supplier_PageEvent() {
             }
 
             if (!valid) {
-                return; // Không submit nếu có lỗi
+                return;
             }
 
             const formData = new FormData(e.target);
             const mode = formData.get("form-mode");
             formData.append("action", mode === "edit" ? "update" : "add");
-            formData.append("id", formData.get("edit-id")); // Dùng edit-id cho trường hợp chỉnh sửa
+            formData.append("id", formData.get("edit-id"));
 
             fetch("includes/right_content/suppliers/supplierAction.php", {
                 method: "POST",
@@ -345,14 +332,6 @@ function Supplier_PageEvent() {
         document.querySelector(".close-supplier-modify-form").addEventListener("click", () => {
             document.querySelector(".supplier-modify-ctn").style.display = "none";
         });
-
-
-    // ---------------------------------------Receipt--------------------------------------------------
-
-
-    // ------------------------------------------------------------------------------------------------
-
-    // Elements for Add Receipt Form
     const openAddReceiptFormBtn = document.getElementById('add-receipt-btn');
     const closeAddReceiptFormBtn = document.getElementById('close-receipt-main-form');
     const addReceiptForm = document.getElementById('receipt-add-form');
@@ -375,7 +354,6 @@ function Supplier_PageEvent() {
     let selectedSupplierId = null;
 
     if (addReceiptForm) {
-        // Open/Close Add Receipt Form
         openAddReceiptFormBtn.addEventListener('click', () => {
             addReceiptForm.style.display = 'flex';
         });
@@ -387,7 +365,6 @@ function Supplier_PageEvent() {
     }
 
     if (detailAddReceiptForm) {
-        // Open/Close Detail Form
         openDetailAddReceiptFormBtn.addEventListener('click', () => {
             if (!selectedSupplierId) {
                 alert('Vui lòng chọn nhà cung cấp trước!');
@@ -408,8 +385,6 @@ function Supplier_PageEvent() {
             totalAmountSpan.textContent = "";
         });
     }
-
-    // Supplier Search
     if (supplierSearchInput) {
         supplierSearchInput.addEventListener('input', debounce(() => {
             const keyword = supplierSearchInput.value.trim();
@@ -475,7 +450,7 @@ function Supplier_PageEvent() {
                                 li.textContent = `${product.name} (ID: ${product.id})`;
                                 li.addEventListener('click', () => {
                                     productSearchInput.value = product.name;
-                                    productSearchInput.dataset.productId = product.id; // Lưu productId
+                                    productSearchInput.dataset.productId = product.id;
                                     suggestionsList.innerHTML = '';
                                     loadProductSizes(product.id, sizesWrapper, row);
                                 });
@@ -491,8 +466,6 @@ function Supplier_PageEvent() {
                 .catch(error => console.error('Lỗi tìm kiếm sản phẩm:', error));
         }, 300));
     }
-
-    // Load Sizes for Selected Product
     function loadProductSizes(productId, sizesWrapper, row) {
         fetch(`includes/right_content/suppliers/Search.php?action=sizes&product_id=${productId}`)
             .then(response => response.text())
@@ -516,8 +489,6 @@ function Supplier_PageEvent() {
             })
             .catch(error => console.error('Lỗi tải kích thước:', error));
     }
-
-    // Add Size Input Group
     function addSizeInput(sizesWrapper, productSizeId, sizeValue, row) {
         const sizeGroup = document.createElement('div');
         sizeGroup.className = 'size-input-group';
@@ -529,16 +500,12 @@ function Supplier_PageEvent() {
         <button type="button" class="remove-size-btn">❌</button>
     `;
         sizesWrapper.appendChild(sizeGroup);
-
-        // Event Listeners for Size Inputs
         sizeGroup.querySelector('input[name^="quantity"]').addEventListener('input', () => updateRowTotals(row));
         sizeGroup.querySelector('.remove-size-btn').addEventListener('click', () => {
             sizeGroup.remove();
             updateRowTotals(row);
         });
     }
-
-    // Add new row
     if (addRowBtn) {
         addRowBtn.addEventListener('click', () => {
             const currentRowIndex = receiptProductTableBody.children.length;
@@ -566,17 +533,11 @@ function Supplier_PageEvent() {
             <td><button type="button" class="remove-row-btn">🗑️</button></td>
         `;
             receiptProductTableBody.appendChild(newRow);
-
-            // Setup Product Search for New Row
             setupProductSearch(newRow);
-
-            // Add Size Button
             newRow.querySelector('.add-size-btn').addEventListener('click', () => {
                 addSizeInput(newRow.querySelector('.sizes-wrapper'), null, '', newRow);
             });
             newRow.querySelector('.price').addEventListener('input', () => updateRowTotals(newRow));
-
-            // Remove Row
             newRow.querySelector('.remove-row-btn').addEventListener('click', () => {
                 const rows = receiptProductTableBody.querySelectorAll('tr');
                 if (rows.length <= 1) {
@@ -591,9 +552,6 @@ function Supplier_PageEvent() {
             updateRowNumbers();
         });
     }
-    // Price Input
-
-    // Update Row Numbers and Input Names
     function updateRowNumbers() {
         const rows = receiptProductTableBody.querySelectorAll('tr');
         rows.forEach((row, index) => {
@@ -617,21 +575,17 @@ function Supplier_PageEvent() {
             }
         });
     }
-
-    // Update total row
     function updateRowTotals(row) {
         const quantities = Array.from(row.querySelectorAll('input[name^="quantity"]')).map(input => parseInt(input.value) || 0);
         const price = parseFloat(row.querySelector('.price').value) || 0;
         const discountPercent = parseFloat(document.getElementById('percent').value) || 0;
         const total = quantities.reduce((sum, qty) => sum + qty, 0) * price;
-        const sellPrice = price * (1 + discountPercent / 100); // Tính giá bán tự động
+        const sellPrice = price * (1 + discountPercent / 100);
 
         row.querySelector('.total-price').textContent = total.toLocaleString('en-US') + ' $';
         row.querySelector('.sell-price').textContent = sellPrice.toLocaleString('en-US') + ' $';
         updateTotalAmount();
     }
-
-    // Update total amount (không áp dụng chiết khấu)
     function updateTotalAmount() {
         let total = 0;
         document.querySelectorAll('#receipt-product-rows tr').forEach(row => {
@@ -640,8 +594,6 @@ function Supplier_PageEvent() {
         });
         totalAmountSpan.textContent = total.toLocaleString('en-US') + ' $';
     }
-
-    // Xử lý submit form
     if (document.querySelector(".receipt-detail-form-container")) {
         document.querySelector(".receipt-detail-form-container").addEventListener("submit", (e) => {
             e.preventDefault();
@@ -700,8 +652,8 @@ function Supplier_PageEvent() {
                             document.querySelector(".receipt-detail-form-ctn").style.display = "none";
                             document.getElementById('receipt-add-form').style.display = 'none';
                             document.querySelector('.receipt-detail-form-container').reset();
-                            receiptProductTableBody.innerHTML = ''; // Xóa bảng sau khi submit
-                            addRowBtn.click(); // Thêm lại hàng mặc định
+                            receiptProductTableBody.innerHTML = '';
+                            addRowBtn.click();
                             loadReceipts();
                         } else {
                             alert("Lỗi: " + result.error);
@@ -718,8 +670,6 @@ function Supplier_PageEvent() {
                 });
         });
     }
-
-    // Update Receipt Info
     function updateReceiptInfo() {
         const receiptInfo = document.querySelector('.receipt-info');
         receiptInfo.innerHTML = `
@@ -730,8 +680,6 @@ function Supplier_PageEvent() {
         <div><strong>Chiết khấu:</strong> ${discountPercentInput.value || 0}%</div>
     `;
     }
-
-    // Debounce Function
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -743,8 +691,6 @@ function Supplier_PageEvent() {
             timeout = setTimeout(later, wait);
         };
     }
-
-    // Initialize First Row
     if (receiptProductTableBody) {
 
         const firstRow = receiptProductTableBody.querySelector('tr');
@@ -764,8 +710,6 @@ function Supplier_PageEvent() {
             updateTotalAmount();
         });
     }
-
-    // Function to fetch and display receipts
     function loadReceipts() {
         fetch('includes/right_content/suppliers/receipts.php?action=receipts')
             .then(response => response.text())
@@ -775,7 +719,7 @@ function Supplier_PageEvent() {
                     if (data.success) {
                         document.getElementById("total-receipts").textContent = data.results.length;
                         document.getElementById("total-cost").textContent = data.total_cost.toLocaleString('en-US') + ' $';
-                        receiptListBody.innerHTML = ''; // Xóa bảng hiện tại
+                        receiptListBody.innerHTML = '';
                         data.results.forEach(receipt => {
                             const row = document.createElement('tr');
                             row.innerHTML = `
@@ -791,8 +735,6 @@ function Supplier_PageEvent() {
                         `;
                             receiptListBody.appendChild(row);
                         });
-
-                        // Thêm sự kiện cho các nút "Chi tiết"
                         document.querySelectorAll('.view-receipt-btn').forEach(btn => {
                             btn.addEventListener('click', () => {
                                 const receiptId = btn.dataset.receiptId;
@@ -810,8 +752,6 @@ function Supplier_PageEvent() {
             })
             .catch(error => console.error('Lỗi:', error));
     }
-
-    // Function to fetch and display receipt details in the form
     function showReceiptDetails(receiptId) {
         fetch(`includes/right_content/suppliers/receipts.php?action=receipt_details&receipt_id=${receiptId}`)
             .then(response => response.text())
@@ -821,8 +761,6 @@ function Supplier_PageEvent() {
                     if (data.success) {
                         const receipt = data.receipt;
                         const details = data.details;
-
-                        // Nhóm chi tiết theo product_id
                         const groupedDetails = details.reduce((acc, detail) => {
                             const productId = detail.product_id;
                             if (!acc[productId]) {
@@ -839,11 +777,7 @@ function Supplier_PageEvent() {
                             });
                             return acc;
                         }, {});
-
-                        // Chuyển mảng nhóm thành danh sách
                         const groupedDetailsList = Object.values(groupedDetails);
-
-                        // Cập nhật thông tin phiếu nhập
                         receiptInfoDiv.innerHTML = `
                             <div><strong>Trạng thái:</strong> Đã hoàn thành</div>
                             <div><strong>Nhà cung cấp:</strong> ${receipt.supplier_name}</div>
@@ -851,9 +785,7 @@ function Supplier_PageEvent() {
                             <div><strong>Ngày tạo phiếu:</strong> ${new Date(receipt.receipt_date).toLocaleDateString('vi-VN')}</div>
                             <div><strong>Chiết khấu:</strong> ${receipt.discount_percent}%</div>
                         `;
-
-                        // Cập nhật chi tiết phiếu nhập
-                        receiptProductRows.innerHTML = ''; // Xóa các dòng hiện tại
+                        receiptProductRows.innerHTML = '';
                         groupedDetailsList.forEach((product, index) => {
                             const discountPercent = parseFloat(receipt.discount_percent) || 0;
                             const sellPrice = product.price * (1 + discountPercent / 100);
@@ -887,15 +819,9 @@ function Supplier_PageEvent() {
                             `;
                             receiptProductRows.appendChild(row);
                         });
-
-                        // Cập nhật tổng tiền
                         totalAmountSpan.textContent = `${parseFloat(receipt.total_amount).toLocaleString('en-US')} $`;
-
-                        // Ẩn các nút không cần thiết
                         addRowBtn.style.display = 'none';
                         submitBtn.style.display = 'none';
-
-                        // Hiển thị form
                         detailFormContainer.style.display = 'flex';
                     } else {
                         alert("Lỗi: " + data.error);
@@ -911,15 +837,11 @@ function Supplier_PageEvent() {
                 alert("Có lỗi xảy ra khi lấy chi tiết phiếu nhập!");
             });
     }
-
-    // Đóng form chi tiết
     if (closeDetailFormBtn) {
         closeDetailFormBtn.addEventListener('click', () => {
             detailFormContainer.style.display = 'none';
-            // Khôi phục trạng thái ban đầu của form
             addRowBtn.style.display = 'inline-block';
             submitBtn.style.display = 'inline-block';
-            // Reset form về trạng thái thêm mới (nếu cần)
             document.getElementById('receipt-add-form').style.display = 'none';
         });
     }

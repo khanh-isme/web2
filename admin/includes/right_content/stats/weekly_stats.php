@@ -27,7 +27,7 @@ function formatChangeHTML($change)
     return "<span style='color: $color;font-size:12px'>$icon $change% so với tuần trước</span>";
 }
 
-// Dữ liệu tuần này
+
 $weeklyIncomes = getWeeklyValue($conn, "
     SELECT SUM(total_amount)
     FROM orders
@@ -44,7 +44,7 @@ $addedToCart = getWeeklyValue($conn, "
     WHERE WEEK(added_at, 1) = WEEK(NOW(), 1) AND YEAR(added_at) = YEAR(NOW())
 ");
 
-// Dữ liệu tuần trước
+
 $lastWeeklyIncomes = getWeeklyValue($conn, "
     SELECT SUM(total_amount)
     FROM orders
@@ -61,7 +61,7 @@ $lastAddedToCart = getWeeklyValue($conn, "
     WHERE WEEK(added_at, 1) = WEEK(NOW(), 1) - 1 AND YEAR(added_at) = YEAR(NOW())
 ");
 
-// HTML hiển thị
+
 echo json_encode([
     "status" => "success",
     "weeklyIncomes" => "<h3>Doanh thu</h3>" . "<p style='line-height: 40px; font-size: 20px'>" . number_format((float)$weeklyIncomes, 0, '.', ',') . "đ</p>" . formatChangeHTML(percentChange($weeklyIncomes, $lastWeeklyIncomes)),
