@@ -70,6 +70,7 @@ if ($action === 'receipts') {
         'receipt' => [
             'id' => $receipt['id'],
             'supplier_name' => $receipt['supplier_name'],
+            'employee' => $receipt['employee'],
             'receipt_date' => $receipt['receipt_date'],
             'discount_percent' => $receipt['discount_percent'],
             'total_amount' => $receipt['total_amount'],

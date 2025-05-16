@@ -28,7 +28,7 @@ function orderfunc() {    let orderSearchForm = document.getElementById('order-s
                 <td>${order.order_id}</td>
                 <td>${customerId}</td>
                 <td>${orderDate}</td>
-                <td style="text-align: right;">${totalAmount}</td>
+                <td>${totalAmount}</td>
                 <td>${status}</td>
                 <td>${shippingName}</td>
                 <td>${shippingPhone}</td>

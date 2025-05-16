@@ -1,54 +1,47 @@
-input[readonly],
-textarea[readonly],
-select[disabled] {
+/* General styles */
+input[readonly], textarea[readonly], select[disabled] {
     background-color: #f5f5f5;
     color: #888;
     cursor: not-allowed;
 }
-
-.ORDERS.content-ctn {
+.EMPLOYEES.content-ctn {
     height: 100vh;
 }
 
-.order-content {
+/* Content styles */
+.employee-content {
     margin: 10px;
     flex: 1;
     padding: 20px;
     border: solid 3px black;
     border-radius: 8px;
+    height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-.order-header {
+/* Header styling */
+.employee-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 20px;
 }
 
-.order-header h1 {
+.employee-header h1 {
     font-size: 40px;
     color: black;
     margin: 0;
 }
 
-.order-help-text {
-    font-size: 14px;
-    color: black;
-    flex: 1;
-    text-align: left;
-    margin: 25px 0 0 20px;
-    font-weight: bold;
-}
-
-.order-header-buttons {
+.employee-header-buttons {
     display: flex;
     gap: 10px;
 }
 
-.order-action-button {
+.employee-add-button,
+.employee-action-button {
     padding: 10px 20px;
     border: 1px solid white;
     background-color: black;
@@ -59,114 +52,130 @@ select[disabled] {
     border-radius: 10px;
 }
 
-.order-action-button:hover {
+.employee-add-button:hover,
+.employee-action-button:hover {
     background-color: white;
     color: black;
 }
 
-.order-search-section {
+/* Search section */
+.employee-search-section {
     background-color: #fff;
-    padding: 15px;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-.order-search-title {
-    font-size: 14px;
+.employee-search-title {
+    font-size: 16px;
     font-weight: bold;
     color: #2c3e50;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
-.order-search-inputs {
+.employee-search-inputs {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
-.order-search-row {
+.employee-search-row {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: flex-end;
 }
 
-.order-search-bar,
-.order-search-row select {
+.employee-search-bar {
     flex-grow: 1;
-    padding: 7px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
-    box-sizing: border-box;
-    height: 33px;
 }
 
-.order-search-row input[type="text"],
-.order-search-row input[type="number"],
-.order-search-row input[type="date"],
-.order-search-row input[type="tel"] {
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 13px;
-    flex: 1;
-    box-sizing: border-box;
-    height: 36px;
-}
-
-.order-filter-group {
+.employee-filter-group {
     display: flex;
     flex-direction: column;
     flex: 1;
     min-width: 150px;
 }
-
-.order-filter-group label {
-    font-size: 11px;
-    font-weight: bold;
-    color: black;
-    margin-bottom: 3px;
+.employee-delete-button:hover {
+    color: #000; /* Khi hover chuyển sang màu đen */
+}
+.restore-btn {
+    background: none;
+    border: none;
+    color: #222;
+    font-size: 22px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s, transform 0.2s;
+    border-radius: 50%;
+    padding: 4px 8px;
+    margin: 0 2px;
 }
 
-.order-search-button {
-    padding: 0px 15px;
+.restore-btn:hover {
+    opacity: 1;
+    color: #ff1744;
+    background: #ffeaea;
+    transform: scale(1.2);
+    box-shadow: 0 2px 8px rgba(231,76,60,0.15);
+}
+.employee-filter-group label {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 5px;
+}
+#employee-SearchBtn-ctn{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0px;
+}
+.employee-search-button {
+    
+    padding: 10px 20px;
     background-color: black;
     color: white;
     border: none;
     border-radius: 4px;
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    height: 36px;
+    height: 40px;
+    align-self: flex-end;
 }
 
-.order-search-button:hover {
+.employee-search-button:hover {
     background-color: #444;
 }
 
-.order-status-info {
+/* Status info */
+.employee-status-info {
     margin-bottom: 15px;
     padding-left: 5px;
     color: black;
     font-weight: 700;
 }
 
-.order-table-scroll {
-    flex-grow: 1;
+/* Table styles */
+.table-scroll {
     overflow-y: auto;
     border: 1px solid #ddd;
     border-radius: 8px;
-    max-height: 55vh;
+    height: 45vh;
 }
 
-.order-table {
+.employee-table {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
+    table-layout: auto;
 }
 
-.order-table thead {
+.employee-table thead {
     background-color: #f5f5f5;
     text-align: left;
     font-weight: bold;
@@ -175,29 +184,28 @@ select[disabled] {
     z-index: 1;
 }
 
-.order-table th,
-.order-table td {
-    padding: 12px 10px;
+.employee-table th,
+.employee-table td {
+    padding: 12px 15px;
     border-bottom: 1px solid #ddd;
     vertical-align: middle;
-    font-size: 13px;
+    font-size: 14px;
     color: #2c3e50;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    table-layout: auto;
-    text-wrap: wrap;
 }
 
 
-.order-table tbody tr {
+
+.employee-table tbody tr {
     display: table-row;
     width: 100%;
 }
 
-.order-table .order-view-button,
-.order-table .order-edit-button {
+.employee-table .employee-edit-button,
+.employee-table .employee-delete-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -212,23 +220,15 @@ select[disabled] {
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     margin-left: 5px;
     vertical-align: middle;
-    color: #495057;
 }
 
-.order-table .order-view-button:hover {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-}
-
-.order-table .order-edit-button:hover {
+.employee-table .employee-edit-button:hover {
     background-color: black;
     color: white;
-    border-color: black;
 }
 
-
-.order-modal {
+/* Modal styles */
+.employee-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -244,7 +244,7 @@ select[disabled] {
     box-sizing: border-box;
 }
 
-.order-modal-content {
+.employee-modal-content {
     background-color: white;
     padding: 30px;
     border-radius: 8px;
@@ -260,67 +260,40 @@ select[disabled] {
     overflow-y: auto;
 }
 
-.order-modal-body {
+.employee-modal-body {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.order-modal-body p {
-    margin: 5px 0;
-    line-height: 1.4;
-}
-
-.order-modal-body strong {
-    color: #333;
-}
-
-
-.order-form-group {
+.employee-form-group {
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin-bottom: 5px;
 }
 
-.order-form-group label {
+.employee-form-group label {
     display: block;
     font-weight: bold;
     margin-bottom: 2px;
     font-size: 14px;
 }
 
-.order-form-group select {
+.employee-form-group input[type="text"],
+.employee-form-group input[type="email"],
+.employee-form-group input[type="password"],
+.employee-form-group input[type="tel"],
+.employee-form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
-    height: 40px;
 }
 
-#view-order-items table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-#view-order-items th,
-#view-order-items td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    font-size: 13px;
-    text-align: left;
-}
-
-#view-order-items th {
-    background-color: #f9f9f9;
-    font-weight: bold;
-}
-
-
-.order-close-button {
+.employee-close-button {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -332,11 +305,11 @@ select[disabled] {
     transition: color 0.3s ease;
 }
 
-.order-close-button:hover {
+.employee-close-button:hover {
     color: #ff0000;
 }
 
-.order-save-button {
+.employee-save-button {
     padding: 10px 20px;
     background-color: black;
     color: white;
@@ -345,16 +318,16 @@ select[disabled] {
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.order-save-button:hover {
+.employee-save-button:hover {
     background-color: white;
     color: black;
     border: 1px solid black;
 }
 
-.order-modal-footer {
+.employee-modal-footer {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
@@ -362,7 +335,7 @@ select[disabled] {
     border-top: 1px solid #eee;
 }
 
-.order-modal-header {
+.employee-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -371,7 +344,7 @@ select[disabled] {
     border-bottom: 1px solid #eee;
 }
 
-.order-modal-header h1 {
+.employee-modal-header h1 {
     font-size: 22px;
     font-weight: bold;
     margin: 0;

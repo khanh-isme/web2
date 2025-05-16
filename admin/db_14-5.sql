@@ -34,11 +34,11 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username`, `password`, `fullname`, `status`, `role`) VALUES
-(1, '0209', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Cao Cát Lượng', 'active', 'Người thừa'),
-(2, '0033', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Từ Huy Bình', 'inactive', 'Ăn bám'),
-(3, '0307', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Đinh Văn Thanh Sơn', 'active', 'Cục dàng'),
-(4, '0161', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Dương Văn Khánh', 'active', 'Cứng đầu'),
-(5, '0149', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Dương Nguyễn Minh Khang', 'active', 'Nole');
+(1, '0209', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Cao Cát Lượng', 'active', 'Admin'),
+(2, '0033', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Từ Huy Bình', 'inactive', 'Warehouse Manager'),
+(3, '0307', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Đinh Văn Thanh Sơn', 'active', 'Sales Staff'),
+(4, '0161', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Dương Văn Khánh', 'active', 'Staff Management'),
+(5, '0149', '$2y$12$C27QHh6j52Ju4QkV7yVNTuOeS.7uNCnbdKF3lr52ssb7BrROHZoCy', 'Dương Nguyễn Minh Khang', 'active', 'Customer Support');
 
 -- --------------------------------------------------------
 
@@ -76,28 +76,24 @@ INSERT INTO `admin_permissions` (`admin_id`, `perm_id`) VALUES
 (1, 18),
 (1, 19),
 (1, 20),
-(1, 21),
-(5, 1),
-(5, 2),
-(5, 3),
-(5, 4),
-(5, 5),
-(5, 6),
-(5, 7),
-(5, 8),
-(5, 9),
-(5, 10),
-(5, 11),
-(5, 12),
-(5, 13),
-(5, 14),
-(5, 15),
-(5, 16),
-(5, 17),
-(5, 18),
-(5, 19),
-(5, 20),
-(5, 21);
+(1, 21);
+
+-- Warehouse Manager (id = 2)
+INSERT INTO `admin_permissions` (`admin_id`, `perm_id`) VALUES
+(2, 2), (2, 6), (2, 7), (2, 8), (2, 9), (2, 17), (2, 18), (2, 19), (2, 20), (2, 21);
+
+-- Sales Staff (id = 3)
+INSERT INTO `admin_permissions` (`admin_id`, `perm_id`) VALUES
+(3, 2), (3, 3), (3, 4), (3, 10), (3, 11), (3, 12), (3, 13);
+
+-- Staff Management (id = 4)
+INSERT INTO `admin_permissions` (`admin_id`, `perm_id`) VALUES
+(4, 5), (4, 14), (4, 15), (4, 16);
+
+-- Customer Support (id = 5)
+INSERT INTO `admin_permissions` (`admin_id`, `perm_id`) VALUES
+(5, 1), (5, 2), (5, 3), (5, 4);
+
 
 -- --------------------------------------------------------
 
@@ -185,17 +181,26 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `total_amount`, `status`, `shipping_name`, `shipping_phone`, `shipping_address`) VALUES
-(1, 3, '2025-04-01 14:23:00', 500000.00, 'delivered', 'Nguyễn Văn A', '0987654321', '15 Lý Thường Kiệt, Hoàn Kiếm, Hà Nội'),
-(2, 5, '2025-04-12 10:15:00', 1800000.00, 'delivered', 'Trần Thị B', '0912345678', '89 Trần Quang Diệu, Quận 3, TP.HCM'),
-(3, 2, '2025-04-05 18:30:00', 250000.00, 'delivered', 'Lê Văn C', '0909988777', '25 Nguyễn Đình Chiểu, Quận 1, TP.HCM'),
-(4, 7, '2025-04-07 09:00:00', 300000.00, 'delivered', 'Phạm Thị D', '0988776655', '102 Trường Chinh, Thanh Xuân, Hà Nội'),
-(5, 9, '2025-04-12 11:45:00', 890000.00, 'delivered', 'Vũ Minh E', '0945566777', '78 Phan Đình Phùng, Ba Đình, Hà Nội'),
-(6, 4, '2025-04-09 15:20:00', 750000.00, 'delivered', 'Nguyễn Thị F', '0977333222', '12 Hoàng Văn Thụ, Phú Nhuận, TP.HCM'),
-(7, 6, '2025-04-10 13:05:00', 590000.00, 'delivered', 'Đặng Văn G', '0933222111', '30 Nguyễn Văn Cừ, Long Biên, Hà Nội'),
-(8, 1, '2025-04-12 16:40:00', 890000.00, 'delivered', 'Lương Thị H', '0966778899', '45 Lê Văn Sỹ, Phú Nhuận, TP.HCM'),
-(9, 8, '2025-04-13 08:55:00', 630000.00, 'delivered', 'Phan Văn I', '0905112233', '23 Tô Hiến Thành, Quận 10, TP.HCM'),
-(10, 10, '2025-04-14 17:30:00', 1050000.00, 'delivered', 'Đỗ Thị K', '0911223344', '68 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội');
-
+(1, 1, '2025-03-01 10:00:00', 1250000.00, 'delivered', 'Nguyễn Văn A', '0987654321', 'Số 161, Đường Nguyễn Trãi, Hà Nội'),
+(2, 2, '2025-03-07 10:00:00', 1050000.00, 'delivered', 'Trần Thị B', '0977123456', 'Số 48, Đường Lê Lợi, TP HCM'),
+(3, 3, '2025-03-08 10:00:00', 1950000.00, 'delivered', 'Lê Văn C', '0912345678', 'Số 91, Đường Lê Lợi, Đà Nẵng'),
+(4, 4, '2025-03-09 10:00:00', 400000.00, 'cancelled', 'Hoàng Thị D', '0933221144', 'Số 94, Đường Trần Hưng Đạo, Cần Thơ'),
+(5, 5, '2025-03-11 10:00:00', 2700000.00, 'delivered', 'Phạm Văn E', '0966554433', 'Số 122, Đường Trần Hưng Đạo, Hải Phòng'),
+(6, 6, '2025-03-25 10:00:00', 1400000.00, 'delivered', 'Vũ Thị F', '0922113344', 'Số 140, Đường Trần Hưng Đạo, Huế'),
+(7, 7, '2025-04-06 10:00:00', 1350000.00, 'delivered', 'Bùi Văn G', '0944556677', 'Số 18, Đường Lê Lợi, Nha Trang'),
+(8, 8, '2025-04-11 10:00:00', 750000.00, 'cancelled', 'Đặng Thị H', '0988223344', 'Số 6, Đường Lê Lợi, Vũng Tàu'),
+(9, 9, '2025-04-14 10:00:00', 1850000.00, 'delivered', 'Ngô Văn I', '0911998877', 'Số 24, Đường Trần Hưng Đạo, Quảng Ninh'),
+(10, 10, '2025-04-16 10:00:00', 1850000.00, 'delivered', 'Dương Thị J', '0955332244', 'Số 115, Đường Trần Hưng Đạo, Bắc Ninh'),
+(11, 11, '2025-04-17 10:00:00', 1800000.00, 'delivered', 'Trịnh Văn K', '0999223344', 'Số 131, Đường Nguyễn Trãi, Thanh Hóa'),
+(12, 12, '2025-04-18 10:00:00', 1200000.00, 'cancelled', 'Đoàn Thị L', '0944559922', 'Số 48, Đường Nguyễn Trãi, Nam Định'),
+(13, 13, '2025-04-25 10:00:00', 350000.00, 'delivered', 'Mai Văn M', '0900557788', 'Số 9, Đường Lê Lợi, Hòa Bình'),
+(14, 14, '2025-05-01 10:00:00', 1850000.00, 'delivered', 'Châu Thị N', '0933225566', 'Số 193, Đường Nguyễn Trãi, Bình Dương'),
+(15, 15, '2025-05-04 10:00:00', 1700000.00, 'cancelled', 'Lương Văn O', '0977448822', 'Số 31, Đường Lý Thường Kiệt, Lạng Sơn'),
+(16, 16, '2025-05-08 10:00:00', 1450000.00, 'delivered', 'Phan Thị P', '0966991155', 'Số 137, Đường Nguyễn Trãi, Quảng Bình'),
+(17, 17, '2025-05-09 10:00:00', 1900000.00, 'shipping', 'Cao Văn Q', '0922334455', 'Số 89, Đường Quang Trung, Cà Mau'),
+(18, 18, '2025-05-11 10:00:00', 1250000.00, 'cancelled', 'Tạ Thị R', '0999887766', 'Số 54, Đường Quang Trung, Kon Tum'),
+(19, 1, '2025-05-14 10:00:00', 1600000.00, 'delivered', 'Trương Văn S', '0900223344', 'Số 87, Đường Lý Thường Kiệt, Bắc Giang'),
+(20, 2, '2025-05-16 10:00:00', 1550000.00, 'processing', 'Lý Thị T', '0944778899', 'Số 139, Đường Lê Lợi, Đắk Lắk');
 -- --------------------------------------------------------
 
 --
@@ -215,16 +220,49 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`order_detail_id`, `order_id`, `product_size_id`, `quantity`, `price`) VALUES
-(1, 1, 5, 2, 500000.00),
-(2, 2, 10, 1, 1800000.00),
-(3, 3, 15, 3, 250000.00),
-(4, 4, 20, 5, 300000.00),
-(5, 5, 25, 2, 890000.00),
-(6, 6, 30, 4, 750000.00),
-(7, 7, 35, 1, 590000.00),
-(8, 8, 40, 3, 890000.00),
-(9, 9, 45, 2, 630000.00),
-(10, 10, 50, 4, 1050000.00);
+(1, 1, 1, 2, 400000.00),
+(2, 1, 2, 3, 150000.00),
+(3, 2, 3, 3, 200000.00),
+(4, 2, 4, 1, 450000.00),
+(5, 3, 5, 3, 300000.00),
+(6, 3, 6, 3, 150000.00),
+(7, 3, 7, 2, 300000.00),
+(8, 4, 8, 1, 400000.00),
+(9, 5, 9, 3, 450000.00),
+(10, 5, 10, 3, 450000.00),
+(11, 6, 11, 3, 350000.00),
+(12, 6, 12, 1, 350000.00),
+(13, 7, 13, 1, 250000.00),
+(14, 7, 14, 2, 450000.00),
+(15, 7, 15, 1, 200000.00),
+(16, 8, 16, 2, 200000.00),
+(17, 8, 17, 1, 350000.00),
+(18, 9, 18, 3, 400000.00),
+(19, 9, 19, 1, 200000.00),
+(20, 9, 20, 1, 450000.00),
+(21, 10, 21, 2, 500000.00),
+(22, 10, 22, 1, 450000.00),
+(23, 10, 23, 2, 200000.00),
+(24, 11, 24, 2, 450000.00),
+(25, 11, 25, 2, 450000.00),
+(26, 12, 26, 3, 400000.00),
+(27, 13, 27, 1, 350000.00),
+(28, 14, 28, 2, 200000.00),
+(29, 14, 29, 3, 450000.00),
+(30, 15, 30, 1, 350000.00),
+(31, 15, 31, 1, 150000.00),
+(32, 15, 32, 2, 450000.00),
+(33, 16, 33, 3, 250000.00),
+(34, 16, 34, 3, 400000.00),
+(35, 17, 35, 3, 500000.00),
+(36, 17, 36, 2, 250000.00),
+(37, 18, 37, 1, 350000.00),
+(38, 18, 38, 2, 250000.00),
+(39, 18, 39, 2, 150000.00),
+(40, 19, 40, 1, 400000.00),
+(41, 19, 41, 3, 300000.00),
+(42, 20, 42, 3, 250000.00),
+(43, 20, 43, 2, 400000.00);
 
 -- --------------------------------------------------------
 
@@ -724,30 +762,37 @@ INSERT INTO `product_size` (`id`, `product_id`, `size`, `stock`) VALUES
 CREATE TABLE `receipts` (
   `id` int(11) NOT NULL,
   `supplier_id` int(11) NOT NULL,
+  `employee` varchar(255) NOT NULL,
   `receipt_date` datetime DEFAULT current_timestamp(),
   `total_amount` decimal(10,2) DEFAULT 0.00,
-  `discount_percent` decimal(5,2) DEFAULT 0.00,
-  `notes` text DEFAULT NULL
+  `discount_percent` decimal(5,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `receipts`
 --
 
-INSERT INTO `receipts` (`id`, `supplier_id`, `receipt_date`, `total_amount`, `discount_percent`, `notes`) VALUES
-(4, 1, '2025-04-25 23:36:28', 300.00, 12.00, 'Phiếu nhập từ form'),
-(5, 8, '2025-04-25 23:41:33', 104.00, 12.00, 'Phiếu nhập từ form'),
-(6, 15, '2025-05-13 17:30:21', 200.00, 23.00, 'Phiếu nhập từ form'),
-(7, 15, '2025-05-13 17:36:44', 3276.00, 12.00, 'Phiếu nhập từ form'),
-(8, 14, '2025-05-13 17:58:30', 960.00, 12.00, 'Phiếu nhập từ form'),
-(9, 14, '2025-05-13 18:00:16', 12.00, 13.00, 'Phiếu nhập từ form'),
-(10, 14, '2025-05-13 18:04:11', 559.00, 12.00, 'Phiếu nhập từ form'),
-(11, 14, '2025-05-13 18:15:01', 34.00, 12.00, 'Phiếu nhập từ form'),
-(12, 15, '2025-05-13 18:15:47', 34.00, 12.00, 'Phiếu nhập từ form'),
-(13, 15, '2025-05-13 18:17:32', 22.00, 13.00, 'Phiếu nhập từ form'),
-(14, 15, '2025-05-13 18:19:40', 86.00, 13.00, 'Phiếu nhập từ form'),
-(15, 14, '2025-05-13 20:58:55', 36.09, 12.00, 'Phiếu nhập từ form'),
-(16, 14, '2025-05-13 21:34:56', 108.30, 12.03, 'Phiếu nhập từ form');
+INSERT INTO `receipts` (`id`, `supplier_id`, `employee`, `receipt_date`, `total_amount`, `discount_percent`) VALUES
+(1, 2, 'Cao Cát Lượng', '2024-10-01 08:00:00', 3790500, 5),
+(2, 2, 'Đinh Văn Thanh Sơn', '2024-10-12 08:00:00', 1044000, 10),
+(3, 1, 'Dương Văn Khánh', '2024-10-23 08:00:00', 2160000, 10),
+(4, 1, 'Dương Văn Khánh', '2024-11-03 08:00:00', 3250000, 10),
+(5, 3, 'Từ Huy Bình', '2024-11-14 08:00:00', 2025000, 10),
+(6, 2, 'Dương Nguyễn Minh Khang', '2024-11-25 08:00:00', 3210000, 10),
+(7, 5, 'Dương Văn Khánh', '2024-12-06 08:00:00', 3888000, 10),
+(8, 4, 'Đinh Văn Thanh Sơn', '2024-12-17 08:00:00', 3420000, 10),
+(9, 3, 'Dương Nguyễn Minh Khang', '2024-12-28 08:00:00', 4050000, 10),
+(10, 1, 'Dương Văn Khánh', '2025-01-08 08:00:00', 4230000, 10),
+(11, 2, 'Từ Huy Bình', '2025-01-19 08:00:00', 2780000, 10),
+(12, 4, 'Cao Cát Lượng', '2025-01-30 08:00:00', 3780000, 10),
+(13, 2, 'Dương Văn Khánh', '2025-02-10 08:00:00', 3285000, 10),
+(14, 3, 'Dương Nguyễn Minh Khang', '2025-02-21 08:00:00', 3762000, 10),
+(15, 1, 'Từ Huy Bình', '2025-03-04 08:00:00', 3420000, 10),
+(16, 5, 'Cao Cát Lượng', '2025-03-15 08:00:00', 2340000, 10),
+(17, 2, 'Từ Huy Bình', '2025-03-26 08:00:00', 2160000, 10),
+(18, 4, 'Dương Nguyễn Minh Khang', '2025-04-06 08:00:00', 4050000, 10),
+(19, 5, 'Đinh Văn Thanh Sơn', '2025-04-17 08:00:00', 2250000, 10),
+(20, 2, 'Dương Văn Khánh', '2025-04-28 08:00:00', 3645000, 10);
 
 -- --------------------------------------------------------
 
@@ -768,24 +813,106 @@ CREATE TABLE `receipt_details` (
 --
 
 INSERT INTO `receipt_details` (`id`, `receipt_id`, `product_size_id`, `quantity`, `price`) VALUES
-(5, 4, 1, 4, 30.00),
-(6, 4, 2, 4, 30.00),
-(7, 4, 335, 2, 30.00),
-(8, 5, 29, 8, 13.00),
-(9, 6, 220, 10, 20.00),
-(10, 7, 2, 100, 30.00),
-(11, 7, 30, 12, 23.00),
-(12, 8, 1, 12, 40.00),
-(13, 8, 2, 12, 40.00),
-(14, 9, 1, 1, 12.00),
-(15, 10, 220, 13, 43.00),
-(16, 11, 1, 1, 34.00),
-(17, 12, 2, 1, 34.00),
-(18, 13, 220, 1, 22.00),
-(19, 14, 2, 2, 43.00),
-(20, 15, 2, 3, 12.03),
-(21, 16, 2, 4, 12.03),
-(22, 16, 220, 2, 30.09);
+(1, 1, 186, 9, 110000),
+(2, 1, 214, 19, 80000),
+(3, 1, 226, 7, 80000),
+(4, 1, 292, 2, 100000),
+(5, 1, 160, 4, 80000),
+(6, 1, 250, 3, 110000),
+(7, 2, 280, 3, 110000),
+(8, 2, 112, 2, 100000),
+(9, 2, 125, 3, 120000),
+(10, 2, 31, 1, 90000),
+(11, 2, 65, 1, 90000),
+(12, 2, 35, 1, 90000),
+(13, 3, 133, 15, 90000),
+(14, 3, 305, 2, 100000),
+(15, 3, 79, 1, 110000),
+(16, 3, 91, 3, 120000),
+(17, 3, 295, 3, 100000),
+(18, 4, 190, 17, 110000),
+(19, 4, 275, 12, 90000),
+(20, 4, 15, 2, 110000),
+(21, 4, 6, 1, 80000),
+(22, 5, 67, 15, 120000),
+(23, 5, 84, 3, 120000),
+(24, 6, 291, 4, 90000),
+(25, 6, 62, 2, 90000),
+(26, 6, 111, 9, 100000),
+(27, 6, 58, 20, 80000),
+(28, 6, 332, 2, 80000),
+(29, 7, 263, 4, 100000),
+(30, 7, 255, 14, 110000),
+(31, 7, 142, 20, 90000),
+(32, 7, 53, 1, 120000),
+(33, 7, 46, 2, 100000),
+(34, 7, 22, 1, 120000),
+(35, 7, 7, 1, 100000),
+(36, 8, 17, 17, 110000),
+(37, 8, 281, 15, 100000),
+(38, 9, 309, 10, 120000),
+(39, 9, 322, 11, 120000),
+(40, 9, 129, 17, 90000),
+(41, 10, 284, 5, 90000),
+(42, 10, 121, 15, 80000),
+(43, 10, 252, 19, 120000),
+(44, 10, 154, 1, 120000),
+(45, 10, 196, 1, 90000),
+(46, 11, 87, 10, 100000),
+(47, 11, 147, 3, 100000),
+(48, 11, 217, 6, 100000),
+(49, 11, 64, 5, 120000),
+(50, 11, 149, 1, 110000),
+(51, 11, 122, 1, 120000),
+(52, 12, 240, 6, 110000),
+(53, 12, 74, 19, 100000),
+(54, 12, 304, 1, 90000),
+(55, 12, 162, 12, 90000),
+(56, 13, 294, 5, 80000),
+(57, 13, 174, 1, 110000),
+(58, 13, 103, 13, 110000),
+(59, 13, 97, 4, 90000),
+(60, 13, 244, 6, 110000),
+(61, 13, 135, 1, 100000),
+(62, 13, 1, 2, 80000),
+(63, 13, 197, 3, 80000),
+(64, 13, 320, 1, 110000),
+(65, 13, 164, 1, 80000),
+(66, 14, 269, 6, 90000),
+(67, 14, 289, 7, 80000),
+(68, 14, 279, 10, 120000),
+(69, 14, 49, 12, 90000),
+(70, 14, 306, 3, 90000),
+(71, 14, 156, 3, 110000),
+(72, 14, 137, 2, 100000),
+(73, 15, 77, 18, 100000),
+(74, 15, 39, 8, 100000),
+(75, 15, 104, 4, 120000),
+(76, 15, 233, 2, 120000),
+(77, 15, 193, 1, 90000),
+(78, 16, 229, 3, 120000),
+(79, 16, 14, 18, 100000),
+(80, 16, 134, 5, 80000),
+(81, 17, 19, 16, 100000),
+(82, 17, 210, 4, 120000),
+(83, 17, 177, 1, 80000),
+(84, 18, 89, 9, 110000),
+(85, 18, 188, 20, 80000),
+(86, 18, 13, 11, 100000),
+(87, 18, 184, 1, 90000),
+(88, 18, 88, 2, 100000),
+(89, 19, 249, 11, 80000),
+(90, 19, 230, 2, 110000),
+(91, 19, 30, 4, 80000),
+(92, 19, 204, 2, 90000),
+(93, 19, 282, 4, 120000),
+(94, 19, 310, 3, 100000),
+(95, 19, 218, 1, 80000),
+(96, 20, 208, 10, 90000),
+(97, 20, 194, 7, 110000),
+(98, 20, 313, 12, 110000),
+(99, 20, 239, 7, 80000),
+(100, 20, 232, 4, 100000);
 
 -- --------------------------------------------------------
 
@@ -798,6 +925,12 @@ CREATE TABLE `roles` (
   `role_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
+INSERT INTO `roles` (`id`,`role_name`) VALUES 
+(1,'Admin'),
+(2,'Warehouse Manager'),
+(3,'Sales Staff'),
+(4,'Staff Management'),
+(5,'Customer Support');
 -- --------------------------------------------------------
 
 --
@@ -808,6 +941,67 @@ CREATE TABLE `roles_permissions` (
   `role_id` int(11) NOT NULL,
   `perm_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+-- 🟩 Admin: Toàn quyền
+INSERT INTO `roles_permissions` (`role_id`, `perm_id`) VALUES
+(1, 1),  -- STATS
+(1, 2),  -- PRODUCTS
+(1, 3),  -- ORDERS
+(1, 4),  -- CUSTOMERS
+(1, 5),  -- EMPLOYEES
+(1, 6),  -- SUPPLIERS
+(1, 7),  -- ADD_PRODUCT
+(1, 8),  -- EDIT_PRODUCT
+(1, 9),  -- DELETE_PRODUCT
+(1,10),  -- MANAGE_ORDER_STATUS
+(1,11),  -- ADD_CUSTOMER
+(1,12),  -- EDIT_CUSTOMER
+(1,13),  -- DELETE_CUSTOMER
+(1,14),  -- ADD_EMPLOYEE
+(1,15),  -- EDIT_EMPLOYEE
+(1,16),  -- DELETE_EMPLOYEE
+(1,17),  -- ADD_SUPPLIER
+(1,18),  -- EDIT_SUPPLIER
+(1,19),  -- DELETE_SUPPLIER
+(1,20),  -- VIEW_RECEIPT
+(1,21);  -- ADD_RECEIPT
+
+-- 🟦 Warehouse Manager: Quản lý kho
+INSERT INTO `roles_permissions` (`role_id`, `perm_id`) VALUES
+(2, 2),  -- PRODUCTS
+(2, 6),  -- SUPPLIERS
+(2, 7),  -- ADD_PRODUCT
+(2, 8),  -- EDIT_PRODUCT
+(2, 9),  -- DELETE_PRODUCT
+(2,17),  -- ADD_SUPPLIER
+(2,18),  -- EDIT_SUPPLIER
+(2,19),  -- DELETE_SUPPLIER
+(2,20),  -- VIEW_RECEIPT
+(2,21);  -- ADD_RECEIPT
+
+-- 🟨 Sales Staff: Bán hàng, chăm sóc khách
+INSERT INTO `roles_permissions` (`role_id`, `perm_id`) VALUES
+(3, 2),  -- PRODUCTS
+(3, 3),  -- ORDERS
+(3, 4),  -- CUSTOMERS
+(3,10),  -- MANAGE_ORDER_STATUS
+(3,11),  -- ADD_CUSTOMER
+(3,12),  -- EDIT_CUSTOMER
+(3,13);  -- DELETE_CUSTOMER
+
+-- 🟧 Staff Management: Quản lý nhân sự
+INSERT INTO `roles_permissions` (`role_id`, `perm_id`) VALUES
+(4, 5),  -- EMPLOYEES
+(4,14),  -- ADD_EMPLOYEE
+(4,15),  -- EDIT_EMPLOYEE
+(4,16);  -- DELETE_EMPLOYEE
+
+-- 🟨 Customer Support: chỉ hỗ trợ, không chỉnh sửa
+INSERT INTO `roles_permissions` (`role_id`, `perm_id`) VALUES
+(5, 1),  -- STATS
+(5, 2),  -- PRODUCTS
+(5, 3),  -- ORDERS
+(5, 4);  -- CUSTOMERS
 
 -- --------------------------------------------------------
 
@@ -832,15 +1026,15 @@ CREATE TABLE `suppliers` (
 
 INSERT INTO `suppliers` (`id`, `name`, `contact`, `address`, `email`, `phone`, `created_at`, `deleted`) VALUES
 (1, 'Supplier A Co.', 'khangdnm', 'HCM City', 'khangdnm@gmail.com', '0927468476', '2025-04-22 11:52:41', 1),
-(6, 'Supplier F', 'Daniel Lee', '123 Street A', 'supplierF@example.com', '0901234567', '2025-04-22 01:35:47', 0),
-(8, 'Supplier H', 'Kevin Nguyen', '789 Street C', 'supplierH@example.com', '0903456789', '2025-04-22 01:35:47', 0),
-(9, 'Supplier I', 'Lily Tran', '321 Street D', 'supplierI@example.com', '0904567890', '2025-04-22 01:35:47', 0),
-(10, 'Supplier J', 'David Kim', '654 Street E', 'supplierJ@example.com', '0905678901', '2025-04-22 01:35:47', 0),
-(11, 'Supplier A', 'khangdnm', '123 Main St, Hanoi', 'duongnguyenminhkhang13@gmail.com', '0987654321', '2025-04-22 11:54:08', 0),
-(13, 'Supplier M', 'Angela Zhang', '246 Street H', 'supplierM@example.com', '0908901234', '2025-04-22 01:35:47', 0),
-(14, 'MopLab', 'KaiNad', 'Hong Kong', 'moplab@gmail.com', '0927468476', '2025-05-13 15:52:21', 0),
-(15, 'MopLab', 'KaiNad', 'Hong Kong', 'moplab@gmail.com', '0927468476', '2025-05-13 16:26:46', 0),
-(16, 'Supplier A Co.', 'khangdnm', 'dfdfd', 'khangdnm@gmail.com', '0123456789', '2025-05-13 17:09:33', 1);
+(2, 'Supplier F', 'Daniel Lee', '123 Street A', 'supplierF@example.com', '0901234567', '2025-04-22 01:35:47', 0),
+(3, 'Supplier H', 'Kevin Nguyen', '789 Street C', 'supplierH@example.com', '0903456789', '2025-04-22 01:35:47', 0),
+(4, 'Supplier I', 'Lily Tran', '321 Street D', 'supplierI@example.com', '0904567890', '2025-04-22 01:35:47', 0),
+(5, 'Supplier J', 'David Kim', '654 Street E', 'supplierJ@example.com', '0905678901', '2025-04-22 01:35:47', 0),
+(6, 'Supplier A', 'khangdnm', '123 Main St, Hanoi', 'duongnguyenminhkhang13@gmail.com', '0987654321', '2025-04-22 11:54:08', 0),
+(7, 'Supplier M', 'Angela Zhang', '246 Street H', 'supplierM@example.com', '0908901234', '2025-04-22 01:35:47', 0),
+(8, 'MopLab', 'KaiNad', 'Hong Kong', 'moplab@gmail.com', '0927468476', '2025-05-13 15:52:21', 1),
+(9, 'MopLab', 'KaiNad', 'Hong Kong', 'moplab@gmail.com', '0927468476', '2025-05-13 16:26:46', 0),
+(10, 'Supplier A Co.', 'khangdnm', 'dfdfd', 'khangdnm@gmail.com', '0123456789', '2025-05-13 17:09:33', 1);
 
 -- --------------------------------------------------------
 
@@ -973,7 +1167,14 @@ ALTER TABLE `receipt_details`
 -- Chỉ mục cho bảng `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE (`role_name`);
+
+ALTER TABLE `admins`
+ADD CONSTRAINT `fk_admins_role_name`
+FOREIGN KEY (`role`) REFERENCES `roles`(`role_name`)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
 
 --
 -- Chỉ mục cho bảng `roles_permissions`
@@ -1004,61 +1205,61 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `product_size`
 --
 ALTER TABLE `product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=336;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `receipt_details`
 --
 ALTER TABLE `receipt_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -1070,7 +1271,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

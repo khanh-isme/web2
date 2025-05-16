@@ -255,7 +255,7 @@ function loadProducts() {
                                 <td>${product.name}</td>
                                 <td>${product.category_name}</td>
                                 <td>${product.total_stock || 0}</td>
-                                <td>${product.price == 0 ? 'Chưa nhập giá' : `$${product.price}`}</td>
+                                <td>${product.price == 0 ? 'Chưa nhập giá' : `${product.price}đ`}</td>
                                 <td>${actionButtons}</td>
                             </tr>
                         `;
@@ -454,7 +454,7 @@ function productFilter() {
                                         <td>${product.name}</td>
                                         <td>${product.category_name}</td>
                                         <td>${product.total_stock || 0}</td>
-                                        <td>${product.price == 0 ? 'Chưa nhập giá' : `$${product.price}`}</td>
+                                        <td>${product.price == 0 ? 'Chưa nhập giá' : `${product.price}đ`}</td>
                                         <td>${actionButtons}</td>
                                     </tr>
                                 `;

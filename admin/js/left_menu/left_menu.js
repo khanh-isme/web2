@@ -31,11 +31,11 @@ function activeMenuItem() {
     });
 
     document.addEventListener("click", function (event) {
-        let changPasswordBtn = document.getElementById("change-password-btn");
+        let changePasswordBtn = document.getElementById("change-password-btn");
 
-        if (changPasswordBtn.style.display === "flex") {
-            if (!changPasswordBtn.contains(event.target)) {
-                changPasswordBtn.style.display = "none";
+        if (changePasswordBtn && changePasswordBtn.style.display === "flex") {
+            if (!changePasswordBtn.contains(event.target)) {
+                changePasswordBtn.style.display = "none";
             }
         }
     });

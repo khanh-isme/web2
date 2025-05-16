@@ -77,10 +77,11 @@ try {
             'product_id' => $product_id
         ];
     }
-
-    $stmt = $conn->prepare("INSERT INTO receipts (supplier_id, receipt_date, total_amount, discount_percent, notes) 
-                            VALUES (?, NOW(), ?, ?, ?)");
-    $stmt->bind_param("idds", $supplier_id, $total_amount, $discount_percent, $notes);
+    session_start();
+    $employee=$_SESSION['user']['fullname']; 
+    $stmt = $conn->prepare("INSERT INTO receipts (supplier_id, employee, receipt_date, total_amount, discount_percent, notes) 
+                            VALUES (?, ?, NOW(), ?, ?, ?)");
+    $stmt->bind_param("isdds", $supplier_id, $employee, $total_amount, $discount_percent, $notes);
     $stmt->execute();
     $receipt_id = $conn->insert_id;
 

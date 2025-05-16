@@ -36,7 +36,7 @@ switch ($type) {
             JOIN product_size ps ON od.product_size_id = ps.id
             JOIN products p ON ps.product_id = p.id
             LEFT JOIN categories c ON p.category_id = c.id
-            WHERE WEEK(o.order_date, 1) = WEEK(CURDATE(), 1)
+            WHERE o.status='delivered' and WEEK(o.order_date, 1) = WEEK(CURDATE(), 1)
             GROUP BY ps.product_id
             ORDER BY total_sold DESC
         ");
@@ -57,7 +57,7 @@ switch ($type) {
             JOIN products p ON ps.product_id = p.id
             LEFT JOIN categories c ON p.category_id = c.id
             JOIN orders o ON od.order_id = o.order_id
-            WHERE MONTH(o.order_date) = MONTH(CURDATE()) AND YEAR(o.order_date) = YEAR(CURDATE())
+            WHERE o.status='delivered' and MONTH(o.order_date) = MONTH(CURDATE()) AND YEAR(o.order_date) = YEAR(CURDATE())
             GROUP BY ps.product_id
             ORDER BY total_sold DESC
         ");
@@ -78,7 +78,7 @@ switch ($type) {
                 JOIN product_size ps ON od.product_size_id = ps.id
                 JOIN products p ON ps.product_id = p.id
                 LEFT JOIN categories c ON p.category_id = c.id
-                WHERE WEEK(o.order_date, 1) = WEEK(CURDATE(), 1)
+                WHERE o.status='delivered' and  WEEK(o.order_date, 1) = WEEK(CURDATE(), 1)
                 GROUP BY ps.product_id
                 ORDER BY revenue DESC
             ");
@@ -103,7 +103,7 @@ switch ($type) {
                 JOIN product_size ps ON od.product_size_id = ps.id
                 JOIN products p ON ps.product_id = p.id
                 LEFT JOIN categories c ON p.category_id = c.id
-                WHERE MONTH(o.order_date) = MONTH(CURDATE()) AND YEAR(o.order_date) = YEAR(CURDATE())
+                WHERE o.status='delivered' and  MONTH(o.order_date) = MONTH(CURDATE()) AND YEAR(o.order_date) = YEAR(CURDATE())
                 GROUP BY ps.product_id
                 ORDER BY revenue DESC
             ");
@@ -125,6 +125,7 @@ switch ($type) {
                 SELECT u.name, u.email, u.phone, u.address, SUM(o.total_amount) AS revenue
                 FROM orders o
                 JOIN users u ON o.customer_id = u.id
+                where o.status='delivered'
                 GROUP BY o.customer_id
                 ORDER BY revenue DESC
             ");
@@ -148,7 +149,7 @@ switch ($type) {
                 SELECT u.name, u.email, u.phone, u.address, COUNT(o.order_id) AS num_orders
                 FROM orders o
                 JOIN users u ON o.customer_id = u.id
-                WHERE o.order_date >= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)
+                WHERE o.status='delivered' and o.order_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
                 GROUP BY o.customer_id
                 ORDER BY num_orders DESC
             ");
@@ -186,6 +187,7 @@ switch ($type) {
                     ) AS loyalty_score
                 FROM users u
                 JOIN orders o ON u.id = o.customer_id
+                where o.status='delivered'
                 GROUP BY u.id
                 ORDER BY loyalty_score DESC
             ");

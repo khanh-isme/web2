@@ -21,6 +21,10 @@ function contentSetup() {
         customerfunc();
     }
 
+    if (document.querySelector('.EMPLOYEES')) {
+        Employee();
+    }
+
     if (document.querySelector('.SUPPLIERS')) {
         Supplier_PageEvent();
     }

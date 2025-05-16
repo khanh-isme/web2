@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql .= " AND " . implode(" AND ", $conditions);
     }
 
-    $sql .= " ORDER BY name ASC"; 
+    $sql .= " ORDER BY id ASC"; 
 
     $stmt = $conn->prepare($sql);
 

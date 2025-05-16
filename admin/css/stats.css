@@ -102,6 +102,7 @@ canvas {
     flex-direction: column;
     margin-bottom: 10px;
     width: 80%;
+    overflow: auto;
 }
 
 #stats-time {

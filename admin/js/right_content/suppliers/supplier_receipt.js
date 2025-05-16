@@ -582,8 +582,8 @@ function Supplier_PageEvent() {
         const total = quantities.reduce((sum, qty) => sum + qty, 0) * price;
         const sellPrice = price * (1 + discountPercent / 100);
 
-        row.querySelector('.total-price').textContent = total.toLocaleString('en-US') + ' $';
-        row.querySelector('.sell-price').textContent = sellPrice.toLocaleString('en-US') + ' $';
+        row.querySelector('.total-price').textContent = total.toLocaleString('vi-VN') + ' đ';
+        row.querySelector('.sell-price').textContent = sellPrice.toLocaleString('vi-VN') + ' đ';
         updateTotalAmount();
     }
     function updateTotalAmount() {
@@ -592,7 +592,7 @@ function Supplier_PageEvent() {
             const totalPrice = parseFloat(row.querySelector('.total-price').textContent.replace(/[^\d.-]/g, '')) || 0;
             total += totalPrice;
         });
-        totalAmountSpan.textContent = total.toLocaleString('en-US') + ' $';
+        totalAmountSpan.textContent = total.toLocaleString('vi-VN') + ' đ';
     }
     if (document.querySelector(".receipt-detail-form-container")) {
         document.querySelector(".receipt-detail-form-container").addEventListener("submit", (e) => {
@@ -675,9 +675,9 @@ function Supplier_PageEvent() {
         receiptInfo.innerHTML = `
         <div><strong>Trạng thái:</strong> Chưa hoàn thành</div>
         <div><strong>Nhà cung cấp:</strong> ${supplierSearchInput.value || 'Chưa chọn'}</div>
-        <div><strong>Nhân viên:</strong></div>
-        <div><strong>Ngày tạo phiếu:</strong> ${new Date().toLocaleDateString('vi-VN')}</div>
+        <div><strong>Nhân viên: ${document.getElementById('admin-username').textContent}</strong></div>
         <div><strong>Chiết khấu:</strong> ${discountPercentInput.value || 0}%</div>
+        <div><strong>Ngày tạo phiếu:</strong> ${new Date().toLocaleDateString('vi-VN')}</div>
     `;
     }
     function debounce(func, wait) {
@@ -718,14 +718,14 @@ function Supplier_PageEvent() {
                     let data = JSON.parse(responseData);
                     if (data.success) {
                         document.getElementById("total-receipts").textContent = data.results.length;
-                        document.getElementById("total-cost").textContent = data.total_cost.toLocaleString('en-US') + ' $';
+                        document.getElementById("total-cost").textContent = data.total_cost.toLocaleString('vi-VN') + ' đ';
                         receiptListBody.innerHTML = '';
                         data.results.forEach(receipt => {
                             const row = document.createElement('tr');
                             row.innerHTML = `
                             <td>RC${String(receipt.id).padStart(3, '0')}</td>
                             <td>${new Date(receipt.receipt_date).toLocaleDateString('vi-VN')}</td>
-                            <td>${parseFloat(receipt.total_amount).toLocaleString('en-US')} $</td>
+                            <td>${parseFloat(receipt.total_amount).toLocaleString('vi-VN')} đ</td>
                             <td>${receipt.supplier_name}</td>
                             <td>
                                 <div class="sr-table-action">
@@ -781,7 +781,7 @@ function Supplier_PageEvent() {
                         receiptInfoDiv.innerHTML = `
                             <div><strong>Trạng thái:</strong> Đã hoàn thành</div>
                             <div><strong>Nhà cung cấp:</strong> ${receipt.supplier_name}</div>
-                            <div><strong>Nhân viên:</strong> Nguyễn Thanh Sang</div>
+                            <div><strong>Nhân viên:</strong> ${receipt.employee}</div>
                             <div><strong>Ngày tạo phiếu:</strong> ${new Date(receipt.receipt_date).toLocaleDateString('vi-VN')}</div>
                             <div><strong>Chiết khấu:</strong> ${receipt.discount_percent}%</div>
                         `;
@@ -813,13 +813,13 @@ function Supplier_PageEvent() {
                                     <button type="button" class="add-size-btn" style="display: none;">+ Thêm size</button>
                                 </td>
                                 <td><input type="number" name="price[${index}]" class="price" value="${product.price}" disabled></td>
-                                <td><span class="sell-price">${sellPrice.toLocaleString('en-US')} $</span></td>
-                                <td><span class="total-price">${totalPrice.toLocaleString('en-US')} $</span></td>
+                                <td><span class="sell-price">${sellPrice.toLocaleString('vi-VN')} đ</span></td>
+                                <td><span class="total-price">${totalPrice.toLocaleString('vi-VN')} đ</span></td>
                                 <td><button type="button" class="remove-row-btn" style="display: none;">🗑️</button></td>
                             `;
                             receiptProductRows.appendChild(row);
                         });
-                        totalAmountSpan.textContent = `${parseFloat(receipt.total_amount).toLocaleString('en-US')} $`;
+                        totalAmountSpan.textContent = `${parseFloat(receipt.total_amount).toLocaleString('vi-VN')} đ`;
                         addRowBtn.style.display = 'none';
                         submitBtn.style.display = 'none';
                         detailFormContainer.style.display = 'flex';

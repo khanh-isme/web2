@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/products.css">
     <link rel="stylesheet" href="css/order_styles.css">
     <link rel="stylesheet" href="css/customer_styles.css">
+    <link rel="stylesheet" href="css/employee.css">
     <link rel="stylesheet" href="css/supplier_receipt.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -39,6 +40,7 @@
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="js/right_content/orders/order_scripts.js"></script>
 <script src="js/right_content/customers/customer_scripts.js"></script>
+<script src="js/right_content/employees/employee.js"></script>
 <script src="js/right_content/suppliers/supplier_receipt.js"></script>
 <script src="js/contentSetup.js"></script>
 <script src="js/login_signin/admin_check_login.js"></script>

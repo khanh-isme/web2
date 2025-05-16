@@ -54,7 +54,7 @@ function responseHTML($permissions, $user)
                                 <ul style="margin: 0; padding-left: 20px;">
                                     <li>Mỗi đơn hàng: <strong>+2 điểm</strong></li>
                                     <li>Mỗi 100.000đ chi tiêu: <strong>+1 điểm</strong></li>
-                                    <li>Mỗi tháng khách hàng có mua hàng (active): <strong>+5 điểm</strong></li>
+                                    <li>Mỗi tháng khách hàng có mua hàng: <strong>+5 điểm</strong></li>
                                     <li>Mỗi tháng tính từ đơn đầu tiên đến hiện tại: <strong>+1 điểm</strong></li>
                                 </ul>
                             </div>
@@ -119,7 +119,6 @@ function responseHTML($permissions, $user)
         <div class="product-content">
             <div class="product-header">
                 <h1>Products</h1>
-                <p class="product-help-text">Add, view and edit your products all in one place. <a href="#">Need help?</a></p>
         ';
         if (isset($permissionsMap["ADD_PRODUCT"]))
             $right .= '<div class="product-header-buttons">
@@ -443,8 +442,8 @@ function responseHTML($permissions, $user)
                                             <input type="number" name="search_id" id="search_id" placeholder="Enter ID..." class="customer-search-bar">
                                         </div>
                                         <div class="customer-filter-group">
-                                            <label for="search_username">Username</label>
-                                            <input type="text" name="search_username" id="search_username" placeholder="Enter username..." class="customer-search-bar">
+                                            <label for="customer_search_username">Username</label>
+                                            <input type="text" name="search_username" id="customer_search_username" placeholder="Enter username..." class="customer-search-bar">
                                         </div>
                                         <div class="customer-filter-group">
                                             <label for="search_name">Name</label>
@@ -575,6 +574,206 @@ function responseHTML($permissions, $user)
         $html .= "<li class='menu-item EMPLOYEES' data-value='EMPLOYEES'>
                     <lb><i class='fa-solid fa-user-tie menu-icon'></i>Nhân viên</lb>
                 </li>";
+
+        $right.= '<div class="EMPLOYEES content-ctn">
+        <div class="employee-content">
+            <div class="employee-header">
+                <h1>Employees</h1>';
+                if(isset($permissionsMap['ADD_EMPLOYEE']))
+                $right.='
+                <div class="employee-header-buttons">
+                    <button class="employee-add-button" id="open-add-employee-modal-button">ADD EMPLOYEE</button>
+                    <button class="employee-action-button" id="restore-employee-button">Restore</button>
+                </div>';
+                $right.='
+            </div>
+
+
+            <form id="employee-search-form">
+                <div class="employee-search-section">
+                    <div class="employee-search-title">SEARCH & FILTER EMPLOYEES</div>
+                    <div class="employee-search-inputs">
+                        <div class="employee-search-row">
+                            <div class="employee-filter-group">
+                                <label for="employee_search_username">Username</label>
+                                <input type="text" name="search_username" id="employee_search_username" placeholder="Enter Username..." class="employee-search-bar">
+                            </div>
+                            <div class="employee-filter-group">
+                                <label for="search_fullname">Fullname</label>
+                                <input type="text" name="search_fullname" id="search_fullname" placeholder="Enter Fullname..." class="employee-search-bar">
+                            </div>
+                            <div class="employee-filter-group">
+                                <label for="search_status">Status</label>
+                                <select name="search_status" id="search_status1" class="employee-search-bar">
+                                    <option value="">All</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="employee-filter-group">
+                                <label for="search_role">Role</label>
+                                    <select name="search_role" id="search_role" class="employee-search-bar">
+                                    <option value="">All</option>
+                                    <!-- Option sẽ được render bằng PHP hoặc JS -->
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="employee-search-row" id="employee-SearchBtn-ctn">
+                            <label>&nbsp;</label>
+                            <button type="submit" class="employee-search-button" id="search-button">SEARCH</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <p class="employee-status-info">DISPLAYING EMPLOYEE LIST</p>
+
+            <div class="table-scroll">
+                <table class="employee-table" id="employee-table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Username</th>
+                            <th>fullname</th>
+                            <th>status</th>
+                            <th>role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="abc">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>';
+
+            if(isset($permissionsMap['ADD_EMPLOYEE']))
+                $right.='
+        <form id="employee-add-form" action="#" method="POST">
+            <div id="employee-add-modal" class="employee-modal">
+                <div class="employee-modal-content">
+                    <div class="employee-modal-header">
+                        <h1>Add New Employee</h1>
+                        <span class="employee-close-button" data-modal-id="employee-add-modal">&times;</span>
+                    </div>
+                    <div class="employee-modal-body">
+                        <div class="employee-form-group">
+                            <label for="employee-add-name">Username</label>
+                            <input type="text" name="username" id="employee-add-username" required>
+                        </div>
+                        <div class="employee-form-group">
+                            <label for="employee-add-password">Password</label>
+                            <input type="password" name="password" id="employee-add-password" required>
+                        </div>
+                        <div class="employee-form-group">
+                            <label for="employee-add-phone">fullname</label>
+                            <input type="text" name="fullname" id="employee-add-fullname">
+                        </div>
+                        <div class="employee-form-group">
+                        <label for="employee-add-role">Role</label>
+                        <select name="role" id="employee-add-role" required>
+                            <!-- Option sẽ được render bằng PHP hoặc JS -->
+                        </select>
+                    </div>
+                    </div>
+                    <div class="employee-modal-footer">
+                        <button type="submit" class="employee-save-button" id="save-employee-button">Save Employee</button>
+                    </div>
+                </div>
+            </div>
+        </form>';
+        if(isset($permissionsMap['EDIT_EMPLOYEE']))
+        $right.='
+        <!-- Form sửa nhân viên -->
+        <form id="employee-edit-form" action="#" method="POST">
+            <div id="employee-edit-modal" class="employee-modal">
+                <div class="employee-modal-content">
+                    <div class="employee-modal-header">
+                        <h1>Edit Employee</h1>
+                        <span class="employee-close-button" data-modal-id="employee-edit-modal">&times;</span>
+                    </div>
+                    <div class="employee-modal-body">
+                        <input type="hidden" name="id" id="employee-edit-id">
+                        <div class="employee-form-group">
+                            <label for="employee-edit-username">Username</label>
+                            <input type="text" name="username" id="employee-edit-username" required disabled>
+                        </div>
+                        <div class="employee-form-group">
+                            <label for="employee-edit-password">Password (leave blank to keep current)</label>
+                            <input type="password" name="password" id="employee-edit-password">
+                        </div>
+                        <div class="employee-form-group">
+                            <label for="employee-edit-fullname">Fullname</label>
+                            <input type="text" name="fullname" id="employee-edit-fullname">
+                        </div>
+                        <div class="employee-form-group">
+                            <label for="employee-edit-role">Role</label>
+                                <select name="role" id="employee-edit-role" required>
+                                <!-- Option sẽ được render bằng PHP hoặc JS -->
+                                </select>
+                        </div>
+                        <div class="employee-form-group">
+                            <label for="employee-edit-status">Status</label>
+                            <select name="status" id="employee-edit-status" required>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="employee-modal-footer">
+                        <button type="submit" class="employee-save-button" id="save-employee-edit-button">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- Modal quản lý quyền nhân viên -->
+        <div id="employee-permission-modal" class="employee-modal" style="display:none;">
+            <div class="employee-modal-content" style="min-width:500px;max-width:500px;">
+                <div class="employee-modal-header">
+                    <h1>Phân quyền nhân viên</h1>
+                    <span class="employee-close-button" id="close-permission-modal" style="cursor:pointer;">&times;</span>
+                </div>
+                <div class="employee-modal-body">
+                    <form id="employee-permission-form">
+                        <input type="hidden" name="employee_id" id="permission-employee-id">
+                        <div id="permission-list">
+                            <!-- Danh sách quyền sẽ được render ở đây bằng JS -->
+                        </div>
+                    </form>
+                </div>
+                <div class="employee-modal-footer">
+                    <button type="button" id="save-permission-button" class="employee-save-button">Lưu quyền</button>
+
+                </div>
+            </div>
+        </div>';
+        if(isset($permissionsMap['ADD_EMPLOYEE']))
+        $right.='
+        <!-- Modal restore nhân viên -->
+        <div id="employee-restore-modal" class="employee-modal" style="display:none;">
+            <div class="employee-modal-content" style="min-width:350px;max-width:400px;">
+                <div class="employee-modal-header">
+                    <h1>Khôi phục nhân viên đã xóa</h1>
+                    <span class="employee-close-button" id="close-restore-modal" style="cursor:pointer;">&times;</span>
+                </div>
+                <div class="employee-modal-body">
+                    <table id="restore-employee-table" border="1" style="width:100%;text-align:center;">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Username</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="restore-employee-tbody">
+                            <!-- Dữ liệu sẽ được render bằng JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>';
+        $right.='
+    </div>';
     }
     if (isset($permissionsMap["SUPPLIERS"])) {
         $html .= "<li class='menu-item SUPPLIERS' data-value='SUPPLIERS'>
@@ -676,17 +875,7 @@ function responseHTML($permissions, $user)
                                 </tr>
                             </thead>
                             <tbody id="receipt-list">
-                                <tr>
-                                    <td>RC001</td>
-                                    <td>2025-04-18</td>
-                                    <td>$120.50</td>
-                                    <td>Supplier B</td>
-                                    <td>
-                                        <div class="sr-table-action">
-                                            <button class="view-receipt-btn">Chi tiết</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -823,8 +1012,8 @@ function responseHTML($permissions, $user)
                                 <button type="button" class="add-size-btn">+ Thêm size</button>
                             </td>
                             <td><input type="number" name="price[0]" class="price" value="0" min="0" step="any"></td>
-                            <td><span class="sell-price">$</span> </td>
-                            <td><span class="total-price">$</span> </td>
+                            <td><span class="sell-price"></span> </td>
+                            <td><span class="total-price"></span> </td>
                             <td><button type="button" class="remove-row-btn">🗑️</button></td>
                         </tr>
                     </tbody>
@@ -834,7 +1023,7 @@ function responseHTML($permissions, $user)
                     <button type="submit" class="submit-btn">Thêm phiếu nhập</button>
                 </div>
                 <div class="receipt-total">
-                    <strong>Tổng tiền:</strong> <span id="total-amount">$</span>
+                    <strong>Tổng tiền:</strong> <span id="total-amount"></span>
                 </div>
             </form>
         </div>';
