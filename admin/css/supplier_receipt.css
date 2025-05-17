@@ -132,7 +132,8 @@
 .search-icon {
     position: absolute;
     top: 37%;
-    left: 230px;
+    left: 10px;
+    top: 15px;
     transform: translateY(-50%);
     color: #888;
     font-size: 16px;
@@ -143,7 +144,7 @@
     padding: 8px 12px 8px 32px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    width: 250px;
+    width: 350px;
     transition: box-shadow 0.2s ease;
 }
 
@@ -175,7 +176,7 @@
 
 .sr-card-header button {
     padding: 8px 14px;
-    background-color: var(--primary);
+    background-color: var(--black);
     color: var(--white);
     border: none;
     border-radius: 6px;
@@ -186,7 +187,7 @@
 }
 
 .sr-card-header button:hover {
-    background-color: #c54a38;
+    background-color: gray;
 }
 
 .sr-order-table {
@@ -719,4 +720,204 @@ button#open-receipt-detail-form-btn:hover {
 .suggestions-product-list li:hover,
 .suggestions-list li:hover {
     background-color: var(--light-gray);
+}
+
+#receipt-filter-form select,
+#receipt-filter-form input[type="date"] {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 140px;
+    font-size: 15px;
+    background: #fff;
+    transition: border-color 0.2s;
+}
+
+#receipt-filter-form div{
+    display: flex;
+    align-items: center;
+}
+
+#receipt-filter-form{
+    display: flex;
+    justify-content: center;
+}
+
+#receipt-filter-form select:focus,
+#receipt-filter-form input[type="date"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+#receipt-filter-form label {
+    font-weight: 500;
+    display: block;
+    margin-right: 5px;
+}
+
+#receipt-filter-form button.receipt-search-button {
+    padding: 7px 18px;
+    background: var(--accent-dark);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#receipt-filter-form button.receipt-search-button:hover {
+    background: var(--accent-light);
+}
+
+
+/* ----------------------------------------------------------------------- */
+
+
+
+/* Nền trắng, chữ đen */
+body, .sr-main, .sr-recent-orders, .sm-card, .supplier-form-container, .supplier-modify-form-container, .receipt-main-form-container, .receipt-detail-form-container {
+    background: var(--white);
+    color: var(--black);
+}
+
+/* Border và shadow nhẹ */
+.sr-topbar, .sm-card, .sr-recent-orders, .supplier-form-container, .supplier-modify-form-container, .receipt-main-form-container, .receipt-detail-form-container {
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+/* Header, tiêu đề */
+.sr-topbar .sr-title,
+.sr-card-header h2,
+.supplier-form-title,
+.supplier-modify-form-title,
+.receipt-main-form-title,
+.receipt-detail-form-title {
+    color: var(--black);
+}
+
+/* Table */
+.sr-order-table {
+    background: var(--white);
+    color: var(--black);
+}
+.sr-order-table thead {
+    background: var(--light-gray);
+    color: var(--black);
+}
+.sr-order-table thead td {
+    font-weight: 600;
+}
+.sr-order-table tbody tr:hover {
+    background-color: #f7f7f7;
+}
+.sr-order-table tbody td {
+    color: var(--black);
+}
+
+.sr-table-switch button,
+#receipt-filter-form button.receipt-search-button {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    border-bottom: gray 3px solid;
+    border-left: gray 3px solid;
+}
+.sr-table-switch button:hover,
+.sr-table-switch button.active,
+#receipt-filter-form button.receipt-search-button:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+
+/* Filter form */
+#receipt-filter-form select,
+#receipt-filter-form input[type="date"] {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--light-gray);
+}
+#receipt-filter-form select:focus,
+#receipt-filter-form input[type="date"]:focus {
+    border-color: var(--black);
+}
+
+/* Label filter */
+#receipt-filter-form label {
+    color: var(--black);
+}
+
+/* Action button trong bảng */
+.sr-table-action button {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--light-gray);
+}
+.sr-table-action button:hover {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+}
+.sr-table-action button.edit-supplier-btn:hover {
+    background: var(--light-gray);
+    color: var(--black);
+    border-color: var(--black);
+}
+
+/* Form input */
+.form-input, .form-group input, .form-group select, .form-group textarea {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--light-gray);
+}
+.form-input:focus {
+    border-color: var(--black);
+    box-shadow: 0 0 8px rgba(10,10,10,0.08);
+}
+
+/* Nút chính trong form */
+.form-button, .modify-form-button, .add-row-btn, .submit-btn {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.form-button:hover, .modify-form-button:hover, .add-row-btn:hover, .submit-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* Nút đóng form */
+.close-supplier-form, .close-supplier-modify-form, .close-receipt-main-form, .close-receipt-detail-form {
+    color: var(--black);
+}
+.close-supplier-form:hover, .close-supplier-modify-form:hover, .close-receipt-main-form:hover, .close-receipt-detail-form:hover {
+    color: var(--primary);
+}
+
+/* Tổng tiền */
+.receipt-total {
+    color: var(--black);
+}
+
+/* Suggestions */
+.suggestions-list, .suggestions-product-list {
+    background: var(--white);
+    color: var(--black);
+}
+.suggestions-list li:hover, .suggestions-product-list li:hover {
+    background: var(--light-gray);
+    color: var(--black);
+}
+
+/* Ẩn các màu nổi bật không cần thiết */
+.sm-card .sm-numbers {
+    color: var(--black);
+}
+.sm-card .sm-icon-box {
+    color: var(--light-gray);
 }

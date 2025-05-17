@@ -196,7 +196,15 @@ function Employee() {
                             addModal.style.display = "none";
                             loadAdminList();
                         } else {
-                            alert(data.message || "Thêm nhân viên thất bại!");
+                            if(data.message==='username_duplicated')
+                            {
+                                document.getElementById("error-message").innerText = 'Tên đăng nhập đã được sử dụng!'
+                            }
+                            else
+                            {
+                                document.getElementById("error-message").innerText = '';
+                                alert(data.message || "Thêm nhân viên thất bại!");
+                            }
                         }
                     }
                     catch (error) {

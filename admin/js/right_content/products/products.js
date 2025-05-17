@@ -160,6 +160,9 @@ function closeAndOpenProductForm() {
                         if (data.success) {
                             alert(data.message);
                             editModal.style.display = "none";
+                            changeImageInput.value = "";
+                            const editImage = document.getElementById('product-change-image');
+                            if (editImage) editImage.src = "/web2/assets/blank.png";
                             loadProducts();
                         } else {
                             alert('Failed to update product: ' + data.message);

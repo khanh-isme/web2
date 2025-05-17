@@ -458,6 +458,8 @@ select[disabled] {
     box-sizing: border-box;
 }
 
+.product-filter-group input,
+.product-filter-group select,
 .product-form-group input,
 .product-form-group select,
 .product-form-group textarea {

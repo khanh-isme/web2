@@ -46,6 +46,16 @@ function responseHTML($permissions, $user)
                                 <option>Khách hàng tiềm năng</option>
                                 <option>Khách hàng trung thành</option>
                             </select>
+                            <div id="ranking-time">
+                                <div class="ranking-time-input">
+                                    <label>Từ ngày: </label>
+                                    <input type="date" id="ranking-time-from" value="2023-01-01">
+                                </div>
+                                <div class="ranking-time-input">
+                                    <label>Đến ngày: </label>
+                                    <input type="date" id="ranking-time-to" value="'.date('Y-m-d').'">
+                                </div>
+                            </div>
                             <table id="ranking-table">
                                 
                             </table>
@@ -431,7 +441,6 @@ function responseHTML($permissions, $user)
                             </div>';
 
         $right .= '</div>
-
                         <form id="customer-search-form">
                             <div class="customer-search-section">
                                 <div class="customer-search-title">SEARCH & FILTER CUSTOMERS</div>
@@ -452,6 +461,14 @@ function responseHTML($permissions, $user)
                                         <div class="customer-filter-group">
                                             <label for="search_email">Email</label>
                                             <input type="email" name="search_email" id="search_email" placeholder="Enter Email..." class="customer-search-bar">
+                                        </div>
+                                        <div class="customer-filter-group">
+                                            <label for="search_customer_status">Status</label>
+                                            <select name="search_status" id="search_customer_status" class="customer-search-bar">
+                                                <option value="">All Statuses</option>
+                                                <option value="active">Active</option>
+                                                <option value="locked">Locked</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="customer-search-row">
@@ -482,6 +499,7 @@ function responseHTML($permissions, $user)
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Address</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -650,38 +668,39 @@ function responseHTML($permissions, $user)
             if(isset($permissionsMap['ADD_EMPLOYEE']))
                 $right.='
         <form id="employee-add-form" action="#" method="POST">
-            <div id="employee-add-modal" class="employee-modal">
-                <div class="employee-modal-content">
-                    <div class="employee-modal-header">
-                        <h1>Add New Employee</h1>
-                        <span class="employee-close-button" data-modal-id="employee-add-modal">&times;</span>
+        <div id="employee-add-modal" class="employee-modal">
+            <div class="employee-modal-content">
+                <div class="employee-modal-header">
+                    <h1>Add New Employee</h1>
+                    <span class="employee-close-button" data-modal-id="employee-add-modal">&times;</span>
+                </div>
+                <div class="employee-modal-body">
+                    <div class="employee-form-group">
+                        <label for="employee-add-name">Username</label>
+                        <input type="text" name="username" id="employee-add-username" required>
+                        <div id="error-message" style="color: red; font-size: 14px; margin-top: 5px;"></div>
                     </div>
-                    <div class="employee-modal-body">
-                        <div class="employee-form-group">
-                            <label for="employee-add-name">Username</label>
-                            <input type="text" name="username" id="employee-add-username" required>
-                        </div>
-                        <div class="employee-form-group">
-                            <label for="employee-add-password">Password</label>
-                            <input type="password" name="password" id="employee-add-password" required>
-                        </div>
-                        <div class="employee-form-group">
-                            <label for="employee-add-phone">fullname</label>
-                            <input type="text" name="fullname" id="employee-add-fullname">
-                        </div>
-                        <div class="employee-form-group">
+                    <div class="employee-form-group">
+                        <label for="employee-add-password">Password</label>
+                        <input type="password" name="password" id="employee-add-password" required>
+                    </div>
+                    <div class="employee-form-group">
+                        <label for="employee-add-phone">fullname</label>
+                        <input type="text" name="fullname" id="employee-add-fullname">
+                    </div>
+                    <div class="employee-form-group">
                         <label for="employee-add-role">Role</label>
                         <select name="role" id="employee-add-role" required>
                             <!-- Option sẽ được render bằng PHP hoặc JS -->
                         </select>
                     </div>
-                    </div>
-                    <div class="employee-modal-footer">
-                        <button type="submit" class="employee-save-button" id="save-employee-button">Save Employee</button>
-                    </div>
+                </div>
+                <div class="employee-modal-footer">
+                    <button type="submit" class="employee-save-button" id="save-employee-button">Save Employee</button>
                 </div>
             </div>
-        </form>';
+        </div>
+    </form>';
         if(isset($permissionsMap['EDIT_EMPLOYEE']))
         $right.='
         <!-- Form sửa nhân viên -->
@@ -864,6 +883,24 @@ function responseHTML($permissions, $user)
                             <button id="add-receipt-btn">Add Receipt</button>';
         $right .= '
                         </div>
+                        <form id="receipt-filter-form" style="margin-bottom:10px; display:flex;gap:10px;align-items:end;width:100%;justify-content:space-between">
+                            <div>
+                                <label for="filter-receiptsBySupplier">Supplier:</label>
+                                <select id="filter-receiptsBySupplier" name="supplier_id">
+                                    <option value="">All</option>
+                                    <!-- Option sẽ được load bằng JS -->
+                                </select>
+                            </div>
+                            <div>
+                                <label for="filter-date-from">From:</label>
+                                <input type="date" id="filter-date-from" name="date_from">
+                            </div>
+                            <div>
+                                <label for="filter-date-to">To:</label>
+                                <input type="date" id="filter-date-to" name="date_to">
+                            </div>
+                            <button type="submit" class="receipt-search-button">Filter</button>
+                        </form>
                         <table class="sr-order-table">
                             <thead>
                                 <tr>

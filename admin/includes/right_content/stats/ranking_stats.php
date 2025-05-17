@@ -2,6 +2,8 @@
 require_once '../../connect.php';
 
 $type = $_POST['type'] ?? '';
+$startDate = $_POST['startDate'] . ' 00:00:00';
+$endDate = $_POST['endDate'] . ' 23:59:59';
 
 function renderTable($headers, $rows)
 {
@@ -125,10 +127,11 @@ switch ($type) {
                 SELECT u.name, u.email, u.phone, u.address, SUM(o.total_amount) AS revenue
                 FROM orders o
                 JOIN users u ON o.customer_id = u.id
-                where o.status='delivered'
+                where o.status='delivered' and (o.order_date between ? and ?)
                 GROUP BY o.customer_id
                 ORDER BY revenue DESC
             ");
+        $stmt->bind_param("ss",$startDate,$endDate);
         $stmt->execute();
         $stmt->bind_result($name, $email, $phone, $address, $revenue);
         $rows = [];

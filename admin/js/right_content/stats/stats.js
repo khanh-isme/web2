@@ -34,12 +34,22 @@ function handleStats() {
         else {
             document.getElementById("loyalty-explanation").style.display = "none";
         }
+
+        if (selected == 'Khách hàng có doanh thu cao nhất') {
+            document.getElementById("ranking-time").style.display = "flex";
+        }
+        else {
+            document.getElementById("ranking-time").style.display = "none";
+        }
+
         fetch("includes/right_content/stats/ranking_stats.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: "type=" + encodeURIComponent(selected)
+            body:   "type=" + encodeURIComponent(selected) + 
+                    "&startDate=" + encodeURIComponent(document.getElementById('ranking-time-from').value) + 
+                    "&endDate=" + encodeURIComponent(document.getElementById('ranking-time-to').value)
         })
             .then(res => res.text())
             .then(html => {
@@ -47,6 +57,9 @@ function handleStats() {
             })
             .catch(error => console.error("Lỗi tải bảng xếp hạng:", error));
     }
+
+    document.getElementById('ranking-time-from').addEventListener("change",render_ranking);
+    document.getElementById('ranking-time-to').addEventListener("change",render_ranking);
 
     render_ranking();
 

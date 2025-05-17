@@ -34,7 +34,7 @@ if ($method === 'POST') {
             $image_db_path = '';
 
             if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
-                $upload_dir = '../../../../assets/images/';
+                $upload_dir = '/web2/assets/images/';
                 if (!is_dir($upload_dir)) {
                     mkdir($upload_dir, 0755, true);
                 }
@@ -42,11 +42,16 @@ if ($method === 'POST') {
                 $extension = pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION);
                 $image_name = preg_replace('/[^a-zA-Z0-9._-]/', '', $original_name) . '.' . $extension;
                 $image_path = $upload_dir . $image_name;
-                $image_db_path = '../assets/images/' . $image_name;
+                $image_db_path = '/web2/assets/images/' . $image_name;
+
+                if (!move_uploaded_file($_FILES['product_image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $image_path)) {
+                    echo json_encode(['success' => false, 'message' => 'Không thể upload ảnh']);
+                    exit;
+                }
             } elseif (!empty($image_src)) {
                 $image_db_path = $image_src;
             } else {
-                $image_db_path = '../assets/images/logo.png';
+                $image_db_path = '/web2/assets/images/logo.png';
             }
 
             try {
@@ -111,7 +116,7 @@ if ($method === 'POST') {
 
             $image_name = $image_src;
             if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
-                $upload_dir = '../../../../assets/images/';
+                $upload_dir = '/web2/assets/images/';
                 if (!is_dir($upload_dir)) {
                     mkdir($upload_dir, 0755, true);
                 }
@@ -119,11 +124,16 @@ if ($method === 'POST') {
                 $extension = pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION);
                 $image_name = preg_replace('/[^a-zA-Z0-9._-]/', '', $original_name) . '.' . $extension;
                 $image_path = $upload_dir . $image_name;
-                $image_db_path = '../assets/images/' . $image_name;
+                $image_db_path = '/web2/assets/images/' . $image_name;
+
+                if (!move_uploaded_file($_FILES['product_image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $image_path)) {
+                    echo json_encode(['success' => false, 'message' => 'Không thể upload ảnh']);
+                    exit;
+                }
             } elseif (!empty($image_src)) {
                 $image_db_path = $image_src;
             } else {
-                $image_db_path = '../assets/images/default.png';
+                $image_db_path = '/web2/assets/images/default.png';
             }
             try {
                 $result = $product->updateProduct(

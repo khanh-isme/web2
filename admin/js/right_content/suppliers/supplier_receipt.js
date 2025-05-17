@@ -710,8 +710,51 @@ function Supplier_PageEvent() {
             updateTotalAmount();
         });
     }
-    function loadReceipts() {
-        fetch('includes/right_content/suppliers/receipts.php?action=receipts')
+
+    function loadSupplierFilterOptions() {
+        fetch("includes/right_content/suppliers/supplierAction.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "action=get_all"
+        })
+        .then(response => response.text())
+        .then(responseData => {
+            try {
+                let data = JSON.parse(responseData);
+                const select = document.getElementById("filter-receiptsBySupplier");
+                if (!select) return;
+                select.innerHTML = '<option value="">All</option>';
+                data.forEach(supplier => {
+                    const option = document.createElement("option");
+                    option.value = supplier.id;
+                    option.textContent = supplier.name;
+                    select.appendChild(option);
+                });
+            } catch (e) {
+                console.error(e);
+            }
+        });
+    }
+    loadSupplierFilterOptions();
+
+    const receiptFilterForm = document.getElementById('receipt-filter-form');
+    if (receiptFilterForm) {
+        receiptFilterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const supplier_id = document.getElementById('filter-receiptsBySupplier').value;
+            const date_from = document.getElementById('filter-date-from').value;
+            const date_to = document.getElementById('filter-date-to').value;
+            loadReceipts({
+                supplier_id,
+                date_from,
+                date_to
+            });
+        });
+    }
+
+    function loadReceipts(filter = {}) {
+        const params = new URLSearchParams({ action: "receipts", ...filter}).toString();
+        fetch('includes/right_content/suppliers/receipts.php?' + params)
             .then(response => response.text())
             .then(responseData => {
                 try {

@@ -196,6 +196,34 @@ canvas {
     font-size: 18px;
 }
 
+#ranking-time
+{
+    display:none;
+    flex-direction: row;
+    justify-content: right;
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+}
+
+.ranking-time-input
+{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ranking-time-input input
+{
+    margin-left: 10px;
+    border: 1px solid black;
+    border-radius: none;
+    outline: none;
+    font-size: 18px;
+}
+
 #ranking-table {
     width: 100%;
     border-collapse: collapse;

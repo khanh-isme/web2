@@ -1,33 +1,37 @@
 <?php
-include '../../connect.php';
+include '../../connect.php'; // Kết nối CSDL
 
 header('Content-Type: application/json');
 
 $response = ['status' => 'error', 'message' => 'Invalid Request.'];
 
+// Chỉ xử lý nếu là POST và có customer_id
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['customer_id'])) {
     $customerId = filter_var($_POST['customer_id'], FILTER_VALIDATE_INT);
+    $currentStatus = trim($_POST['current_status'] ?? ''); // Nhận trạng thái hiện tại từ frontend
 
     if ($customerId === false || $customerId <= 0) {
-        $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Invalid Customer ID.</p>';
-    } else {
+        $response['message'] = 'Invalid Customer ID.';
+    } elseif (empty($currentStatus) || !in_array($currentStatus, ['active', 'locked'])) {
+        $response['message'] = 'Invalid current status provided.';
+    }
+    else {
+        // Xác định trạng thái mới
+        $newStatus = ($currentStatus === 'active') ? 'locked' : 'active';
 
-        $newStatus = 'deleted';
+        // Chuẩn bị câu lệnh UPDATE để đổi status
         $sql = "UPDATE users SET status = ? WHERE id = ?";
-
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-
-            $stmt->bind_param("si", $newStatus, $customerId);
+            $stmt->bind_param("si", $newStatus, $customerId); // s = string (cho status), i = integer (cho id)
 
             if ($stmt->execute()) {
-
                 if ($stmt->affected_rows > 0) {
-                    $response['status'] = '<p><i class="fa-regular fa-circle-check green icon"></i>success</p>';
-                    $response['message'] = '<p><i class="fa-regular fa-circle-check green icon"></i>Customer marked as deleted successfully.</p>';
+                    $response['status'] = 'success';
+                    $response['message'] = '<p><i class="fa-regular fa-circle-check green icon"></i>Customer status updated successfully.</p>';
+                    $response['new_status'] = $newStatus; // Trả về trạng thái mới để JS cập nhật UI
                 } else {
-
                     $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Customer not found or status already set.</p>';
                 }
             } else {
@@ -41,10 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['customer_id'])) {
         }
     }
 } else {
-    $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Invalid request method or missing customer ID.</p>';
+     $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Invalid request method or missing parameters.</p>';
 }
 
 $conn->close();
-
 echo json_encode($response);
 exit();
+?>

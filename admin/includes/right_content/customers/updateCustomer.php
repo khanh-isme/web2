@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
                 
                 if ($stmt->affected_rows > 0) {
                     $response['status'] = 'success';
-                    $response['message'] = "Customer updated successfully!";
+                    $response['message'] = '<p><i class="fa-regular fa-circle-check green icon"></i>Customer updated successfully!</p>';
                     
                     $response['updated_data'] = [
                         'id' => $id,
@@ -69,26 +69,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
                     ];
                 } else {
                     $response['status'] = 'info'; 
-                    $response['message'] = "No changes were made to the customer.";
+                    $response['message'] = '<p><i class="fa-regular fa-circle-check green icon"></i>No changes were made to the customer.</p>';
                 }
             } else {
                 
-                $response['message'] = "Error updating customer: " . $stmt->error;
+                $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Error updating customer: </p>' . $stmt->error;
                 $response['sql_error'] = $stmt->error;
             }
             $stmt->close();
         } else {
             
-            $response['message'] = "Error preparing update statement: " . $conn->error;
+            $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Error preparing update statement: </p>' . $conn->error;
             $response['sql_error'] = $conn->error;
         }
     } else {
-        $response['status'] = 'validation_error';
-        $response['message'] = 'Validation failed.';
+        $response['status'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>validation_error</p>';
+        $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Validation failed.</p>';
         $response['errors'] = $errors;
     }
 } else {
-    $response['message'] = 'Invalid request method or missing ID.';
+    $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Invalid request method or missing ID.</p>';
 }
 
 $conn->close();

@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt_check->close();
         } else {
 
-            $response['message'] = "Database error checking email: " . $conn->error;
+            $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Database error checking email: </p>' . $conn->error;
             echo json_encode($response);
             $conn->close();
             exit();
@@ -82,21 +82,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
 
-                $response['status'] = 'success';
-                $response['message'] = 'Customer added successfully!';
+                $response['status'] = '<p><i class="fa-regular fa-circle-check green icon"></i>success</p>';
+                $response['message'] = '<p><i class="fa-regular fa-circle-check green icon"></i>Customer added successfully!</p>';
             } else {
 
-                $response['message'] = "Error adding customer: " . $stmt->error;
+                $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Error adding customer: </p>' . $stmt->error;
             }
             $stmt->close();
         } else {
 
-            $response['message'] = "Error preparing insert statement: " . $conn->error;
+            $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Error preparing insert statement: </p>' . $conn->error;
         }
     } else {
 
-        $response['status'] = 'validation_error';
-        $response['message'] = 'Please correct the errors below.';
+        $response['status'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>validation_error</p>';
+        $response['message'] = '<p><i class="fa-regular fa-circle-xmark red icon"></i>Please correct the errors below.</p>';
         $response['errors'] = $errors;
     }
 }
