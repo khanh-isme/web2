@@ -18,6 +18,63 @@
     --box-shadow :2px 2px 10px 4px rgb(14 55 54 / 15%);
 }
 
+/* message dialog    */
+@keyframes showMessageDialog {
+    0% {
+        transform: translateX(100%);  /* Đưa phần tử ra ngoài màn hình (bên phải) */
+        opacity: 0;
+    }
+    10% {
+        transform: translateX(-30px);  /* Di chuyển vào vị trí ban đầu (trong màn hình) */
+        opacity: 1;
+    }
+    80% {
+        transform: translateX(-30px);  /* Giữ phần tử ở trong màn hình */
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);  /* Đưa phần tử ra ngoài màn hình (bên phải) */
+        opacity: 0;
+    }
+}
+
+#messageDialog {
+    display: inline-flex;
+    position: fixed;  /* Dùng position fixed để cố định phần tử ở một vị trí */
+    top: 30px;  /* Vị trí phần tử */
+    right: 0;   /* Giữ phần tử ở bên phải màn hình */
+    height: 75px;
+    min-width: 300px;
+    padding: 0 20px 0 20px; 
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 75px;  /* Căn giữa văn bản */
+    opacity: 0;  /* Ban đầu ẩn phần tử */
+    z-index: 999999;
+}
+.icon
+{
+    vertical-align: middle;
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.red
+{
+    color: red;
+}
+
+.green
+{
+    color: green;
+}
+
+
+
+/*hết phầm messs*/
+
 header{
     position: fixed; /*giúp cố định vị trí của phần tử trên trang, sao cho nó luôn hiển thị ở một vị trí cố định*/
     width: 100%;
@@ -117,93 +174,20 @@ header.sticky{
 }
 
 
-/* --------------------------------Style for the cart popup --------------------------------*/
-.cart-popup {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    width: 300px;
-    background-color: #fff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    padding: 15px;
-    display: none;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 100;
+/*  icon user sau khi đăng nhập*/
+#greeting-chip {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: #000000; /* Màu nền chính */
+  color: white;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-family: sans-serif;
+  font-size: 14px;
+  gap: 10px;
+  width: fit-content;
 }
-.cart-popup a{
-    text-align: center;
-}
-
-
-
-
-
-/* Style for cart items */
-.cart-item {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.cart-item img {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-}
-
-.cart-item-details {
-    flex-grow: 1;
-}
-
-.cart-item-name {
-    font-weight: bold;
-}
-
-.cart-item-price {
-    color: #555;
-}
-
-.cart-item-size {
-    font-size: 12px;
-    color: #777;
-}
-
-.cart-item-delete {
-    cursor: pointer;
-    color: #dc3545;
-}
-
-
-
-
-/* ------------------------Style for total and checkout button-------------------------- */
-.cart-total {
-    font-weight: bold;  
-    font-size: 16px;
-    text-align: right;
-}
-
-.checkout-btn {
-    background-color: #111010;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.checkout-btn:hover {
-    opacity: 0.9;
-}
-
-
-
-
 
 
 
@@ -273,4 +257,176 @@ header.sticky{
     background-color: #b8b024;
     color: #000;
   }
+
+
+
+
+/* --------------------------------Style for the cart popup --------------------------------*/
+.cart-popup {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Ẩn ra ngoài màn hình */
+    width:40%;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+}
+/* Khi thêm class 'active', popup trượt vào */
+.cart-popup.active {
+    right: 0;
+}
+
+
+
+.cart-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-title h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.exit-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.exit-icon:hover {
+    color: #e53935;
+}
+
+
+
+
+/* Mỗi item */
+.cart-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.cart-item img {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.cart-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cart-item-info p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.cart-item-info p strong {
+    font-size: 18px;
+    color: #111;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.quantity-control button {
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.quantity-control button:hover {
+    background-color: #eaeaea;
+}
+
+.quantity-control .quantity {
+    min-width: 20px;
+    text-align: center;
+}
+
+.price {
+    font-weight: bold;
+    color: #007b00;
+}
+
+.remove-item {
+    margin-top: 10px;
+    align-self: flex-start;
+    background-color: #ff4d4d;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.remove-item:hover {
+    background-color: #e03e3e;
+}
+
+/* ------------------------Style for total and checkout button-------------------------- */
+.cart-checkout {
+    text-align: right;
+    margin-top: 20px;
+    padding: 15px;
+    border-top: 1px solid #eee;
+    background-color: #fafafa;
+    border-radius: 10px;
+}
+
+#checkoutBtn {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#checkoutBtn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+#checkoutBtn:active {
+    transform: translateY(0);
+    background-color: #1e7e34;
+}
 

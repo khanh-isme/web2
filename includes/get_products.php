@@ -1,11 +1,5 @@
 <?php
-$host = "127.0.0.1:3307";
-$user = "root";
-$password = "";
-$database = "shoe";
-
-// Kết nối database với kiểm tra lỗi
-$connection = new mysqli($host, $user, $password, $database);
+include "config.php";
 if ($connection->connect_error) {
     die(json_encode(["error" => "Kết nối database thất bại: " . $connection->connect_error]));
 }

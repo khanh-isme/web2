@@ -33,37 +33,43 @@ if (!defined('HEADER_INCLUDED')) {
         <div class="search-icon">
             <i class='bx bx-search' onclick="toggleSearch()"></i>
         </div>
-        <a href="/web2/pages/login.php"><i class='bx bx-user'></i></a>
+
+        <a id="nav-user" href="" class="nav-link" data-page="login.php">
+            <i class='bx bx-user'></i>
+        </a>
+
+
         <div class="cart-icon" onclick="toggleCartPopup()">
             <i class='bx bx-cart' id="cart-icon"></i>
         </div>
+
         <div class="bx bx-menu" id="menu-icon"></div>
     </div>
+
+
+    
 </header>
 
 <!-- Cart Popup -->
 <div class="cart-popup" id="cartPopup">
-    <!-- Mỗi item có thể được tạo bằng JS từ dữ liệu giỏ hàng -->
-    <div class="cart-item">
-        <img src="/web2/images/13.png" alt="Product Image">
-        <div class="cart-item-details">
-            <div class="cart-item-name">T-Shirt 14A</div>
-            <div class="cart-item-price">$50.05 x1</div>
-        </div>
-        <div class="cart-item-delete" onclick="removeItem()">
-            <i class='bx bxs-trash-alt'></i>
+    <div class="cart-title">
+        <h3>Giỏ Hàng</h3>
+        <div class="exit-icon" id="closeCart">
+            <i class='bx bx-x'></i>
         </div>
     </div>
 
-    <a href="/web2/pages/bag.php">
-        <p>See more...</p>
-    </a>
+    <div class="cart-items" id="cartItems">
+            <!-- Các item sẽ được thêm động tại đây bằng JS -->
+    </div>
 
-    <div class="cart-total">Total: $100.10</div>
-    <a href="/web2/pages/bag.php">
-        <button class="checkout-btn">CHECK YOUR BAG</button>
-    </a>
+    <div class="cart-checkout">
+            <button id="checkoutBtn">Thanh toán</button>
+        </div>
+    
 </div>
+
+
 
 <!-- Search Popup -->
 <div class="search-container" id="searchPopup">
@@ -107,3 +113,5 @@ if (!defined('HEADER_INCLUDED')) {
         <button type="submit" class="search-button">Search</button>
     </form>
 </div>
+
+

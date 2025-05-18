@@ -1,0 +1,923 @@
+:root {
+    --black: #0A0A0A;
+    --primary: #ED624E;
+    --secondary: #95B8A4;
+    --light-gray: #E1E1DA;
+    --white: #FEFEFE;
+    --primary-dark: #14375F;
+    --secondary-light: #6D8199;
+    --accent-light: #E24943;
+    --accent-dark: #E0312E;
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+}
+
+
+.sr-container {
+    position: relative;
+    max-width: 100%;
+}
+
+.sr-main {
+    position: absolute;
+    width: 100%;
+    background: var(--white);
+    transition: 0.5s;
+    padding: 10px;
+}
+
+.main.active {
+    width: calc(100% - 60px);
+    left: 60px;
+}
+
+.sr-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 25px;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    border: solid 1px var(--primary);
+}
+
+.sr-topbar .sr-title {
+    font-size: 20px;
+    color: var(--primary);
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.sm-card-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.sm-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sm-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.sm-card .sm-numbers {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.sm-card .sm-card-name {
+    font-size: 0.9rem;
+    color: var(--black);
+}
+
+.sm-card .sm-icon-box {
+    font-size: 2rem;
+    color: var(--secondary);
+}
+
+.sr-table-switch {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.sr-table-switch button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--light-gray);
+    color: var(--black);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.sr-table-switch button:hover,
+.sr-table-switch button.active {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.sr-receipt-details,
+.sr-supplier-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    border: 0.5px solid var(--secondary);
+    border-radius: 10px;
+}
+
+.search-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.search-icon {
+    position: absolute;
+    top: 37%;
+    left: 10px;
+    top: 15px;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+#supplier-search {
+    padding: 8px 12px 8px 32px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 350px;
+    transition: box-shadow 0.2s ease;
+}
+
+#supplier-search:focus {
+    box-shadow: 0 0 4px #007bff;
+    outline: none;
+}
+
+.sr-recent-orders {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+}
+
+.sr-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.sr-card-header h2 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 0;
+}
+
+.sr-card-header button {
+    padding: 8px 14px;
+    background-color: var(--black);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.sr-card-header button:hover {
+    background-color: gray;
+}
+
+.sr-order-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.sr-order-table thead {
+    background-color: var(--secondary);
+    color: var(--white);
+}
+
+.sr-order-table thead td {
+    font-weight: 600;
+    padding: 10px;
+    text-align: left;
+}
+
+.sr-order-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.sr-order-table tbody tr:hover {
+    background-color: var(--light-gray);
+}
+
+.sr-table-body {
+    overflow-y: auto;
+}
+
+.sr-order-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid var(--light-gray);
+    color: var(--black);
+}
+
+.sr-order-table tbody td:last-child {
+    text-align: center;
+    display: flex;
+}
+
+.sr-table-action {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.sr-table-action button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--white);
+    color: var(--black);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    outline: none;
+}
+
+.sr-table-action button:hover {
+    background-color: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.sr-table-action button.edit-supplier-btn:hover {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+@media (max-width: 991px) {
+    .sr-main {
+        width: 100%;
+        left: 0;
+    }
+
+    .main.active {
+        left: 60px;
+    }
+
+    .sr-topbar .sr-title {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .sm-card-box {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .sr-topbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .sr-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .sr-card-header button {
+        width: 100%;
+    }
+
+    .sr-table-switch {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sr-table-switch button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+.supplier-add-ctn {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: var(--overlay-bg);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.close-supplier-form {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.close-supplier-form:hover {
+    color: var(--accent-light);
+}
+
+.supplier-form-container {
+    position: relative;
+    padding: 40px 35px;
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 480px;
+    z-index: 1001;
+}
+
+.supplier-form-title {
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--secondary-light);
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--primary-dark);
+    transition: 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--accent-light);
+    box-shadow: 0 0 8px rgba(226, 73, 67, 0.2);
+}
+
+.form-button {
+    background-color: var(--accent-light);
+    color: var(--white);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.form-button:hover {
+    background-color: var(--accent-dark);
+}
+
+.supplier-modify-ctn {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: var(--overlay-bg);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.close-supplier-modify-form {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+.close-supplier-modify-form:hover {
+    color: var(--accent-light);
+}
+
+.supplier-modify-form-title {
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.modify-form-button {
+    background-color: var(--accent-dark);
+    color: var(--white);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.modify-form-button:hover {
+    background-color: var(--accent-light);
+}
+
+.receipt-add-form {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-bg);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.receipt-main-form-container {
+    position: relative;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+}
+
+.close-receipt-main-form {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s ease;
+}
+
+.close-receipt-main-form:hover {
+    color: var(--accent-light);
+}
+
+.receipt-main-form-title {
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+input#product-search,
+input#percent,
+input#supplier-add-search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--secondary-light);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button#open-receipt-detail-form-btn {
+    background-color: var(--accent-dark);
+    color: var(--white);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button#open-receipt-detail-form-btn:hover {
+    background-color: var(--primary);
+}
+
+.receipt-detail-form-ctn {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-bg);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.receipt-detail-form-container {
+    position: relative;
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 1000px;
+}
+
+.close-receipt-detail-form {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--accent-dark);
+    cursor: pointer;
+}
+
+.receipt-detail-form-title {
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.receipt-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+    font-size: 0.95rem;
+}
+
+.receipt-product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.receipt-product-table th {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 10px;
+    font-weight: 600;
+}
+
+.receipt-product-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid var(--light-gray);
+}
+
+.receipt-product-table select,
+.receipt-product-table input[type="number"] {
+    padding: 5px;
+    border: 1px solid var(--secondary-light);
+    border-radius: 5px;
+    width: 100%;
+    max-width: 100px;
+}
+
+.sizes-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 5px;
+}
+
+.size-input-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.size-input-group input {
+    width: 70px;
+    padding: 4px;
+    border-radius: 6px;
+    border: 1px solid var(--secondary-light);
+    text-align: center;
+}
+
+.add-size-btn,
+.remove-size-btn {
+    background-color: var(--accent-light);
+    color: var(--white);
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-size-btn {
+    background-color: var(--accent-dark);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.add-row-btn,
+.submit-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: var(--primary);
+    color: var(--white);
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-row-btn:hover,
+.submit-btn:hover {
+    background-color: var(--accent-dark);
+}
+
+.remove-row-btn {
+    background: none;
+    border: none;
+    color: var(--accent-dark);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.receipt-total {
+    text-align: right;
+    font-weight: bold;
+    color: var(--accent-dark);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 500px) {
+    .supplier-form-container {
+        padding: 20px;
+        margin: 0 10px;
+    }
+}
+
+.suggestions-list {
+    position: absolute;
+    background-color: white;
+    border-radius: 6px;
+    margin-top: 5px;
+    list-style: none;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 999;
+}
+
+.suggestions-product-list {
+    width: 50px;
+    position: absolute;
+    background-color: white;
+    border-radius: 6px;
+    margin-top: 5px;
+    list-style: none;
+    width: 25%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 999;
+}
+
+.suggestions-product-list li,
+.suggestions-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.suggestions-product-list li:hover,
+.suggestions-list li:hover {
+    background-color: var(--light-gray);
+}
+
+#receipt-filter-form select,
+#receipt-filter-form input[type="date"] {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 140px;
+    font-size: 15px;
+    background: #fff;
+    transition: border-color 0.2s;
+}
+
+#receipt-filter-form div{
+    display: flex;
+    align-items: center;
+}
+
+#receipt-filter-form{
+    display: flex;
+    justify-content: center;
+}
+
+#receipt-filter-form select:focus,
+#receipt-filter-form input[type="date"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+#receipt-filter-form label {
+    font-weight: 500;
+    display: block;
+    margin-right: 5px;
+}
+
+#receipt-filter-form button.receipt-search-button {
+    padding: 7px 18px;
+    background: var(--accent-dark);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#receipt-filter-form button.receipt-search-button:hover {
+    background: var(--accent-light);
+}
+
+
+/* ----------------------------------------------------------------------- */
+
+
+
+/* Nền trắng, chữ đen */
+body, .sr-main, .sr-recent-orders, .sm-card, .supplier-form-container, .supplier-modify-form-container, .receipt-main-form-container, .receipt-detail-form-container {
+    background: var(--white);
+    color: var(--black);
+}
+
+/* Border và shadow nhẹ */
+.sr-topbar, .sm-card, .sr-recent-orders, .supplier-form-container, .supplier-modify-form-container, .receipt-main-form-container, .receipt-detail-form-container {
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+/* Header, tiêu đề */
+.sr-topbar .sr-title,
+.sr-card-header h2,
+.supplier-form-title,
+.supplier-modify-form-title,
+.receipt-main-form-title,
+.receipt-detail-form-title {
+    color: var(--black);
+}
+
+/* Table */
+.sr-order-table {
+    background: var(--white);
+    color: var(--black);
+}
+.sr-order-table thead {
+    background: var(--light-gray);
+    color: var(--black);
+}
+.sr-order-table thead td {
+    font-weight: 600;
+}
+.sr-order-table tbody tr:hover {
+    background-color: #f7f7f7;
+}
+.sr-order-table tbody td {
+    color: var(--black);
+}
+
+.sr-table-switch button,
+#receipt-filter-form button.receipt-search-button {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    border-bottom: gray 3px solid;
+    border-left: gray 3px solid;
+}
+.sr-table-switch button:hover,
+.sr-table-switch button.active,
+#receipt-filter-form button.receipt-search-button:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+
+/* Filter form */
+#receipt-filter-form select,
+#receipt-filter-form input[type="date"] {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--light-gray);
+}
+#receipt-filter-form select:focus,
+#receipt-filter-form input[type="date"]:focus {
+    border-color: var(--black);
+}
+
+/* Label filter */
+#receipt-filter-form label {
+    color: var(--black);
+}
+
+/* Action button trong bảng */
+.sr-table-action button {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--light-gray);
+}
+.sr-table-action button:hover {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+}
+.sr-table-action button.edit-supplier-btn:hover {
+    background: var(--light-gray);
+    color: var(--black);
+    border-color: var(--black);
+}
+
+/* Form input */
+.form-input, .form-group input, .form-group select, .form-group textarea {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--light-gray);
+}
+.form-input:focus {
+    border-color: var(--black);
+    box-shadow: 0 0 8px rgba(10,10,10,0.08);
+}
+
+/* Nút chính trong form */
+.form-button, .modify-form-button, .add-row-btn, .submit-btn {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.form-button:hover, .modify-form-button:hover, .add-row-btn:hover, .submit-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* Nút đóng form */
+.close-supplier-form, .close-supplier-modify-form, .close-receipt-main-form, .close-receipt-detail-form {
+    color: var(--black);
+}
+.close-supplier-form:hover, .close-supplier-modify-form:hover, .close-receipt-main-form:hover, .close-receipt-detail-form:hover {
+    color: var(--primary);
+}
+
+/* Tổng tiền */
+.receipt-total {
+    color: var(--black);
+}
+
+/* Suggestions */
+.suggestions-list, .suggestions-product-list {
+    background: var(--white);
+    color: var(--black);
+}
+.suggestions-list li:hover, .suggestions-product-list li:hover {
+    background: var(--light-gray);
+    color: var(--black);
+}
+
+/* Ẩn các màu nổi bật không cần thiết */
+.sm-card .sm-numbers {
+    color: var(--black);
+}
+.sm-card .sm-icon-box {
+    color: var(--light-gray);
+}

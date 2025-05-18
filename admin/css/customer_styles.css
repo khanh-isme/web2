@@ -1,0 +1,416 @@
+/* General styles */
+input[readonly], textarea[readonly], select[disabled] {
+    background-color: #f5f5f5;
+    color: #888;
+    cursor: not-allowed;
+}
+.CUSTOMERS.content-ctn {
+    height: 100vh;
+}
+/* Content styles */
+.customer-content {
+    margin: 10px;
+    /* margin-bottom: 20px; */
+    flex: 1;
+    padding: 20px;
+    border: solid 3px black;
+    border-radius: 8px;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header styling */
+.customer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.customer-header h1 {
+    font-size: 40px;
+    color: black;
+    margin: 0;
+}
+
+.customer-help-text {
+    font-size: 14px;
+    color: black;
+    flex: 1;
+    text-align: left;
+    margin: 25px 0 0 20px;
+    font-weight: bold;
+}
+
+.customer-header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.customer-add-button,
+.customer-action-button { /* Generic action button style */
+    padding: 10px 20px;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.customer-add-button:hover,
+.customer-action-button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Search section */
+.customer-search-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.customer-search-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.customer-search-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Increased gap slightly */
+}
+
+.customer-search-row {
+    display: flex;
+    gap: 15px; /* Increased gap slightly */
+    align-items: flex-end; /* Align items to the bottom for button alignment */
+}
+
+.customer-search-bar {
+    flex-grow: 1; /* Allow search bar to take available space */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.customer-search-row input[type="text"],
+.customer-search-row input[type="email"],
+.customer-search-row input[type="tel"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1; /* Make input fields flexible */
+}
+
+.customer-filter-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Make filter groups flexible */
+    min-width: 150px; /* Optional: Set a minimum width */
+}
+
+.customer-filter-group label {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 5px;
+}
+
+.customer-search-button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 40px; /* Match input height */
+    align-self: flex-end; /* Align button to bottom in its container */
+}
+
+.customer-search-button:hover {
+    background-color: #444;
+}
+
+/* Status info */
+.customer-status-info {
+    margin-bottom: 15px;
+    padding-left: 5px;
+    color: black;
+    font-weight: 700;
+}
+
+/* Table styles */
+.table-scroll {
+    /* flex-grow: 1; Allow table scroll area to fill remaining space */
+    overflow-y: auto; /* Add vertical scroll */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 45vh; /* Ensure a minimum height */
+}
+
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.customer-table thead {
+    background-color: #f5f5f5;
+    text-align: left;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.customer-table th,
+.customer-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #2c3e50;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    table-layout: auto;
+    text-wrap: wrap;
+}
+/* Adjust column widths as needed */
+
+.customer-table tbody tr {
+    display: table-row;
+    width: 100%;
+}
+
+.customer-table .customer-edit-button,
+.customer-table .customer-delete-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;  /* Đặt chiều rộng cố định */
+    height: 32px; /* Đặt chiều cao cố định (bằng chiều rộng) */
+    padding: 0; /* Bỏ padding để icon căn giữa */
+    font-size: 14px; /* Cỡ chữ/icon */
+    border: 1px solid #adb5bd; /* Viền xám nhạt hơn */
+    border-radius: 4px; /* Bo góc */
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    margin-left: 5px; /* Khoảng cách giữa các nút */
+    vertical-align: middle;
+}
+
+.customer-table .customer-edit-button:hover {
+    background-color: black;
+    color: white;
+}
+
+.customer-edit-button i {
+    margin-right: 5px; /* Adjusted margin */
+}
+
+/* Modal styles */
+.customer-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow-y: auto; /* Allow modal scrolling if content overflows */
+    padding: 20px; /* Add padding for smaller screens */
+    box-sizing: border-box;
+}
+
+.customer-modal-content {
+    background-color: white;
+    padding: 30px; /* Increased padding */
+    border-radius: 8px;
+    width: 100%; /* Full width on small screens */
+    max-width: 600px; /* Max width for larger screens */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: solid 2px black;
+    max-height: 100vh; /* Limit height */
+    overflow-y: auto; /* Scroll inside content if needed */
+}
+
+.customer-modal-body {
+    display: flex;
+    flex-direction: column; /* Stack form groups vertically */
+    gap: 15px; /* Space between form groups */
+}
+
+/* No left/right split needed for customer modal */
+
+.customer-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 5px; /* Reduced bottom margin */
+}
+
+.customer-form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 2px;
+    font-size: 14px; /* Consistent font size */
+}
+
+.customer-form-group input[type="text"],
+.customer-form-group input[type="email"],
+.customer-form-group input[type="password"],
+.customer-form-group input[type="tel"],
+.customer-form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.customer-form-group textarea {
+    min-height: 80px; /* Give textarea some height */
+    resize: vertical; /* Allow vertical resize */
+}
+
+.customer-close-button {
+    position: absolute;
+    top: 15px; /* Adjusted position */
+    right: 15px; /* Adjusted position */
+    font-size: 24px; /* Larger close icon */
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+.customer-close-button:hover {
+    color: #ff0000;
+}
+
+.customer-save-button { /* Renamed for generic save */
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold; /* Make save button bold */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.customer-save-button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black; /* Add border on hover */
+}
+
+.customer-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    padding-top: 20px; /* Add padding above footer */
+    border-top: 1px solid #eee; /* Separator line */
+}
+
+.customer-modal-header {
+    display: flex;
+    justify-content: space-between; /* Title on left, close button handled by absolute positioning */
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px; /* Add padding below header */
+    border-bottom: 1px solid #eee; /* Separator line */
+}
+
+.customer-modal-header h1 {
+    font-size: 22px; /* Slightly smaller modal title */
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+}
+
+.customer-table .customer-lock-button,
+.customer-table .customer-unlock-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 32px; */ /* Có thể bỏ width cố định nếu muốn nút dài hơn với text */
+    height: 32px;
+    padding: 0 8px; /* Thêm padding nếu có text */
+    font-size: 13px; /* Điều chỉnh nếu cần */
+    border: 1px solid #adb5bd;
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.customer-table .customer-lock-button i,
+.customer-table .customer-unlock-button i {
+    margin-left: 4px; /* Khoảng cách giữa text và icon */
+}
+
+.customer-table .customer-lock-button {
+    color: #dc3545; /* Màu đỏ cho nút Khóa */
+    border-color: #dc3545;
+}
+.customer-table .customer-lock-button:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.customer-table .customer-unlock-button {
+    color: #28a745; /* Màu xanh cho nút Mở khóa */
+    border-color: #28a745;
+}
+.customer-table .customer-unlock-button:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Specific Add Modal ID if needed, otherwise generic classes are fine */
+#customer-add-modal {
+    /* Can inherit from .customer-modal */
+}
+
+#customer-edit-modal {
+     /* Can inherit from .customer-modal */
+}
+
+/* Remove image specific styles if not used elsewhere */
+/*
+.customer-image-preview,
+.change-image-button,
+.custom-file-label,
+.customer-image-upload
+{
+    display: none;
+}
+*/

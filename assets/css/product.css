@@ -134,3 +134,36 @@
     color: #777;
     margin-top: 15px;
 }
+
+
+.quantity-selector {
+    margin: 15px 0;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-controls button {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.quantity-controls input[type="number"] {
+    width: 60px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.button.active {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+.button {
+    transition: background-color 0.3s, color 0.3s;
+}

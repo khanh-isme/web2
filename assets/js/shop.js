@@ -123,6 +123,8 @@
                     </div>`).join('');
 
             console.log(`✅ Hiển thị ${products.length} sản phẩm`);
+
+            initProductEvents() 
         }
 
         function updatePaginationButtons() {
@@ -214,39 +216,57 @@
         });
 
 
-
-
+        
 
 
         // Xử lý sự kiện click vào sản phẩm
-        $(document).on("click", ".product a", function (event) {
-            event.preventDefault();
-        
-            let productId = $(this).closest(".product").data("product-id");
+        function productClickHandler(e) {
+            e.preventDefault();
+
+            const productId = this.closest(".product").dataset.productId;
             if (!productId) {
                 console.error("❌ Không tìm thấy ID sản phẩm.");
                 return;
             }
-        
-            console.log("🛍 Sản phẩm ID:", productId);
-        
-            // Gửi AJAX đến product.php
+
             fetch(`/web2/pages/product.php?id=${productId}`)
                 .then(response => response.text())
                 .then(html => {
-                    document.getElementById('content').innerHTML = html;
+                const contentDiv = document.getElementById("content");
+                if (contentDiv) {
+                    contentDiv.innerHTML = html;
+                    console.log(`✅ Đã hiển thị chi tiết sản phẩm ID ${productId}`);
+
+                    // Gọi các hàm cần thiết sau khi load xong trang chi tiết
+                    if (typeof hashButtonClickSize === "function") {
+                        hashButtonClickSize();
+                        initAddToCartButton();
+                    }
+                }
                 })
-                .catch(error => console.error('Lỗi khi tải sản phẩm:', error));
-        });
-        
-        
+                .catch(error => console.error(`❌ Lỗi khi tải sản phẩm ID ${productId}:`, error));
+        }
+
+
         // Gọi fetchProducts khi trang được load
         fetchProducts(currentPage);
+
+            // ===== GẮN SỰ KIỆN CHO TẤT CẢ PRODUCT LINKS =====
+        function initProductEvents() {
+            const productLinks = document.querySelectorAll(".product a");
+            productLinks.forEach(link => {
+                link.addEventListener("click", productClickHandler);
+            });
+        }
     }
     
 
+
     
 })();
+
+
+
 
 window.resetFilters = function(){
     console.log("🔄 Đặt lại toàn bộ bộ lọc");

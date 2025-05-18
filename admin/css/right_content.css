@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#right_content {
+    width: calc(80% - 2px);
+    margin-left: calc(20% + 2px);
+}
+
+.content-ctn {
+    display: none;
+    flex-direction: column;
+}
+
+.content-ctn.active {
+    display: flex;
+}

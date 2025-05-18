@@ -3,9 +3,6 @@
 
 
 
-
-
-
 async function fetchData() {
     try {
         // Gọi API lấy danh sách sản phẩm
@@ -71,12 +68,22 @@ function attachProductClickEvent() {
             }
 
             // Gửi AJAX đến product.php
-            fetch(`/web2/pages/product.php?id=${productId}`)
+           fetch(`/web2/pages/product.php?id=${productId}`)
                 .then(response => response.text())
                 .then(html => {
-                    document.getElementById('content').innerHTML = html;
+                const contentDiv = document.getElementById("content");
+                if (contentDiv) {
+                    contentDiv.innerHTML = html;
+                    console.log(`✅ Đã hiển thị chi tiết sản phẩm ID ${productId}`);
+
+                    // Gọi các hàm cần thiết sau khi load xong trang chi tiết
+                    if (typeof hashButtonClickSize === "function") {
+                        hashButtonClickSize();
+                        initAddToCartButton();
+                    }
+                }
                 })
-                .catch(error => console.error('Lỗi khi tải sản phẩm:', error));
+                .catch(error => console.error(`❌ Lỗi khi tải sản phẩm ID ${productId}:`, error));
         });
     });
 }
@@ -116,7 +123,7 @@ function renderProductSale(products) {
     attachProductClickEvent(); // Thêm sự kiện click cho sản phẩm trong phần sale
 }
 
-const navLinks = document.querySelectorAll(".nav-link");
+navLinks = document.querySelectorAll(".nav-link");
 
     navLinks.forEach(link => {
         link.addEventListener("click", function (e) {

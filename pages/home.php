@@ -98,7 +98,7 @@ include(__DIR__ . "/../includes/config.php");
                 <div class="the-lasted-text">
                     <h4>run in the rain</h4>
                     <h1>Ai sợ đi về</h1>
-                    <a href="shop.html" class="the-lasted-btn"> Shop Now <i class='bx bx-right-arrow-alt'></i> </a>
+                    <a href=""  class="nav-link" data-page="shop.php" id="the-lasted-btn"> Shop Now <i class='bx bx-right-arrow-alt'></i> </a>
                 </div>
             </div>
     
@@ -107,7 +107,7 @@ include(__DIR__ . "/../includes/config.php");
                 <div class="the-lasted-text">
                     <h4>run in the rain</h4>
                     <h1>NIKE em iu thich</h1>
-                    <a href="shop.html" class="the-lasted-btn"> Shop Now <i class='bx bx-right-arrow-alt'></i> </a>
+                    <a href=""  class="nav-link" data-page="shop.php" id="the-lasted-btn"> Shop Now <i class='bx bx-right-arrow-alt'></i> </a>
                 </div>
             </div>
     
@@ -116,7 +116,7 @@ include(__DIR__ . "/../includes/config.php");
                 <div class="the-lasted-text">
                     <h4>run in the rain</h4>
                     <h1>NIKE em iu thich</h1>
-                    <a href="shop.html" class="the-lasted-btn"> Shop Now <i class='bx bx-right-arrow-alt'></i> </a>
+                    <a href=""  class="nav-link" data-page="shop.php" id="the-lasted-btn"> Shop Now <i class='bx bx-right-arrow-alt'></i> </a>
                 </div>
             </div>
     
@@ -137,32 +137,32 @@ include(__DIR__ . "/../includes/config.php");
                 <div class="product-sport">
     
                     <img src="/web2/assets/images/42.jpg" alt="Nike C1TY 'Brownstone'">
-                    <a class="sport-text" href="shop.html"> basketball </a>
+                    <a href=""  class="nav-link" data-page="shop.php" id='sport-text'> basketball </a>
                     
                 </div>
                 <div class="product-sport">
                     <img src="/web2/assets/images/24.jpg" alt="Nike Air Force 1 Shadow">
-                    <a class="sport-text" href="shop.html"> naiii </a>
+                    <a href=""  class="nav-link" data-page="shop.php" id='sport-text'> naiii </a>
                 </div>
     
                 <div class="product-sport">
                     <img src="/web2/assets/images/43.jpg" alt="Nike Zoom Vomero Roam">
-                    <a class="sport-text" href="shop.html"> baseball </a>
+                    <a href=""  class="nav-link" data-page="shop.php" id='sport-text'> baseball </a>
                 </div>
     
                 <div class="product-sport">
                     <img src="/web2/assets/images/44.jpg" alt="Nike Zoom Vomero Roam">
-                    <a class="sport-text" href="shop.html"> never give up</a>
+                    <a href=""  class="nav-link" data-page="shop.php" id='sport-text'> never give up</a>
                 </div>
     
                 <div class="product-sport">
                     <img src="/web2/assets/images/45.jpg" alt="Nike Zoom Vomero Roam">
-                    <a class="sport-text" href="shop.html"> nhảy đê</a>
+                   <a href=""  class="nav-link" data-page="shop.php" id='sport-text'> nhảy đê</a>
                 </div>
                 
                 <div class="product-sport">
                     <img src="/web2/assets/images/46.png" alt="Nike Zoom Vomero Roam">
-                    <a class="sport-text" href="shop.html"> mưa vãi</a>
+                   <a href=""  class="nav-link" data-page="shop.php" id='sport-text'> mưa vãi</a>
                 </div>
     
                 
@@ -179,7 +179,7 @@ include(__DIR__ . "/../includes/config.php");
             </div>
     
             <div class="update-cart">
-                <a href="shop.html">
+                 <a href=""  class="nav-link" data-page="shop.php" >
     
                     <div class="cart">
                         <img src="/web2/assets/images/banner5.jpg" alt="">
@@ -194,7 +194,7 @@ include(__DIR__ . "/../includes/config.php");
                     </div>
                 </a>
                 
-                <a href="shop.html">
+                <a href=""class="nav-link" data-page="shop.php" >
     
                     <div class="cart">
                         <img src="/web2/assets/images/banner5.jpg" alt="">
@@ -210,7 +210,7 @@ include(__DIR__ . "/../includes/config.php");
                 </a>
     
     
-                <a href="shop.html">
+                <a href=""  class="nav-link" data-page="shop.php" >
                     
                     <div class="cart">
                         <img src="/web2/assets/images/banner5.jpg" alt="">

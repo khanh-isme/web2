@@ -332,7 +332,7 @@ section{
     margin: 5px 10px;
 
 }
-.the-lasted-btn{
+#the-lasted-btn{
     display: inline-block;
     color: #fcfbfb;
     font-size: 16px;
@@ -402,7 +402,7 @@ section{
     
     
 }
-.sport-text{
+#sport-text{
     
                     position: absolute;/* dùng để xác định vị trí phần  tử theo tọa độ của cái chứa nó  */
                     bottom:  50px;

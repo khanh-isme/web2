@@ -1,63 +1,25 @@
-<?php 
-// Kết nối database
-$host = "127.0.0.1:3307";
-$user = "root";
-$password = "";
-$database = "shoe";
+<?php
+require_once('../includes/config.php');
+require_once ('../includes/get_product_info.php');
+require_once ('../includes/funtion_product.php');
 
-$connection = new mysqli($host, $user, $password, $database);
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json; charset=UTF-8");
+$productId = $_GET['id'] ?? null;
 
-// Kiểm tra kết nối database
-if ($connection->connect_error) {
-    die(json_encode(["error" => "Lỗi: Không thể kết nối đến cơ sở dữ liệu."]));
+if ($productId) {
+    $productResult = get_product_info($productId);
+
+    if ($productResult['status'] === 'success') {
+        $product = $productResult['product'];
+        $sizes = get_product_sizes($productId);
+    } else {
+        die("Lỗi: " . $productResult['message']);
+    } 
+} else {
+    die("Thiếu ID sản phẩm.");
 }
-
-// Kiểm tra tham số ID
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    die(json_encode(["error" => "Lỗi: Tham số ID không hợp lệ."]));
-}
-
-$product_id = intval($_GET['id']);
-
-$response = [
-    'product' => [],
-    'sizes' => []
-];
-
-// Truy vấn sản phẩm
-$productQuery = "SELECT * FROM products WHERE id = ?";
-$stmt = $connection->prepare($productQuery);
-$stmt->bind_param("i", $product_id);
-$stmt->execute();
-$productResult = $stmt->get_result();
-
-if ($productResult->num_rows > 0) {
-    $response['product'] = $productResult->fetch_assoc();
-}
-
-// Truy vấn size sản phẩm
-$productSizesQuery = "SELECT size FROM product_size WHERE product_id = ?";
-$stmt = $connection->prepare($productSizesQuery);
-$stmt->bind_param("i", $product_id);
-$stmt->execute();
-$productSizesResult = $stmt->get_result();
-
-if ($productSizesResult->num_rows > 0) {
-    while ($row = $productSizesResult->fetch_assoc()) {
-        $response['sizes'][] = $row['size'];
-    }
-}
-
-$product = $response['product'];
-$sizes = $response['sizes'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +29,7 @@ $sizes = $response['sizes'];
     <title><?= htmlspecialchars($product['name'] ?? "Sản phẩm") ?></title>
     <link rel="stylesheet" href="/web2/assets/css/product.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <script src="/web2/assets/js/product.js" defer></script>
+   
 </head>
 <body>
 
@@ -88,7 +50,7 @@ $sizes = $response['sizes'];
 
             <div class="product-details">
                 <h1><?= htmlspecialchars($product['name'] ?? 'Không có sản phẩm') ?></h1>
-                <p class="price">$<?= isset($product['price']) ? number_format($product['price'], 2) : '0.00' ?></p>
+                <p class="price"><?= isset($product['price']) ? number_format($product['price'], 2) : '0.00' ?>VND</p> 
                 <p class="description"><?= htmlspecialchars($product['description'] ?? 'Không có mô tả') ?></p>
 
                 <div class="size-selection">
@@ -96,8 +58,15 @@ $sizes = $response['sizes'];
                     <div class="sizes">
                         <?php if (!empty($sizes)): ?>
                             <?php foreach ($sizes as $size): ?>
-                                <button class="button" onclick="selectButton(this)">
-                                    <?= htmlspecialchars($size) ?>
+                                <button 
+                                    class="button" 
+                                    onclick="selectButton(this)" 
+                                    data-size="<?= htmlspecialchars($size['size']) ?>" 
+                                    data-stock="<?= htmlspecialchars($size['stock']) ?>"
+                                    data-size-id="<?= htmlspecialchars($size['id']) ?>"
+                                    data-product-id="<?= htmlspecialchars($product['id']) ?>"
+                                >
+                                    <?= htmlspecialchars($size['size']) ?> (Còn <?= $size['stock'] ?>)
                                 </button>
                             <?php endforeach; ?>
                         <?php else: ?>
@@ -106,8 +75,17 @@ $sizes = $response['sizes'];
                     </div>
                 </div>
 
-                <a href="bag.php?id=<?= $product_id ?>&name=<?= urlencode($product['name'] ?? '') ?>&price=<?= $product['price'] ?? 0 ?>&image=<?= urlencode($product['image'] ?? '') ?>">
-                    <button class="add-to-bag">Add to Bag</button>
+                <div class="quantity-selector">
+                    <label for="quantity">Số lượng:</label>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity(-1)">-</button>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                        <button type="button" onclick="changeQuantity(1)">+</button>
+                    </div>
+                </div>
+                 
+                <a>
+                    <button class="add-to-bag">Add to Cart</button>
                 </a>
                 <button class="favourite">Favourite ♥</button>
 

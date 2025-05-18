@@ -1,14 +1,11 @@
 
 <?php
-    $servername = "127.0.0.1:3307"; 
-    $username = "root";
-    $password = "";
-    $database = "shoe";
-
-    $connection = new mysqli($servername, $username, $password, $database);
-
+   $host = "127.0.0.1:3307";
+   $user = "root";
+   $password = "";
+   $database = "shoe";
    
-
+   // Kết nối database với kiểm tra lỗi
+   $connection = new mysqli($host, $user, $password, $database);
    
-
 ?>

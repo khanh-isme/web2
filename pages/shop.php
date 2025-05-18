@@ -27,7 +27,6 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
 <body>
     <input type="hidden" id="productName" value="<?= htmlspecialchars($productName) ?>">
     <input type="hidden" id="category" value="<?= htmlspecialchars($category) ?>">
-    <input type="hidden" id="collection" value="<?= htmlspecialchars($collection) ?>">
     <input type="hidden" id="gender" value="<?= htmlspecialchars($gender) ?>">
     <input type="hidden" id="size" value="<?= htmlspecialchars($size) ?>">
     <input type="hidden" id="minPrice" value="<?= htmlspecialchars($minPrice) ?>">
