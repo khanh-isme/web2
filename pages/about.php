@@ -72,7 +72,7 @@
             <div class="team-member">
                 <img src="/web2/assets/images/team4.jpg" alt="Phó giám đốc">
                 <h3>Đinh Văn Thanh Sơn</h3>
-                <p>Trưởng lão chấp pháp đường</p>
+                <p>Phó tông chủ đương thời</p>
             </div>
             <div class="team-member">
                 <img src="/web2/assets/images/team5.jpg" alt="Nhân viên thiết kế">
